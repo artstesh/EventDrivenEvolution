@@ -1,0 +1,170 @@
+@startuml
+!theme cerulean-outline
+skinparam componentStyle rectangle
+skinparam shadowing false
+skinparam packageStyle rectangle
+
+title SPA Contact Center MVP - Components / Services / Models
+
+package "UI Components" {
+  [AppShell]
+  [Header]
+  [CallStatusPanel]
+  [CustomerProfileWidget]
+  [CartWidget]
+  [CatalogSearchPanel]
+  [ProductGrid]
+  [ProductCard]
+  [ToastCenter]
+  [ConfirmDiscountModal]
+  [OrderHistoryModal]
+}
+
+package "State / Facades" {
+  [SessionFacade]
+  [CallFacade]
+  [CatalogFacade]
+  [CartFacade]
+  [NotificationFacade]
+  [ModalFacade]
+}
+
+package "Application Services" {
+  [CallRoutingService]
+  [CustomerService]
+  [CatalogService]
+  [InventoryService]
+  [CartService]
+  [OrderService]
+  [DiscountApprovalService]
+  [NotificationService]
+  [ModalService]
+  [SimulationService]
+}
+
+package "Infrastructure / PubSub" {
+  [EventBus]
+  [CommandBus]
+  [WebSocketAdapter]
+  [MockScheduler]
+  [ApiClient]
+}
+
+package "Domain Models" {
+  [OperatorSession]
+  [Customer]
+  [Product]
+  [ProductCategory]
+  [Cart]
+  [CartItem]
+  [Order]
+  [Money]
+  [DiscountReason]
+  [StockStatus]
+  [Call]
+}
+
+package "Commands" {
+  [AddItemToCartCommand]
+  [ConfirmOrderCommand]
+  [EndCallCommand]
+  [SetOperatorStatusCommand]
+  [OpenModalCommand]
+  [ApplyDiscountCommand]
+}
+
+package "Events" {
+  [IncomingCallEvent]
+  [CallEndedEvent]
+  [CustomerLoadedEvent]
+  [ProductSearchRequestedEvent]
+  [ProductSelectedEvent]
+  [CartUpdatedEvent]
+  [StockUpdatedEvent]
+  [OrderConfirmedEvent]
+  [ToastRequestedEvent]
+  [OperatorStatusChangedEvent]
+  [ModalOpenedEvent]
+  [ModalClosedEvent]
+}
+
+' UI -> Facades
+[AppShell] --> [SessionFacade]
+[Header] --> [SessionFacade]
+[CallStatusPanel] --> [CallFacade]
+[CustomerProfileWidget] --> [CallFacade]
+[CartWidget] --> [CartFacade]
+[CatalogSearchPanel] --> [CatalogFacade]
+[ProductGrid] --> [CatalogFacade]
+[ProductCard] --> [CatalogFacade]
+[ToastCenter] --> [NotificationFacade]
+[ConfirmDiscountModal] --> [ModalFacade]
+[OrderHistoryModal] --> [ModalFacade]
+
+' Facades -> Services
+[SessionFacade] --> [CallRoutingService]
+[SessionFacade] --> [NotificationService]
+
+[CallFacade] --> [CallRoutingService]
+[CallFacade] --> [CustomerService]
+[CallFacade] --> [NotificationService]
+
+[CatalogFacade] --> [CatalogService]
+[CatalogFacade] --> [InventoryService]
+[CatalogFacade] --> [NotificationService]
+
+[CartFacade] --> [CartService]
+[CartFacade] --> [OrderService]
+[CartFacade] --> [NotificationService]
+
+[ModalFacade] --> [ModalService]
+[ModalFacade] --> [DiscountApprovalService]
+[ModalFacade] --> [OrderService]
+[NotificationFacade] --> [NotificationService]
+
+' Services -> Infra
+[CallRoutingService] --> [EventBus]
+[CustomerService] --> [ApiClient]
+[CatalogService] --> [ApiClient]
+[InventoryService] --> [WebSocketAdapter]
+[CartService] --> [EventBus]
+[OrderService] --> [CommandBus]
+[DiscountApprovalService] --> [CommandBus]
+[NotificationService] --> [EventBus]
+[ModalService] --> [EventBus]
+[SimulationService] --> [MockScheduler]
+[SimulationService] --> [EventBus]
+[SimulationService] --> [WebSocketAdapter]
+
+' Commands / Events flow
+[CommandBus] --> AddItemToCartCommand
+[CommandBus] --> ConfirmOrderCommand
+[CommandBus] --> EndCallCommand
+[CommandBus] --> SetOperatorStatusCommand
+[CommandBus] --> OpenModalCommand
+[CommandBus] --> ApplyDiscountCommand
+
+[EventBus] --> IncomingCallEvent
+[EventBus] --> CallEndedEvent
+[EventBus] --> CustomerLoadedEvent
+[EventBus] --> CartUpdatedEvent
+[EventBus] --> StockUpdatedEvent
+[EventBus] --> OrderConfirmedEvent
+[EventBus] --> ToastRequestedEvent
+[EventBus] --> OperatorStatusChangedEvent
+[EventBus] --> ModalOpenedEvent
+[EventBus] --> ModalClosedEvent
+
+' Domain relationships
+OperatorSession "1" o-- "0..1" Call
+Call "1" --> "1" Customer
+Cart "1" o-- "0..*" CartItem
+CartItem "1" --> "1" Product
+Product "0..1" --> ProductCategory
+CartItem "1" --> "1" Money
+Order "1" o-- "1..*" CartItem
+Order "1" --> "1" Money
+Order "1" --> "0..1" DiscountReason
+Product "1" --> "1" StockStatus
+
+@enduml

@@ -1,0 +1,35 @@
+<div class="catalog-filters">
+  <label class="catalog-filters__field">
+    <span class="catalog-filters__label">Категория</span>
+    <select
+      class="catalog-filters__input"
+      [value]="category"
+      (change)="setCategory($any($event.target).value)"
+    >
+      <option *ngFor="let item of categories" [value]="item">{{ item }}</option>
+    </select>
+  </label>
+
+  <label class="catalog-filters__field">
+    <span class="catalog-filters__label">Наличие</span>
+    <select
+      class="catalog-filters__input"
+      [value]="availability"
+      (change)="setAvailability($any($event.target).value)"
+    >
+      <option *ngFor="let item of availabilityOptions" [value]="item">{{ item }}</option>
+    </select>
+  </label>
+
+  <div class="catalog-filters__chips">
+    <button
+      type="button"
+      class="catalog-filters__chip"
+      *ngFor="let item of presets"
+      [class.catalog-filters__chip--active]="preset === item"
+      (click)="setPreset(item)"
+    >
+      {{ item }}
+    </button>
+  </div>
+</div>

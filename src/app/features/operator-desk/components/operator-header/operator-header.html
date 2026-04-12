@@ -1,0 +1,35 @@
+<div class="operator-header">
+  <div class="operator-header__brand">
+    <div class="operator-header__logo">OC</div>
+
+    <div class="operator-header__titles">
+      <div class="operator-header__eyebrow">Contact Center Workspace</div>
+      <h1 class="operator-header__title">Операторская панель</h1>
+    </div>
+  </div>
+
+  <div class="operator-header__center">
+    <div class="operator-header__status">
+      <span class="operator-header__status-dot" [class.operator-header__status-dot--away]="status === 'away'"></span>
+      <span class="operator-header__status-text">
+        {{ status === 'working' ? 'Работаю' : 'Отошёл' }}
+      </span>
+    </div>
+
+    <div class="operator-header__meta">
+      <span class="operator-header__meta-item">Смена: {{ shiftLabel }}</span>
+      <span class="operator-header__meta-separator"></span>
+      <span class="operator-header__meta-item">Очередь: {{ queueSize }} клиентов</span>
+    </div>
+  </div>
+
+  <div class="operator-header__actions">
+    <button type="button" class="operator-header__button">
+      История
+    </button>
+
+    <button type="button" class="operator-header__button operator-header__button--primary">
+      Переключить статус
+    </button>
+  </div>
+</div>

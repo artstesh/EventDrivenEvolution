@@ -1,0 +1,29 @@
+:host {
+  display: inline-flex;
+}
+
+.stock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.stock-badge--available {
+  background: rgba(34, 197, 94, 0.12);
+  color: #166534;
+}
+
+.stock-badge--limited {
+  background: rgba(245, 158, 11, 0.14);
+  color: #92400e;
+}
+
+.stock-badge--out {
+  background: rgba(239, 68, 68, 0.12);
+  color: #b91c1c;
+}

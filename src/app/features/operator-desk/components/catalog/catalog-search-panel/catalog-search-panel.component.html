@@ -1,0 +1,35 @@
+<section class="catalog-search-panel">
+  <div class="catalog-search-panel__header">
+    <div>
+      <div class="catalog-search-panel__eyebrow">Каталог товаров</div>
+      <h3 class="catalog-search-panel__title">Поиск и фильтрация</h3>
+    </div>
+
+    <div class="catalog-search-panel__status">
+      <span class="catalog-search-panel__status-dot"></span>
+      <span>1 248 товаров</span>
+    </div>
+  </div>
+
+  <div class="catalog-search-panel__controls">
+    <label class="catalog-search-panel__field">
+      <span class="catalog-search-panel__label">Поиск</span>
+      <input
+        class="catalog-search-panel__input"
+        type="text"
+        [value]="query"
+        (input)="onQueryChange($any($event.target).value)"
+        placeholder="Введите артикул, название или бренд"
+      />
+    </label>
+  </div>
+
+  <app-catalog-filters
+    [category]="category"
+    [availability]="availability"
+    [preset]="preset"
+    (categoryChanged)="onFiltersChanged({ category: $event })"
+    (availabilityChanged)="onFiltersChanged({ availability: $event })"
+    (presetChanged)="onFiltersChanged({ preset: $event })"
+  ></app-catalog-filters>
+</section>

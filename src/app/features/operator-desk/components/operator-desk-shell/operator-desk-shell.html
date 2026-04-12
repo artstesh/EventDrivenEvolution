@@ -1,0 +1,95 @@
+<div class="operator-desk-shell">
+  <header class="operator-desk-shell__header">
+    <app-operator-header
+      [status]="operatorStatus"
+      [queueSize]="queueSize"
+      [shiftLabel]="shiftLabel"
+    ></app-operator-header>
+  </header>
+
+  <main class="operator-desk-shell__content">
+    <aside class="operator-desk-shell__sidebar operator-desk-shell__sidebar--left">
+      <section class="operator-desk-shell__section">
+        <app-call-status-panel
+          [callTitle]="callTitle"
+          [customerName]="customerName"
+          [isVip]="isVip"
+          [balance]="balance"
+          [status]="callStatus"
+          [duration]="callDuration"
+        ></app-call-status-panel>
+      </section>
+
+      <section class="operator-desk-shell__section">
+        <app-customer-profile-widget
+          [fullName]="fullName"
+          [isVip]="isVip"
+          [balance]="balance"
+          [loyaltyLevel]="loyaltyLevel"
+          [segment]="segment"
+          [lastOrderAt]="lastOrderAt"
+        ></app-customer-profile-widget>
+      </section>
+
+      <section class="operator-desk-shell__section">
+        <app-operator-status-switch
+          [status]="operatorStatus"
+          (statusChanged)="operatorStatusChanged.emit($event)"
+        ></app-operator-status-switch>
+      </section>
+    </aside>
+
+    <section class="operator-desk-shell__workspace">
+      <div class="operator-desk-shell__catalog">
+        <app-catalog-search-panel (criteriaChanged)="searchRequested.emit($event)"></app-catalog-search-panel>
+
+        <app-product-grid
+          [products]="products"
+          [totalCount]="totalCount"
+          [displayedCount]="displayedCount"
+          [currentPage]="currentPage"
+          [totalPages]="totalPages"
+          (addToCart)="addToCart.emit($event)"
+        ></app-product-grid>
+      </div>
+    </section>
+
+    <aside class="operator-desk-shell__sidebar operator-desk-shell__sidebar--right">
+      <section class="operator-desk-shell__section">
+        <app-cart-widget
+          [itemCount]="cartItemCount"
+          [discount]="cartDiscount"
+          [subtotal]="cartSubtotal"
+          [total]="cartTotal"
+          [items]="cartItems"
+        ></app-cart-widget>
+      </section>
+
+      <section class="operator-desk-shell__section operator-desk-shell__section--compact">
+        <div class="operator-desk-shell__actions">
+          <button type="button" class="operator-desk-shell__action" (click)="endCall.emit()">
+            Завершить звонок
+          </button>
+
+          <button type="button" class="operator-desk-shell__action operator-desk-shell__action--primary" (click)="openOrder.emit()">
+            Оформить заказ
+          </button>
+        </div>
+      </section>
+    </aside>
+  </main>
+
+  <app-confirm-discount-modal
+    [opened]="showConfirmDiscountModal"
+    [cartSubtotal]="cartSubtotal"
+    [discount]="cartDiscount"
+    [total]="cartTotal"
+    (closed)="closeConfirmDiscountModal.emit()"
+    (confirmed)="confirmDiscount.emit($event)"
+  ></app-confirm-discount-modal>
+
+  <app-order-history-modal
+    [opened]="showOrderHistoryModal"
+    (closed)="closeOrderHistoryModal.emit()"
+  ></app-order-history-modal>
+</div>

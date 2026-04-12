@@ -1,0 +1,114 @@
+:host {
+  display: block;
+}
+
+.customer-profile-widget {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.customer-profile-widget__header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.customer-profile-widget__eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.customer-profile-widget__title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.customer-profile-widget__vip {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.14);
+  color: #92400e;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.customer-profile-widget__balance {
+  padding: 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(79, 70, 229, 0.08));
+  border: 1px solid rgba(37, 99, 235, 0.12);
+}
+
+.customer-profile-widget__balance-label {
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 6px;
+}
+
+.customer-profile-widget__balance-value {
+  font-size: 28px;
+  line-height: 1;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.customer-profile-widget__metrics {
+  display: grid;
+  gap: 10px;
+}
+
+.customer-profile-widget__metric {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.customer-profile-widget__metric-label {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.customer-profile-widget__metric-value {
+  color: #0f172a;
+  font-weight: 600;
+  text-align: right;
+}
+
+.customer-profile-widget__history {
+  display: flex;
+}
+
+.customer-profile-widget__button {
+  width: 100%;
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.42);
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.customer-profile-widget__button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
+}

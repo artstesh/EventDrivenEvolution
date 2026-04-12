@@ -1,0 +1,32 @@
+<div class="operator-status-switch">
+  <div class="operator-status-switch__header">
+    <div class="operator-status-switch__eyebrow">Статус оператора</div>
+    <div class="operator-status-switch__state" [class.operator-status-switch__state--active]="status === 'working'">
+      {{ status === 'working' ? 'Работает' : 'Отошёл' }}
+    </div>
+  </div>
+
+  <div class="operator-status-switch__toggle">
+    <button
+      type="button"
+      class="operator-status-switch__button"
+      [class.operator-status-switch__button--active]="status === 'working'"
+      (click)="statusChanged.emit('working')"
+    >
+      Работаю
+    </button>
+
+    <button
+      type="button"
+      class="operator-status-switch__button"
+      [class.operator-status-switch__button--active]="status === 'away'"
+      (click)="statusChanged.emit('away')"
+    >
+      Отошёл
+    </button>
+  </div>
+
+  <div class="operator-status-switch__hint">
+    Если статус «Отошёл», входящие звонки не поступают.
+  </div>
+</div>

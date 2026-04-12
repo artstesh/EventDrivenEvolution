@@ -1,0 +1,41 @@
+<article class="product-card">
+  <div class="product-card__topline">
+    <span class="product-card__category">{{ category }}</span>
+    <app-stock-badge [state]="stockState" [label]="stockLabel"></app-stock-badge>
+  </div>
+
+  <div class="product-card__main">
+    <h4 class="product-card__name">{{ name }}</h4>
+    <p class="product-card__description">
+      {{ description }}
+    </p>
+  </div>
+
+  <div class="product-card__specs">
+    <div class="product-card__spec">
+      <span class="product-card__spec-label">Артикул</span>
+      <span class="product-card__spec-value">{{ sku }}</span>
+    </div>
+
+    <div class="product-card__spec">
+      <span class="product-card__spec-label">Склад</span>
+      <span class="product-card__spec-value">{{ warehouse }}</span>
+    </div>
+  </div>
+
+  <div class="product-card__footer">
+    <div class="product-card__price-block">
+      <span class="product-card__price-label">Цена</span>
+      <span class="product-card__price">{{ price }}</span>
+    </div>
+
+    <button
+      type="button"
+      class="product-card__button"
+      [disabled]="stockState === 'out'"
+      (click)="addToCart.emit()"
+    >
+      Добавить в корзину
+    </button>
+  </div>
+</article>

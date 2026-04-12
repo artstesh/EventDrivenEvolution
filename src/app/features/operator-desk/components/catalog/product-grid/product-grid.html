@@ -1,0 +1,29 @@
+<section class="product-grid">
+  <div class="product-grid__header">
+    <div class="product-grid__meta">
+      <span class="product-grid__meta-label">Результаты поиска</span>
+      <span class="product-grid__meta-value">Показано {{ displayedCount }} из {{ totalCount }}</span>
+    </div>
+
+    <div class="product-grid__pager">
+      <button type="button" class="product-grid__pager-button">←</button>
+      <span class="product-grid__pager-value">Страница {{ currentPage }} / {{ totalPages }}</span>
+      <button type="button" class="product-grid__pager-button">→</button>
+    </div>
+  </div>
+
+  <div class="product-grid__list">
+    <app-product-card
+      *ngFor="let product of products"
+      [category]="product.category"
+      [name]="product.name"
+      [description]="product.description"
+      [sku]="product.sku"
+      [warehouse]="product.warehouse"
+      [price]="product.price"
+      [stockState]="product.stockState"
+      [stockLabel]="product.stockLabel"
+      (addToCart)="addToCart.emit(product)"
+    ></app-product-card>
+  </div>
+</section>

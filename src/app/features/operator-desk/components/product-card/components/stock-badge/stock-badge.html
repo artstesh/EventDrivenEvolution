@@ -1,0 +1,8 @@
+<span
+  class="stock-badge"
+  [class.stock-badge--available]="state === 'available'"
+  [class.stock-badge--limited]="state === 'limited'"
+  [class.stock-badge--out]="state === 'out'"
+>
+  {{ label }}
+</span>

@@ -1,0 +1,165 @@
+:host {
+  display: block;
+}
+
+.call-status-panel {
+  display: grid;
+  gap: 16px;
+  padding: 18px;
+}
+
+.call-status-panel__header {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.call-status-panel__eyebrow {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.call-status-panel__title {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.call-status-panel__badge {
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.call-status-panel__badge--live {
+  background: rgba(34, 197, 94, 0.12);
+  color: #166534;
+}
+
+.call-status-panel__customer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08), rgba(37, 99, 235, 0.05));
+  border: 1px solid rgba(79, 70, 229, 0.12);
+}
+
+.call-status-panel__avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 18px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #4f46e5 0%, #2563eb 100%);
+  box-shadow: 0 10px 18px rgba(79, 70, 229, 0.2);
+  flex: 0 0 auto;
+}
+
+.call-status-panel__customer-info {
+  min-width: 0;
+}
+
+.call-status-panel__name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 4px;
+}
+
+.call-status-panel__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  color: #475569;
+  font-size: 13px;
+}
+
+.call-status-panel__vip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: rgba(245, 158, 11, 0.14);
+  color: #92400e;
+  font-weight: 700;
+}
+
+.call-status-panel__separator {
+  width: 4px;
+  height: 4px;
+  border-radius: 999px;
+  background: #cbd5e1;
+}
+
+.call-status-panel__details {
+  display: grid;
+  gap: 12px;
+}
+
+.call-status-panel__detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.call-status-panel__label {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.call-status-panel__value {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+.call-status-panel__actions {
+  display: grid;
+  gap: 10px;
+}
+
+.call-status-panel__button {
+  appearance: none;
+  border: 1px solid rgba(148, 163, 184, 0.42);
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 14px;
+  padding: 12px 14px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+}
+
+.call-status-panel__button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(99, 102, 241, 0.45);
+  box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
+}
+
+.call-status-panel__button--danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: #fff;
+  border-color: transparent;
+}
+
+.call-status-panel__button--danger:hover {
+  border-color: transparent;
+}

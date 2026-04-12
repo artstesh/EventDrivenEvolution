@@ -1,0 +1,237 @@
+@startuml
+!theme cerulean-outline
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+skinparam componentStyle rectangle
+
+title SPA Contact Center MVP - operator-desk internal dependencies
+
+package "operator-desk" {
+
+  package "pages" {
+    class OperatorDeskPageComponent
+  }
+
+  package "components" {
+    package "shell" {
+      class OperatorDeskShellComponent
+    }
+    package "header" {
+      class OperatorHeaderComponent
+    }
+    package "call-panel" {
+      class CallStatusPanelComponent
+      class OperatorStatusSwitchComponent
+    }
+    package "customer-profile" {
+      class CustomerProfileWidgetComponent
+    }
+    package "cart-widget" {
+      class CartWidgetComponent
+      class CartItemRowComponent
+    }
+    package "catalog" {
+      class CatalogSearchPanelComponent
+      class CatalogFiltersComponent
+      class ProductGridComponent
+    }
+    package "product-card" {
+      class ProductCardComponent
+      class StockBadgeComponent
+    }
+    package "modals" {
+      class ConfirmDiscountModalComponent
+      class OrderHistoryModalComponent
+    }
+    package "toast-center" {
+      class ToastCenterComponent
+    }
+  }
+
+  package "facades" {
+    class OperatorSessionFacade
+    class CallFacade
+    class CatalogFacade
+    class CartFacade
+    class ModalFacade
+    class NotificationFacade
+  }
+
+  package "services" {
+    class CallRoutingService
+    class CustomerProfileService
+    class CatalogService
+    class InventoryService
+    class CartService
+    class OrderService
+    class DiscountApprovalService
+    class ModalService
+    class NotificationService
+    class SimulationService
+  }
+
+  package "adapters" {
+    package "api" {
+      class CustomerApiAdapter
+      class CatalogApiAdapter
+      class OrderApiAdapter
+    }
+    package "websocket" {
+      class StockWebSocketAdapter
+    }
+  }
+
+  package "models" {
+    class OperatorSession
+    class Call
+    class Customer
+    class Product
+    class ProductCategory
+    class Cart
+    class CartItem
+    class Order
+    class Money
+    class StockStatus
+    class DiscountReason
+  }
+
+  package "mappers" {
+    class CustomerMapper
+    class ProductMapper
+    class CartMapper
+    class OrderMapper
+  }
+}
+
+' Page composition
+OperatorDeskPageComponent --> OperatorDeskShellComponent
+
+' Shell composition
+OperatorDeskShellComponent --> OperatorHeaderComponent
+OperatorDeskShellComponent --> CallStatusPanelComponent
+OperatorDeskShellComponent --> CustomerProfileWidgetComponent
+OperatorDeskShellComponent --> CartWidgetComponent
+OperatorDeskShellComponent --> CatalogSearchPanelComponent
+OperatorDeskShellComponent --> ProductGridComponent
+OperatorDeskShellComponent --> ToastCenterComponent
+OperatorDeskShellComponent --> ConfirmDiscountModalComponent
+OperatorDeskShellComponent --> OrderHistoryModalComponent
+
+' Header and operator control
+OperatorHeaderComponent --> OperatorSessionFacade
+OperatorStatusSwitchComponent --> OperatorSessionFacade
+OperatorHeaderComponent --> OperatorStatusSwitchComponent
+
+' Call area
+CallStatusPanelComponent --> CallFacade
+CustomerProfileWidgetComponent --> CallFacade
+CallStatusPanelComponent --> OperatorSessionFacade
+
+' Cart area
+CartWidgetComponent --> CartFacade
+CartItemRowComponent --> CartFacade
+CartWidgetComponent --> OrderService
+
+' Catalog area
+CatalogSearchPanelComponent --> CatalogFacade
+CatalogFiltersComponent --> CatalogFacade
+ProductGridComponent --> CatalogFacade
+ProductCardComponent --> CatalogFacade
+StockBadgeComponent --> ProductCardComponent
+
+' Modals
+ConfirmDiscountModalComponent --> ModalFacade
+ConfirmDiscountModalComponent --> CartFacade
+ConfirmDiscountModalComponent --> OrderService
+OrderHistoryModalComponent --> ModalFacade
+OrderHistoryModalComponent --> CustomerProfileService
+
+' Toasts
+ToastCenterComponent --> NotificationFacade
+
+' Facade dependencies
+OperatorSessionFacade --> CallRoutingService
+OperatorSessionFacade --> NotificationService
+
+CallFacade --> CallRoutingService
+CallFacade --> CustomerProfileService
+CallFacade --> NotificationService
+
+CatalogFacade --> CatalogService
+CatalogFacade --> InventoryService
+CatalogFacade --> NotificationService
+
+CartFacade --> CartService
+CartFacade --> OrderService
+CartFacade --> NotificationService
+
+ModalFacade --> ModalService
+ModalFacade --> DiscountApprovalService
+ModalFacade --> OrderService
+
+NotificationFacade --> NotificationService
+
+' Service dependencies
+CallRoutingService --> OperatorSession
+CallRoutingService --> Call
+CallRoutingService --> NotificationService
+
+CustomerProfileService --> CustomerApiAdapter
+CustomerProfileService --> CustomerMapper
+CustomerProfileService --> Customer
+
+CatalogService --> CatalogApiAdapter
+CatalogService --> ProductMapper
+CatalogService --> Product
+CatalogService --> ProductCategory
+
+InventoryService --> StockWebSocketAdapter
+InventoryService --> StockStatus
+InventoryService --> Product
+
+CartService --> Cart
+CartService --> CartItem
+CartService --> Product
+CartService --> Money
+CartService --> CartMapper
+
+OrderService --> OrderApiAdapter
+OrderService --> OrderMapper
+OrderService --> Order
+OrderService --> Cart
+OrderService --> DiscountReason
+OrderService --> Money
+
+DiscountApprovalService --> OrderService
+DiscountApprovalService --> DiscountReason
+
+ModalService --> OperatorSession
+ModalService --> Order
+ModalService --> Customer
+
+NotificationService --> ToastCenterComponent
+NotificationService --> StockStatus
+
+SimulationService --> CallRoutingService
+SimulationService --> StockWebSocketAdapter
+SimulationService --> NotificationService
+
+' Mapper dependencies
+CustomerMapper --> Customer
+ProductMapper --> Product
+CartMapper --> Cart
+OrderMapper --> Order
+
+' Domain relations
+OperatorSession "1" o-- "0..1" Call
+Call "1" --> "1" Customer
+Cart "1" o-- "0..*" CartItem
+CartItem "1" --> "1" Product
+Product "1" --> "1" StockStatus
+Product "0..1" --> ProductCategory
+Order "1" o-- "1..*" CartItem
+Order "1" --> "1" Money
+Order "1" --> "0..1" DiscountReason
+
+@enduml

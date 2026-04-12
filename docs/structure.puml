@@ -1,0 +1,314 @@
+@startuml
+!theme cerulean-outline
+skinparam packageStyle rectangle
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam classAttributeIconSize 0
+
+title SPA Contact Center MVP - Project Structure
+
+package "src" {
+
+  package "app" {
+
+    package "core" {
+      package "bus" {
+        class EventBusService
+        class CommandBusService
+      }
+
+      package "state" {
+        class ApplicationStateService
+        class SessionStateService
+      }
+
+      package "services" {
+        class AppInitService
+        class LoggerService
+        class UiStateService
+      }
+
+      package "models" {
+        class AppEvent
+        class AppCommand
+        class PagedResult
+        class Result
+      }
+    }
+
+    package "shared" {
+      package "components" {
+        class UiButtonComponent
+        class UiInputComponent
+        class UiModalComponent
+        class UiBadgeComponent
+        class UiCardComponent
+        class UiLoaderComponent
+      }
+
+      package "pipes" {
+        class MoneyFormatPipe
+        class StockStatusPipe
+      }
+
+      package "directives" {
+        class AutofocusDirective
+        class DebounceInputDirective
+      }
+
+      package "utils" {
+        class DateUtils
+        class StringUtils
+        class ValidationUtils
+      }
+
+      package "constants" {
+        class AppConstants
+        class UiConstants
+      }
+
+      package "models" {
+        class OptionItem
+        class TableColumn
+      }
+    }
+
+    package "features" {
+
+      package "operator-desk" {
+        package "pages" {
+          class OperatorDeskPageComponent
+        }
+
+        package "components" {
+          package "shell" {
+            class OperatorDeskShellComponent
+          }
+          package "header" {
+            class OperatorHeaderComponent
+          }
+          package "call-panel" {
+            class CallStatusPanelComponent
+            class OperatorStatusSwitchComponent
+          }
+          package "customer-profile" {
+            class CustomerProfileWidgetComponent
+          }
+          package "cart-widget" {
+            class CartWidgetComponent
+            class CartItemRowComponent
+          }
+          package "catalog" {
+            class CatalogSearchPanelComponent
+            class CatalogFiltersComponent
+            class ProductGridComponent
+          }
+          package "product-card" {
+            class ProductCardComponent
+            class StockBadgeComponent
+          }
+          package "modals" {
+            class ConfirmDiscountModalComponent
+            class OrderHistoryModalComponent
+          }
+          package "toast-center" {
+            class ToastCenterComponent
+          }
+        }
+
+        package "facades" {
+          class OperatorSessionFacade
+          class CallFacade
+          class CatalogFacade
+          class CartFacade
+          class ModalFacade
+          class NotificationFacade
+        }
+
+        package "services" {
+          class CallRoutingService
+          class CustomerProfileService
+          class CatalogService
+          class InventoryService
+          class CartService
+          class OrderService
+          class DiscountApprovalService
+          class ModalService
+          class NotificationService
+          class SimulationService
+        }
+
+        package "models" {
+          class OperatorSession
+          class Call
+          class Customer
+          class Product
+          class ProductCategory
+          class Cart
+          class CartItem
+          class Order
+          class Money
+          class StockStatus
+          class DiscountReason
+        }
+
+        package "mappers" {
+          class CustomerMapper
+          class ProductMapper
+          class CartMapper
+          class OrderMapper
+        }
+
+        package "adapters" {
+          package "api" {
+            class CustomerApiAdapter
+            class CatalogApiAdapter
+            class OrderApiAdapter
+          }
+          package "websocket" {
+            class StockWebSocketAdapter
+          }
+        }
+      }
+
+      package "customers" {
+        package "pages" {
+          class CustomerHistoryPageComponent
+        }
+        package "components" {
+          class CustomerSummaryCardComponent
+        }
+        package "facades" {
+          class CustomerFacade
+        }
+        package "services" {
+          class CustomerService
+        }
+        package "models" {
+          class CustomerProfile
+          class CustomerOrderHistory
+        }
+      }
+
+      package "inventory" {
+        package "components" {
+          class InventoryPageComponent
+          class InventoryTableComponent
+        }
+        package "facades" {
+          class InventoryFacade
+        }
+        package "services" {
+          class InventoryService
+        }
+        package "models" {
+          class InventoryItem
+          class InventoryFilter
+        }
+      }
+
+      package "orders" {
+        package "pages" {
+          class OrdersPageComponent
+        }
+        package "components" {
+          class OrderDetailsComponent
+        }
+        package "facades" {
+          class OrdersFacade
+        }
+        package "services" {
+          class OrdersService
+        }
+        package "models" {
+          class OrderSummary
+          class OrderDetails
+        }
+      }
+    }
+
+    class AppComponent
+    class AppRoutes
+    class AppConfig
+  }
+}
+
+' Core relationships
+EventBusService --> AppEvent
+CommandBusService --> AppCommand
+ApplicationStateService --> SessionStateService
+UiStateService --> AppEvent
+
+' Feature relationships - operator desk
+OperatorDeskPageComponent --> OperatorDeskShellComponent
+OperatorDeskShellComponent --> OperatorHeaderComponent
+OperatorDeskShellComponent --> CallStatusPanelComponent
+OperatorDeskShellComponent --> CustomerProfileWidgetComponent
+OperatorDeskShellComponent --> CartWidgetComponent
+OperatorDeskShellComponent --> CatalogSearchPanelComponent
+OperatorDeskShellComponent --> ProductGridComponent
+OperatorDeskShellComponent --> ToastCenterComponent
+
+OperatorHeaderComponent --> OperatorSessionFacade
+CallStatusPanelComponent --> CallFacade
+CustomerProfileWidgetComponent --> CallFacade
+CartWidgetComponent --> CartFacade
+CatalogSearchPanelComponent --> CatalogFacade
+ProductGridComponent --> CatalogFacade
+ProductCardComponent --> CatalogFacade
+ConfirmDiscountModalComponent --> ModalFacade
+OrderHistoryModalComponent --> ModalFacade
+ToastCenterComponent --> NotificationFacade
+
+OperatorSessionFacade --> CallRoutingService
+OperatorSessionFacade --> NotificationService
+CallFacade --> CallRoutingService
+CallFacade --> CustomerProfileService
+CallFacade --> NotificationService
+CatalogFacade --> CatalogService
+CatalogFacade --> InventoryService
+CatalogFacade --> NotificationService
+CartFacade --> CartService
+CartFacade --> OrderService
+CartFacade --> NotificationService
+ModalFacade --> ModalService
+ModalFacade --> DiscountApprovalService
+ModalFacade --> OrderService
+NotificationFacade --> NotificationService
+
+CallRoutingService --> EventBusService
+CustomerProfileService --> CustomerApiAdapter
+CatalogService --> CatalogApiAdapter
+InventoryService --> StockWebSocketAdapter
+CartService --> EventBusService
+OrderService --> CommandBusService
+DiscountApprovalService --> CommandBusService
+ModalService --> EventBusService
+NotificationService --> EventBusService
+SimulationService --> EventBusService
+SimulationService --> StockWebSocketAdapter
+
+' Domain relationships
+OperatorSession "1" o-- "0..1" Call
+Call "1" --> "1" Customer
+Cart "1" o-- "0..*" CartItem
+CartItem "1" --> "1" Product
+Product "0..1" --> ProductCategory
+CartItem "1" --> "1" Money
+Order "1" o-- "1..*" CartItem
+Order "1" --> "1" Money
+Order "1" --> "0..1" DiscountReason
+Product "1" --> "1" StockStatus
+
+' Mappers / adapters
+CustomerMapper --> Customer
+ProductMapper --> Product
+CartMapper --> Cart
+OrderMapper --> Order
+
+CustomerApiAdapter --> Customer
+CatalogApiAdapter --> Product
+OrderApiAdapter --> Order
+StockWebSocketAdapter --> StockStatus
+
+@enduml

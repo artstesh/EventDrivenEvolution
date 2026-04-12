@@ -1,0 +1,146 @@
+@startuml
+!theme cerulean-outline
+skinparam shadowing false
+skinparam sequenceMessageAlign center
+skinparam responseMessageBelowArrow true
+
+title SPA Contact Center MVP - Sequence diagram for F0-F9
+
+actor Operator as OP
+
+participant "OperatorDeskPageComponent" as Page
+participant "OperatorSessionFacade" as SessionFacade
+participant "CallFacade" as CallFacade
+participant "CatalogFacade" as CatalogFacade
+participant "CartFacade" as CartFacade
+participant "ModalFacade" as ModalFacade
+participant "NotificationFacade" as NotificationFacade
+
+participant "CallRoutingService" as CallRoutingService
+participant "CustomerProfileService" as CustomerProfileService
+participant "CatalogService" as CatalogService
+participant "InventoryService" as InventoryService
+participant "CartService" as CartService
+participant "OrderService" as OrderService
+participant "DiscountApprovalService" as DiscountApprovalService
+participant "ModalService" as ModalService
+participant "NotificationService" as NotificationService
+participant "SimulationService" as SimulationService
+
+participant "CustomerApiAdapter" as CustomerApi
+participant "CatalogApiAdapter" as CatalogApi
+participant "OrderApiAdapter" as OrderApi
+participant "StockWebSocketAdapter" as StockSocket
+
+collections "EventBus" as EventBus
+collections "CommandBus" as CommandBus
+
+== F0. Переключение статуса оператора ==
+
+OP -> Page : toggleOperatorStatus("away"/"working")
+Page -> SessionFacade : setOperatorStatus(status)
+SessionFacade -> CallRoutingService : updateOperatorStatus(status)
+CallRoutingService -> EventBus : publish(OperatorStatusChangedEvent)
+EventBus -> NotificationService : notify(status changed)
+NotificationService -> NotificationFacade : showToast()
+
+== F1. Имитация входящего звонка ==
+
+CallRoutingService -> SimulationService : requestNextCall()
+SimulationService -> EventBus : publish(IncomingCallEvent)
+EventBus -> CallFacade : handleIncomingCall(event)
+CallFacade -> CustomerProfileService : loadCustomerProfile(customerId)
+CustomerProfileService -> CustomerApi : getCustomer(customerId)
+CustomerApi --> CustomerProfileService : customerDTO
+CustomerProfileService --> CallFacade : Customer
+CallFacade -> EventBus : publish(CustomerLoadedEvent)
+
+== F2. Отображение профиля клиента ==
+
+EventBus -> Page : updateCustomerWidget(CustomerLoadedEvent)
+Page -> CallFacade : currentCustomer$
+CallFacade --> Page : customer view model
+Page -> OP : render name, VIP, balance
+
+== F3. Поиск и просмотр каталога ==
+
+OP -> Page : searchProducts(query, filters, page)
+Page -> CatalogFacade : search(query, filters, page)
+CatalogFacade -> CatalogService : searchProducts(criteria)
+CatalogService -> CatalogApi : search(criteria)
+CatalogApi --> CatalogService : pagedProducts
+CatalogService --> CatalogFacade : product list
+CatalogFacade -> InventoryService : syncAvailability(productIds)
+InventoryService -> StockSocket : getLatestStock(productIds)
+StockSocket --> InventoryService : stock statuses
+InventoryService --> CatalogFacade : availability map
+CatalogFacade -> EventBus : publish(ProductSearchRequestedEvent)
+CatalogFacade --> Page : catalog view model
+Page -> OP : render product grid
+
+== F4. Добавление товара в корзину ==
+
+OP -> Page : click "Add"
+Page -> CartFacade : addItem(productId, quantity)
+CartFacade -> CommandBus : dispatch(AddItemToCartCommand)
+CommandBus -> CartService : execute(command)
+CartService -> CartService : update cart state
+CartService -> EventBus : publish(CartUpdatedEvent)
+CartService -> NotificationService : notify(cart changed)
+
+== F5. Синхронизация корзины и header ==
+
+EventBus -> CartFacade : onCartUpdated(event)
+CartFacade --> Page : cart view model
+Page -> OP : update cart widget + total + header counter
+
+== F6. Изменение остатков (WebSocket) ==
+
+SimulationService -> StockSocket : push random stock update
+StockSocket -> EventBus : publish(StockUpdatedEvent)
+EventBus -> InventoryService : handleStockUpdated(event)
+InventoryService -> CatalogFacade : refreshAvailability(productId)
+CatalogFacade -> EventBus : publish(StockUpdatedEvent)
+EventBus -> NotificationService : notify(stock updated)
+NotificationService -> NotificationFacade : showToast()
+CatalogFacade --> Page : updated product availability
+Page -> OP : update card button state / color
+
+== F7. Оформление заказа через модалку ==
+
+OP -> Page : click "Оформить заказ"
+Page -> ModalFacade : openConfirmDiscountModal()
+ModalFacade -> ModalService : open(modalType)
+ModalService -> EventBus : publish(ModalOpenedEvent)
+ModalService --> Page : modal opened
+
+OP -> Page : enter discount reason + confirm
+Page -> ModalFacade : confirmDiscount(reason)
+ModalFacade -> DiscountApprovalService : approve(reason)
+DiscountApprovalService -> OrderService : prepareConfirmation(reason)
+OrderService -> CommandBus : dispatch(ConfirmOrderCommand)
+CommandBus -> OrderApi : confirm(order draft)
+OrderApi --> OrderService : confirmed order
+OrderService -> EventBus : publish(OrderConfirmedEvent)
+
+== F8. Глобальные уведомления ==
+
+EventBus -> NotificationService : onOrderConfirmed(event)
+NotificationService -> NotificationFacade : showToast("Order confirmed")
+EventBus -> NotificationService : onStockUpdated(event)
+NotificationService -> NotificationFacade : showToast("Stock updated")
+
+== F9. Сброс сессии после завершения звонка ==
+
+OP -> Page : click "Завершить звонок"
+Page -> CallFacade : endCurrentCall()
+CallFacade -> CallRoutingService : endCall()
+CallRoutingService -> EventBus : publish(CallEndedEvent)
+EventBus -> CartService : clearCart()
+EventBus -> CustomerProfileService : clearCustomer()
+EventBus -> ModalService : closeAll()
+EventBus -> NotificationService : notify(call ended)
+CallFacade --> Page : empty call state
+Page -> OP : clear client panel + cart + counters
+
+@enduml

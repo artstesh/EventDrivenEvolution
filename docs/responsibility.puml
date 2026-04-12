@@ -1,0 +1,195 @@
+@startuml
+!theme cerulean-outline
+skinparam shadowing false
+skinparam componentStyle rectangle
+skinparam packageStyle rectangle
+
+title SPA Contact Center MVP - Component Diagram with responsibilities and data flows
+
+package "Presentation Layer" as PL {
+  [AppShell] as AppShell
+  [Header] as Header
+  [OperatorDeskPage] as DeskPage
+  [CallStatusPanel] as CallPanel
+  [CustomerProfileWidget] as CustomerWidget
+  [CartWidget] as CartWidget
+  [CatalogSearchPanel] as SearchPanel
+  [ProductGrid] as ProductGrid
+  [ProductCard] as ProductCard
+  [ToastCenter] as ToastCenter
+  [ConfirmDiscountModal] as DiscountModal
+  [OrderHistoryModal] as HistoryModal
+}
+
+package "Application Layer" as AL {
+  [OperatorSessionFacade] as SessionFacade
+  [CallFacade] as CallFacade
+  [CatalogFacade] as CatalogFacade
+  [CartFacade] as CartFacade
+  [ModalFacade] as ModalFacade
+  [NotificationFacade] as NotificationFacade
+}
+
+package "Domain Services" as DS {
+  [CallRoutingService] as CallRouting
+  [CustomerProfileService] as CustomerProfile
+  [CatalogService] as CatalogService
+  [InventoryService] as InventoryService
+  [CartService] as CartService
+  [OrderService] as OrderService
+  [DiscountApprovalService] as DiscountApproval
+  [ModalService] as ModalService
+  [NotificationService] as NotificationService
+  [SimulationService] as SimulationService
+}
+
+package "Integration Adapters" as IA {
+  [CustomerApiAdapter] as CustomerApi
+  [CatalogApiAdapter] as CatalogApi
+  [OrderApiAdapter] as OrderApi
+  [StockWebSocketAdapter] as StockSocket
+}
+
+package "Infrastructure / Messaging" as INF {
+  [EventBus] as EventBus
+  [CommandBus] as CommandBus
+}
+
+package "Domain Model" as DM {
+  [OperatorSession] as OperatorSession
+  [Call] as Call
+  [Customer] as Customer
+  [Product] as Product
+  [ProductCategory] as ProductCategory
+  [Cart] as Cart
+  [CartItem] as CartItem
+  [Order] as Order
+  [Money] as Money
+  [StockStatus] as StockStatus
+  [DiscountReason] as DiscountReason
+}
+
+' =========================
+' Presentation responsibilities
+' =========================
+AppShell --> DeskPage : composition
+DeskPage --> Header : renders
+DeskPage --> CallPanel : renders
+DeskPage --> CustomerWidget : renders
+DeskPage --> CartWidget : renders
+DeskPage --> SearchPanel : renders
+DeskPage --> ProductGrid : renders
+DeskPage --> ToastCenter : renders
+DeskPage --> DiscountModal : overlays
+DeskPage --> HistoryModal : overlays
+ProductGrid --> ProductCard : list item
+CartWidget --> CartItem : rows
+Header --> SessionFacade : operator status
+CallPanel --> CallFacade : active call
+CustomerWidget --> CallFacade : customer profile
+CartWidget --> CartFacade : cart state
+SearchPanel --> CatalogFacade : search request
+ProductCard --> CatalogFacade : availability/actions
+DiscountModal --> ModalFacade : confirm discount
+HistoryModal --> ModalFacade : open history
+ToastCenter --> NotificationFacade : notifications
+
+' =========================
+' Application responsibilities
+' =========================
+SessionFacade --> CallRouting : operator status, active session
+SessionFacade --> NotificationService : status events
+
+CallFacade --> CallRouting : incoming/end call
+CallFacade --> CustomerProfile : load customer
+CallFacade --> NotificationService : call notifications
+
+CatalogFacade --> CatalogService : search/catalog data
+CatalogFacade --> InventoryService : stock availability
+CatalogFacade --> NotificationService : catalog notifications
+
+CartFacade --> CartService : cart mutations
+CartFacade --> OrderService : order draft/summary
+CartFacade --> NotificationService : cart notifications
+
+ModalFacade --> ModalService : modal lifecycle
+ModalFacade --> DiscountApproval : discount approval workflow
+ModalFacade --> OrderService : confirm order
+ModalFacade --> NotificationService : modal notifications
+
+NotificationFacade --> NotificationService : toast stream
+
+' =========================
+' Domain services responsibilities
+' =========================
+CallRouting --> OperatorSession
+CallRouting --> Call
+CallRouting --> EventBus : publish call events
+
+CustomerProfile --> CustomerApi : customer data
+CustomerProfile --> Customer : profile model
+
+CatalogService --> CatalogApi : search/filter/paginate
+CatalogService --> Product : product data
+CatalogService --> ProductCategory : category data
+
+InventoryService --> StockSocket : stock updates
+InventoryService --> StockStatus : availability state
+InventoryService --> EventBus : publish stock events
+
+CartService --> Cart : cart state
+CartService --> CartItem : cart line items
+CartService --> Money : totals
+CartService --> EventBus : publish cart events
+
+OrderService --> OrderApi : confirm order
+OrderService --> Order : order model
+OrderService --> Money : totals and discounts
+OrderService --> DiscountReason : discount justification
+OrderService --> EventBus : publish order events
+
+DiscountApproval --> OrderService : approve discount / confirm
+DiscountApproval --> DiscountReason
+
+ModalService --> EventBus : modal opened/closed
+
+NotificationService --> EventBus : subscribe domain events
+NotificationService --> ToastCenter : toast payloads
+
+SimulationService --> StockSocket : random stock simulation
+SimulationService --> EventBus : synthetic operational events
+
+' =========================
+' Messaging infrastructure
+' =========================
+EventBus --> CallFacade : call events
+EventBus --> CartFacade : cart events
+EventBus --> CatalogFacade : stock events
+EventBus --> ModalFacade : modal events
+EventBus --> NotificationService : global events
+EventBus --> CustomerProfile : customer events
+EventBus --> InventoryService : stock update events
+EventBus --> OrderService : order events
+
+CommandBus --> CartService : AddItemToCartCommand
+CommandBus --> OrderService : ConfirmOrderCommand
+CommandBus --> CallRouting : EndCallCommand
+CommandBus --> SessionFacade : SetOperatorStatusCommand
+CommandBus --> ModalService : OpenModalCommand
+CommandBus --> DiscountApproval : ApplyDiscountCommand
+
+' =========================
+' Domain relations
+' =========================
+OperatorSession "1" o-- "0..1" Call
+Call "1" --> "1" Customer
+Cart "1" o-- "0..*" CartItem
+CartItem "1" --> "1" Product
+Product "1" --> "1" StockStatus
+Product "0..1" --> ProductCategory
+Order "1" o-- "1..*" CartItem
+Order "1" --> "1" Money
+Order "1" --> "0..1" DiscountReason
+CartItem "1" --> "1" Money
+
+@enduml

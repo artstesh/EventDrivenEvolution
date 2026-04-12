@@ -1,0 +1,31 @@
+:host {
+  display: block;
+  min-height: 100vh;
+}
+
+.operator-desk-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(99, 102, 241, 0.12), transparent 32%),
+    radial-gradient(circle at top right, rgba(14, 165, 233, 0.1), transparent 28%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  color: #0f172a;
+}
+
+.operator-desk-page__frame {
+  min-height: 100vh;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .operator-desk-page__frame {
+    padding: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .operator-desk-page__frame {
+    padding: 12px;
+  }
+}

@@ -1,0 +1,50 @@
+<section class="call-status-panel">
+  <div class="call-status-panel__header">
+    <div>
+      <div class="call-status-panel__eyebrow">Текущий звонок</div>
+      <h2 class="call-status-panel__title">{{ callTitle }}</h2>
+    </div>
+
+    <span class="call-status-panel__badge call-status-panel__badge--live">
+      В эфире
+    </span>
+  </div>
+
+  <div class="call-status-panel__customer">
+    <div class="call-status-panel__avatar">{{ customerName.slice(0, 1) }}</div>
+
+    <div class="call-status-panel__customer-info">
+      <div class="call-status-panel__name">{{ customerName }}</div>
+
+      <div class="call-status-panel__meta">
+        <span class="call-status-panel__vip" [class.call-status-panel__vip--off]="!isVip">
+          {{ isVip ? 'VIP' : 'Standard' }}
+        </span>
+        <span class="call-status-panel__separator"></span>
+        <span class="call-status-panel__balance">Баланс: {{ balance }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="call-status-panel__details">
+    <div class="call-status-panel__detail">
+      <span class="call-status-panel__label">Статус</span>
+      <span class="call-status-panel__value">{{ status }}</span>
+    </div>
+
+    <div class="call-status-panel__detail">
+      <span class="call-status-panel__label">Длительность</span>
+      <span class="call-status-panel__value">{{ duration }}</span>
+    </div>
+  </div>
+
+  <div class="call-status-panel__actions">
+    <button type="button" class="call-status-panel__button">
+      Отошёл
+    </button>
+
+    <button type="button" class="call-status-panel__button call-status-panel__button--danger">
+      Завершить звонок
+    </button>
+  </div>
+</section>

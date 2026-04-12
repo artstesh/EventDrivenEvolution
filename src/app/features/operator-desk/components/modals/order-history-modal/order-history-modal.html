@@ -1,0 +1,67 @@
+<div *ngIf="opened" class="order-history-modal" role="dialog" aria-modal="true" aria-labelledby="order-history-title">
+  <div class="order-history-modal__backdrop" (click)="closed.emit()"></div>
+
+  <section class="order-history-modal__window">
+    <header class="order-history-modal__header">
+      <div>
+        <div class="order-history-modal__eyebrow">История заказов</div>
+        <h3 class="order-history-modal__title" id="order-history-title">
+          Заказы клиента
+        </h3>
+      </div>
+
+      <button type="button" class="order-history-modal__close" aria-label="Закрыть" (click)="closed.emit()">
+        ×
+      </button>
+    </header>
+
+    <div class="order-history-modal__customer">
+      <div class="order-history-modal__avatar">А</div>
+
+      <div class="order-history-modal__customer-info">
+        <div class="order-history-modal__name">Алексей Иванов</div>
+        <div class="order-history-modal__meta">
+          <span>VIP</span>
+          <span class="order-history-modal__separator"></span>
+          <span>8 заказов за 12 месяцев</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-history-modal__list">
+      <article class="order-history-modal__item">
+        <div class="order-history-modal__item-main">
+          <div class="order-history-modal__item-title">Заказ №10482</div>
+          <div class="order-history-modal__item-meta">12 апреля 2026 · Доставлен</div>
+        </div>
+        <div class="order-history-modal__item-sum">56 470 ₽</div>
+      </article>
+
+      <article class="order-history-modal__item">
+        <div class="order-history-modal__item-main">
+          <div class="order-history-modal__item-title">Заказ №10411</div>
+          <div class="order-history-modal__item-meta">28 марта 2026 · Закрыт</div>
+        </div>
+        <div class="order-history-modal__item-sum">18 990 ₽</div>
+      </article>
+
+      <article class="order-history-modal__item">
+        <div class="order-history-modal__item-main">
+          <div class="order-history-modal__item-title">Заказ №10367</div>
+          <div class="order-history-modal__item-meta">11 марта 2026 · Возврат</div>
+        </div>
+        <div class="order-history-modal__item-sum">7 500 ₽</div>
+      </article>
+    </div>
+
+    <div class="order-history-modal__footer">
+      <button type="button" class="order-history-modal__button" (click)="closed.emit()">
+        Закрыть
+      </button>
+
+      <button type="button" class="order-history-modal__button order-history-modal__button--primary">
+        Открыть заказ
+      </button>
+    </div>
+  </section>
+</div>

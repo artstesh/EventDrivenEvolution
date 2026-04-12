@@ -59,7 +59,8 @@
               "buildTarget": "EventDrivenEvolution:build:production"
             },
             "development": {
-              "buildTarget": "EventDrivenEvolution:build:development"
+              "buildTarget": "EventDrivenEvolution:build:development",
+              "ssl": true
             }
           },
           "defaultConfiguration": "development"

@@ -1,0 +1,41 @@
+<div class="operator-desk-page">
+  <app-toast-center></app-toast-center>
+
+  <div class="operator-desk-page__frame">
+    <app-operator-desk-shell
+      [operatorStatus]="operatorStatus"
+      [queueSize]="queueSize"
+      [shiftLabel]="shiftLabel"
+      [callTitle]="callTitle"
+      [customerName]="customerName"
+      [isVip]="isVip"
+      [balance]="balance"
+      [callStatus]="callStatus"
+      [callDuration]="callDuration"
+      [fullName]="fullName"
+      [loyaltyLevel]="loyaltyLevel"
+      [segment]="segment"
+      [lastOrderAt]="lastOrderAt"
+      [cartItemCount]="cartItemCount"
+      [cartDiscount]="cartDiscount"
+      [cartSubtotal]="cartSubtotal"
+      [cartTotal]="cartTotal"
+      [cartItems]="cartItems"
+      [products]="products"
+      [totalCount]="totalCount"
+      [displayedCount]="displayedCount"
+      [currentPage]="currentPage"
+      [totalPages]="totalPages"
+      [showConfirmDiscountModal]="showConfirmDiscountModal"
+      [showOrderHistoryModal]="showOrderHistoryModal"
+      (operatorStatusChanged)="onOperatorStatusChanged($event)"
+      (searchRequested)="onSearchRequested($event)"
+      (addToCart)="onAddToCart($event)"
+      (endCall)="onEndCall()"
+      (openOrder)="onOpenOrder()"
+      (closeConfirmDiscountModal)="onCloseConfirmDiscountModal()"
+      (confirmDiscount)="onConfirmDiscount($event)"
+      (closeOrderHistoryModal)="onCloseOrderHistoryModal()"
+    ></app-operator-desk-shell>
+  </div>
+</div>
