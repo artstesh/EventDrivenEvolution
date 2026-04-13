@@ -1,50 +1,47 @@
 <section class="call-status-panel">
   <div class="call-status-panel__header">
     <div>
-      <div class="call-status-panel__eyebrow">Текущий звонок</div>
-      <h2 class="call-status-panel__title">{{ callTitle }}</h2>
+      <div class="call-status-panel__eyebrow">Current call</div>
+      <h2 class="call-status-panel__title">Client is {{ activeCall() ? 'connected' : 'disconnected' }}</h2>
     </div>
 
     <span class="call-status-panel__badge call-status-panel__badge--live">
-      В эфире
+      On air
     </span>
   </div>
 
   <div class="call-status-panel__customer">
-    <div class="call-status-panel__avatar">{{ customerName.slice(0, 1) }}</div>
+    <div class="call-status-panel__avatar">{{ activeCall()?.customer?.fullName?.slice(0, 1) ?? '-' }}</div>
 
     <div class="call-status-panel__customer-info">
-      <div class="call-status-panel__name">{{ customerName }}</div>
+      <div class="call-status-panel__name">{{ activeCall()?.customer?.fullName ?? '' }}</div>
 
       <div class="call-status-panel__meta">
-        <span class="call-status-panel__vip" [class.call-status-panel__vip--off]="!isVip">
-          {{ isVip ? 'VIP' : 'Standard' }}
+        <span class="call-status-panel__vip" [class.call-status-panel__vip--off]="!activeCall()?.customer?.isVip">
+          {{ activeCall()?.customer?.isVip ? 'VIP' : 'Standard' }}
         </span>
         <span class="call-status-panel__separator"></span>
-        <span class="call-status-panel__balance">Баланс: {{ balance }}</span>
+        <span class="call-status-panel__balance">Balance: ${{ activeCall()?.customer?.balance ?? 0 }}</span>
       </div>
     </div>
   </div>
 
   <div class="call-status-panel__details">
     <div class="call-status-panel__detail">
-      <span class="call-status-panel__label">Статус</span>
-      <span class="call-status-panel__value">{{ status }}</span>
+      <span class="call-status-panel__label">Status</span>
+      <span class="call-status-panel__value">{{ activeCall()?.status ?? '' }}</span>
     </div>
 
     <div class="call-status-panel__detail">
-      <span class="call-status-panel__label">Длительность</span>
-      <span class="call-status-panel__value">{{ duration }}</span>
+      <span class="call-status-panel__label">Duration</span>
+      <span class="call-status-panel__value">{{ callDuration()| date:'HH:mm:ss':'UTC' }}</span>
     </div>
   </div>
 
   <div class="call-status-panel__actions">
-    <button type="button" class="call-status-panel__button">
-      Отошёл
-    </button>
 
-    <button type="button" class="call-status-panel__button call-status-panel__button--danger">
-      Завершить звонок
+    <button type="button" (click)="endCall.emit()" class="call-status-panel__button call-status-panel__button--danger">
+      Finish the call
     </button>
   </div>
 </section>

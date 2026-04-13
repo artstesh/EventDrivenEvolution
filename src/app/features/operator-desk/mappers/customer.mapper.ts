@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { CustomerDto } from '../adapters/api/customer-api.adapter';
 import { CustomerModel } from '../models/customer.model';
-import { MoneyModel } from '../models/money.model';
+import {CustomerDto} from '../adapters/api/models/customer-dto';
+import {Currency} from '../adapters/api/models/currency.enum';
 
 export interface CustomerProfileVm {
   fullName: string;
   vipLabel: string;
-  balance: string;
+  balance: number;
   loyaltyLevel: string;
   segment: string;
   lastOrderAt: string;
@@ -21,7 +21,7 @@ export class CustomerMapper {
       id: dto.id,
       fullName: dto.fullName,
       isVip: dto.isVip,
-      balance: this.mapMoney(dto.balanceAmount, dto.balanceCurrency),
+      balance: dto.balanceAmount,
       loyaltyLevel: dto.loyaltyLevel,
       segment: dto.segment,
       lastOrderAt: dto.lastOrderAt,
@@ -31,27 +31,12 @@ export class CustomerMapper {
   mapModelToProfileVm(model: CustomerModel): CustomerProfileVm {
     return {
       fullName: model.fullName,
-      vipLabel: model.isVip ? 'VIP' : 'Обычный',
-      balance: this.formatMoney(model.balance),
-      loyaltyLevel: model.loyaltyLevel ?? 'Не указано',
-      segment: model.segment ?? 'Не указан',
-      lastOrderAt: model.lastOrderAt ? this.formatDate(model.lastOrderAt) : 'Нет данных',
+      vipLabel: model.isVip ? 'VIP' : 'Standard',
+      balance: model.balance,
+      loyaltyLevel: model.loyaltyLevel ?? 'Unknown',
+      segment: model.segment ?? 'Unknown',
+      lastOrderAt: model.lastOrderAt ? this.formatDate(model.lastOrderAt) : 'No data',
     };
-  }
-
-  mapMoney(amount: number, currency: MoneyModel['currency']): MoneyModel {
-    return {
-      amount,
-      currency,
-    };
-  }
-
-  private formatMoney(money: MoneyModel): string {
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: money.currency,
-      maximumFractionDigits: 0,
-    }).format(money.amount);
   }
 
   private formatDate(value: string): string {

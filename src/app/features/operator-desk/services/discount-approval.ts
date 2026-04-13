@@ -19,14 +19,8 @@ export class DiscountApprovalService {
 
     return {
       ...cart,
-      discount: {
-        amount: discountAmount,
-        currency: cart.total.currency,
-      },
-      total: {
-        amount: Math.max(0, cart.subtotal.amount - discountAmount),
-        currency: cart.subtotal.currency,
-      },
+      discount: discountAmount,
+      total: Math.max(0, cart.subtotal - discountAmount)
     };
   }
 }

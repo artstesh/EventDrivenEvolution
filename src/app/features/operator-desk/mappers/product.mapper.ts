@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import { MoneyModel } from '../models/money.model';
-import { ProductCategoryModel } from '../models/product-category.model';
-import { ProductModel } from '../models/product.model';
-import { ProductDto } from '../adapters/api/catalog-api.adapter';
-import { StockBadgeState } from '../components/product-card/components/stock-badge/stock-badge';
+import {Injectable} from '@angular/core';
+import {ProductCategoryModel} from '../models/product-category.model';
+import {ProductModel} from '../models/product.model';
+import {StockBadgeState} from '../components/product-card/components/stock-badge/stock-badge';
+import {ProductDto} from '../adapters/api/models/product-dto';
 
 export interface ProductCardVm {
   category: string;
@@ -11,7 +10,7 @@ export interface ProductCardVm {
   description: string;
   sku: string;
   warehouse: string;
-  price: string;
+  price: number;
   stockState: StockBadgeState;
   stockLabel: string;
 }
@@ -27,7 +26,7 @@ export class ProductMapper {
       name: dto.name,
       description: dto.description,
       category: this.mapCategory(dto.categoryId, dto.categoryName),
-      price: this.mapMoney(dto.priceAmount, dto.priceCurrency),
+      price: dto.priceAmount,
       stockStatus: dto.stockStatus,
       warehouse: dto.warehouse,
     };
@@ -40,14 +39,14 @@ export class ProductMapper {
       description: model.description,
       sku: model.sku,
       warehouse: model.warehouse,
-      price: this.formatMoney(model.price),
+      price: model.price,
       stockState: model.stockStatus,
       stockLabel: this.getStockLabel(model.stockStatus),
     };
   }
 
   toDomainProduct(vm: ProductCardVm): ProductModel {
-    const categoryName = vm.category.trim() || 'Без категории';
+    const categoryName = vm.category.trim() || 'No';
 
     return {
       id: vm.sku,
@@ -55,7 +54,7 @@ export class ProductMapper {
       name: vm.name,
       description: vm.description,
       category: this.mapCategory(categoryName, categoryName),
-      price: this.parseMoney(vm.price),
+      price: vm.price,
       stockStatus: vm.stockState,
       warehouse: vm.warehouse,
     };
@@ -69,40 +68,16 @@ export class ProductMapper {
     };
   }
 
-  mapMoney(amount: number, currency: MoneyModel['currency']): MoneyModel {
-    return {
-      amount,
-      currency,
-    };
-  }
-
-  private parseMoney(value: string): MoneyModel {
-    const amount = Number(value.replace(/[^\d]/g, '')) || 0;
-
-    return {
-      amount,
-      currency: 'RUB',
-    };
-  }
-
-  private formatMoney(money: MoneyModel): string {
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: money.currency,
-      maximumFractionDigits: 0,
-    }).format(money.amount);
-  }
-
   private getStockLabel(status: ProductModel['stockStatus']): string {
     switch (status) {
       case 'available':
-        return 'В наличии';
+        return 'Available';
       case 'limited':
-        return 'Ограничено';
+        return 'Limited';
       case 'out':
-        return 'Нет в наличии';
+        return 'Out';
       default:
-        return 'В наличии';
+        return 'Available';
     }
   }
 }

@@ -1,27 +1,53 @@
-import {CommonModule, NgIf} from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import {NotificationFacade} from '../../../facades/notification.facade';
+import {DiscountApprovalService} from '../../../services/discount-approval';
+import {CartFacade} from '../../../facades/cart.facade';
+import {CartModel} from '../../../models/cart.model';
+import {Subscription} from 'rxjs';
+import {ModalFacade} from '../../../facades/modal.facade';
 
 @Component({
   selector: 'app-confirm-discount-modal',
   standalone: true,
-  imports: [ FormsModule, NgIf],
+  imports: [FormsModule],
   templateUrl: './confirm-discount-modal.html',
   styleUrl: './confirm-discount-modal.scss',
 })
-export class ConfirmDiscountModal {
-  @Input() opened = false;
-
-  @Input() cartSubtotal = '0 ₽';
-  @Input() discount = '0 ₽';
-  @Input() total = '0 ₽';
-
-  @Output() closed = new EventEmitter<void>();
-  @Output() confirmed = new EventEmitter<string>();
+export class ConfirmDiscountModal  implements OnInit, OnDestroy {
+  private subs: Subscription[] = [];
 
   discountReason = '';
+  cart = signal<CartModel | null>(null);
+
+  constructor(
+    private readonly discountApprovalService: DiscountApprovalService,
+    private readonly notificationFacade: NotificationFacade,
+    private readonly cartFacade: CartFacade,
+    private readonly modalFacade: ModalFacade) {
+  }
+
+  ngOnInit(): void {
+    this.subs.push(this.cartFacade.cart.subscribe(cart =>
+      this.cart.set(cart)))
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(sub => sub.unsubscribe());
+  }
+
+  close(): void {
+    this.modalFacade.close();
+  }
 
   onConfirm(): void {
-    this.confirmed.emit(this.discountReason.trim());
+    const discountReason = this.discountApprovalService.createDiscountReason(this.discountReason.trim());
+    this.notificationFacade.push({
+      type: 'success',
+      title: 'Discount accepted',
+      message: discountReason.text || 'Discount reason did not set.',
+    });
+    this.modalFacade.close();
+    this.cartFacade.clearCart();
   }
 }

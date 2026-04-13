@@ -20,9 +20,9 @@ export class CatalogSearchPanelComponent {
   @Output() criteriaChanged = new EventEmitter<CatalogSearchCriteria>();
 
   query = '';
-  category = 'Все категории';
-  availability = 'Все';
-  preset = 'Популярное';
+  category = 'Phones';
+  availability = 'All';
+  preset = 'Popular';
 
   emitCriteria(): void {
     this.criteriaChanged.emit({

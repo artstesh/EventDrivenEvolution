@@ -1,10 +1,9 @@
-import { MoneyModel } from './money.model';
 import { CartItemModel } from './cart-item.model';
 
 export interface CartModel {
   id: string;
   items: CartItemModel[];
-  discount: MoneyModel;
-  subtotal: MoneyModel;
-  total: MoneyModel;
+  discount: number;
+  subtotal: number;
+  total: number;
 }

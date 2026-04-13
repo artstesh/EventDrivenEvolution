@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { CartService } from '../services/cart';
-import { NotificationService } from '../services/notification';
-import { ProductModel } from '../models/product.model';
-import { CartModel } from '../models/cart.model';
-import { CartWidgetVm } from '../mappers/cart.mapper';
+import {Injectable} from '@angular/core';
+import {CartService} from '../services/cart';
+import {NotificationService} from '../services/notification';
+import {ProductModel} from '../models/product.model';
+import {CartModel} from '../models/cart.model';
+import {CartWidgetVm} from '../mappers/cart.mapper';
+import {ReplaySubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -14,12 +15,8 @@ export class CartFacade {
     private readonly notificationService: NotificationService,
   ) {}
 
-  get cart(): CartModel {
-    return this.cartService.getCart();
-  }
-
-  get cartVm(): CartWidgetVm {
-    return this.cartService.getCartVm();
+  get cart(): ReplaySubject<CartModel> {
+    return this.cartService.cart$;
   }
 
   addItem(product: ProductModel, quantity = 1): CartModel {
@@ -27,8 +24,8 @@ export class CartFacade {
 
     this.notificationService.push({
       type: 'success',
-      title: 'Товар добавлен',
-      message: `${product.name} добавлен в корзину.`,
+      title: 'The item is added',
+      message: `${product.name} id added to the cart.`,
     });
 
     return cart;
@@ -39,19 +36,14 @@ export class CartFacade {
 
     this.notificationService.push({
       type: 'info',
-      title: 'Корзина очищена',
-      message: 'Все позиции были удалены.',
+      title: 'The cart is cleaned',
+      message: 'The cart is cleaned.',
     });
 
     return cart;
   }
 
   setDiscount(amount: number): CartModel {
-    const cart = this.cartService.setDiscount({
-      amount,
-      currency: 'RUB',
-    });
-
-    return cart;
+    return this.cartService.setDiscount(amount);
   }
 }

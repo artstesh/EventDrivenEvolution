@@ -3,14 +3,14 @@ import { OrderConfirmationResponseDto } from '../adapters/api/order-api.adapter'
 import { CartModel } from '../models/cart.model';
 import { CustomerModel } from '../models/customer.model';
 import { DiscountReasonModel } from '../models/discount-reason.model';
-import { MoneyModel } from '../models/money.model';
 import { OrderModel } from '../models/order.model';
+import {Currency} from '../adapters/api/models/currency.enum';
 
 export interface OrderHistoryVm {
   orderNumber: string;
   createdAt: string;
   status: string;
-  total: string;
+  total: number;
 }
 
 @Injectable({
@@ -29,7 +29,7 @@ export class OrderMapper {
       items: cart.items,
       subtotal: cart.subtotal,
       discount: cart.discount,
-      total: this.mapMoney(dto.totalAmount, dto.totalCurrency),
+      total: dto.totalAmount,
       status: 'confirmed',
       discountReason,
       createdAt: dto.confirmedAt,
@@ -42,23 +42,8 @@ export class OrderMapper {
       orderNumber: model.id,
       createdAt: this.formatDate(model.createdAt),
       status: model.status,
-      total: this.formatMoney(model.total),
+      total: model.total
     };
-  }
-
-  mapMoney(amount: number, currency: MoneyModel['currency']): MoneyModel {
-    return {
-      amount,
-      currency,
-    };
-  }
-
-  private formatMoney(money: MoneyModel): string {
-    return new Intl.NumberFormat('ru-RU', {
-      style: 'currency',
-      currency: money.currency,
-      maximumFractionDigits: 0,
-    }).format(money.amount);
   }
 
   private formatDate(value: string): string {

@@ -1,16 +1,16 @@
-<div *ngIf="opened" class="order-history-modal" role="dialog" aria-modal="true" aria-labelledby="order-history-title">
-  <div class="order-history-modal__backdrop" (click)="closed.emit()"></div>
+<div class="order-history-modal" role="dialog" aria-modal="true" aria-labelledby="order-history-title">
+  <div class="order-history-modal__backdrop" (click)="close()"></div>
 
   <section class="order-history-modal__window">
     <header class="order-history-modal__header">
       <div>
-        <div class="order-history-modal__eyebrow">История заказов</div>
+        <div class="order-history-modal__eyebrow">Order history</div>
         <h3 class="order-history-modal__title" id="order-history-title">
-          Заказы клиента
+          Client's orders
         </h3>
       </div>
 
-      <button type="button" class="order-history-modal__close" aria-label="Закрыть" (click)="closed.emit()">
+      <button type="button" class="order-history-modal__close" aria-label="Close" (click)="close()">
         ×
       </button>
     </header>
@@ -55,12 +55,8 @@
     </div>
 
     <div class="order-history-modal__footer">
-      <button type="button" class="order-history-modal__button" (click)="closed.emit()">
-        Закрыть
-      </button>
-
-      <button type="button" class="order-history-modal__button order-history-modal__button--primary">
-        Открыть заказ
+      <button type="button" class="order-history-modal__button" (click)="close()">
+        Close
       </button>
     </div>
   </section>

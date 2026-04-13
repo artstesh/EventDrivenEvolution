@@ -1,10 +1,9 @@
-import { MoneyModel } from './money.model';
 
 export interface CustomerModel {
   id: string;
   fullName: string;
   isVip: boolean;
-  balance: MoneyModel;
+  balance: number;
   loyaltyLevel?: string;
   segment?: string;
   lastOrderAt?: string;

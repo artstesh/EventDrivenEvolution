@@ -1,8 +1,8 @@
 <div class="operator-status-switch">
   <div class="operator-status-switch__header">
-    <div class="operator-status-switch__eyebrow">Статус оператора</div>
-    <div class="operator-status-switch__state" [class.operator-status-switch__state--active]="status === 'working'">
-      {{ status === 'working' ? 'Работает' : 'Отошёл' }}
+    <div class="operator-status-switch__eyebrow">Operator's status</div>
+    <div class="operator-status-switch__state" [class.operator-status-switch__state--active]="status() === 'working'">
+      {{ status() === 'working' ? 'Working' : 'Stepped away' }}
     </div>
   </div>
 
@@ -10,23 +10,23 @@
     <button
       type="button"
       class="operator-status-switch__button"
-      [class.operator-status-switch__button--active]="status === 'working'"
-      (click)="statusChanged.emit('working')"
+      [class.operator-status-switch__button--active]="status() === 'working'"
+      (click)="setStatus('working')"
     >
-      Работаю
+      Working
     </button>
 
     <button
       type="button"
       class="operator-status-switch__button"
-      [class.operator-status-switch__button--active]="status === 'away'"
-      (click)="statusChanged.emit('away')"
+      [class.operator-status-switch__button--active]="status() === 'away'"
+      (click)="setStatus('away')"
     >
-      Отошёл
+      Stepped away
     </button>
   </div>
 
   <div class="operator-status-switch__hint">
-    Если статус «Отошёл», входящие звонки не поступают.
+    If the status is «Stepped away» the calls are paused.
   </div>
 </div>

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {NotificationFacade} from '../../facades/notification.facade';
 
 @Component({
   selector: 'app-toast-center',
@@ -7,4 +8,14 @@ import { Component } from '@angular/core';
   templateUrl: './toast-center.html',
   styleUrl: './toast-center.scss',
 })
-export class ToastCenter {}
+export class ToastCenter {
+  constructor(private readonly notificationFacade: NotificationFacade) {}
+
+  get notifications() {
+    return this.notificationFacade.notifications;
+  }
+
+  dismiss(id: string): void {
+    this.notificationFacade.remove(id);
+  }
+}

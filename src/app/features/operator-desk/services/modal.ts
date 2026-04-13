@@ -1,31 +1,44 @@
 import { Injectable } from '@angular/core';
-
-export type ModalType = 'confirm-discount' | 'order-history';
+import { BehaviorSubject } from 'rxjs';
+import { ModalStateModel, ModalType } from '../models/modal.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ModalService {
-  private openedModal: ModalType | null = null;
+  private readonly modalStateSubject = new BehaviorSubject<ModalStateModel>({
+    activeModal: null,
+  });
 
-  open(modal: ModalType): ModalType {
-    this.openedModal = modal;
-    return this.openedModal;
+  readonly modalState$ = this.modalStateSubject.asObservable();
+
+  get snapshot(): ModalStateModel {
+    return this.modalStateSubject.value;
   }
 
-  close(): void {
-    this.openedModal = null;
+  open(modal: Exclude<ModalType, null>): ModalStateModel {
+    const updated = {
+      activeModal: modal,
+    };
+
+    this.modalStateSubject.next(updated);
+    return updated;
   }
 
-  closeAll(): void {
-    this.openedModal = null;
+  close(): ModalStateModel {
+    const updated = {
+      activeModal: null,
+    };
+
+    this.modalStateSubject.next(updated);
+    return updated;
   }
 
-  getOpenedModal(): ModalType | null {
-    return this.openedModal;
+  closeAll(): ModalStateModel {
+    return this.close();
   }
 
-  isOpen(modal: ModalType): boolean {
-    return this.openedModal === modal;
+  isOpen(modal: Exclude<ModalType, null>): boolean {
+    return this.snapshot.activeModal === modal;
   }
 }

@@ -1,0 +1,57 @@
+<div class="operator-session-modal" role="dialog" aria-modal="true" aria-labelledby="operator-session-title">
+  <div class="operator-session-modal__backdrop" (click)="close()"></div>
+
+  <section class="operator-session-modal__window">
+    <header class="operator-session-modal__header">
+      <div>
+        <div class="operator-session-modal__eyebrow">Operator session</div>
+        <h3 class="operator-session-modal__title" id="operator-session-title">
+          Session details
+        </h3>
+      </div>
+
+      <button type="button" class="operator-session-modal__close" aria-label="Close" (click)="close()">
+        ×
+      </button>
+    </header>
+
+    <div class="operator-session-modal__summary">
+      <div class="operator-session-modal__summary-row">
+        <span class="operator-session-modal__label">Operator</span>
+        <span class="operator-session-modal__value">{{ session()?.operatorName ?? 'Operator' }}</span>
+      </div>
+
+      <div class="operator-session-modal__summary-row">
+        <span class="operator-session-modal__label">Status</span>
+        <span class="operator-session-modal__value operator-session-modal__value--accent">{{ session()?.status === 'working' ? 'Working' : 'Stepped away' }}</span>
+      </div>
+
+      <div class="operator-session-modal__summary-row">
+        <span class="operator-session-modal__label">Working since</span>
+        <span class="operator-session-modal__value">
+          {{ session()?.workingSince ? (session()?.workingSince | date : 'dd.MM.yyyy HH:mm') : '—' }}
+        </span>
+      </div>
+
+      <div class="operator-session-modal__summary-row">
+        <span class="operator-session-modal__label">Active call</span>
+        <span class="operator-session-modal__value">
+          {{ customer()?.fullName ?? 'None' }}
+        </span>
+      </div>
+
+      <div class="operator-session-modal__summary-row">
+        <span class="operator-session-modal__label">Active cart items</span>
+        <span class="operator-session-modal__value">
+          {{ session()?.activeCart?.items?.length ?? 0 }}
+        </span>
+      </div>
+    </div>
+
+    <div class="operator-session-modal__footer">
+      <button type="button" class="operator-session-modal__button" (click)="close()">
+        Close
+      </button>
+    </div>
+  </section>
+</div>

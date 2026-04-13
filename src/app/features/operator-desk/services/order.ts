@@ -5,6 +5,7 @@ import { CustomerModel } from '../models/customer.model';
 import { DiscountReasonModel } from '../models/discount-reason.model';
 import { OrderModel } from '../models/order.model';
 import { OrderMapper, OrderHistoryVm } from '../mappers/order.mapper';
+import {Currency} from '../adapters/api/models/currency.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +22,7 @@ export class OrderService {
       items: cart.items.map((item) => ({
         productId: item.product.id,
         quantity: item.quantity,
-        unitPriceAmount: item.unitPrice.amount,
-        unitPriceCurrency: item.unitPrice.currency,
+        unitPriceAmount: item.unitPrice
       })),
       discountReason: discountReason?.text,
     };
@@ -36,13 +36,9 @@ export class OrderService {
 
     return history.map((item) => ({
       orderNumber: item.orderNumber,
-      createdAt: new Intl.DateTimeFormat('ru-RU').format(new Date(item.createdAt)),
+      createdAt: new Intl.DateTimeFormat('en-US').format(new Date(item.createdAt)),
       status: item.status,
-      total: new Intl.NumberFormat('ru-RU', {
-        style: 'currency',
-        currency: 'RUB',
-        maximumFractionDigits: 0,
-      }).format(item.totalAmount),
+      total: item.totalAmount,
     }));
   }
 }

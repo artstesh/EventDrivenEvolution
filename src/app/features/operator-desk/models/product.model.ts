@@ -1,6 +1,5 @@
-import { MoneyModel } from './money.model';
-import { ProductCategoryModel } from './product-category.model';
-import { StockStatusModel } from './stock-status.model';
+import {ProductCategoryModel} from './product-category.model';
+import {StockStatusModel} from './stock-status.model';
 
 export interface ProductModel {
   id: string;
@@ -8,7 +7,7 @@ export interface ProductModel {
   name: string;
   description: string;
   category: ProductCategoryModel;
-  price: MoneyModel;
+  price: number;
   stockStatus: StockStatusModel;
   warehouse: string;
 }

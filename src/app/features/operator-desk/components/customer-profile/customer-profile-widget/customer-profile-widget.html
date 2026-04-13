@@ -1,40 +1,40 @@
 <section class="customer-profile-widget">
   <div class="customer-profile-widget__header">
     <div>
-      <div class="customer-profile-widget__eyebrow">Профиль клиента</div>
-      <h3 class="customer-profile-widget__title">{{ fullName }}</h3>
+      <div class="customer-profile-widget__eyebrow">Client details</div>
+      <h3 class="customer-profile-widget__title">{{ customer()?.fullName }}</h3>
     </div>
 
     <span class="customer-profile-widget__vip">
-      {{ isVip ? 'VIP' : 'Стандарт' }}
+      {{ customer()?.isVip ? 'VIP' : 'Standard' }}
     </span>
   </div>
 
   <div class="customer-profile-widget__balance">
-    <div class="customer-profile-widget__balance-label">Баланс</div>
-    <div class="customer-profile-widget__balance-value">{{ balance }}</div>
+    <div class="customer-profile-widget__balance-label">Balance</div>
+    <div class="customer-profile-widget__balance-value">${{ customer()?.balance??0 }}</div>
   </div>
 
   <div class="customer-profile-widget__metrics">
     <div class="customer-profile-widget__metric">
-      <span class="customer-profile-widget__metric-label">Лояльность</span>
-      <span class="customer-profile-widget__metric-value">{{ loyaltyLevel }}</span>
+      <span class="customer-profile-widget__metric-label">Loyalty</span>
+      <span class="customer-profile-widget__metric-value">{{ customer()?.loyaltyLevel??'???' }}</span>
     </div>
 
     <div class="customer-profile-widget__metric">
-      <span class="customer-profile-widget__metric-label">Сегмент</span>
-      <span class="customer-profile-widget__metric-value">{{ segment }}</span>
+      <span class="customer-profile-widget__metric-label">Segment</span>
+      <span class="customer-profile-widget__metric-value">{{ customer()?.segment??'???' }}</span>
     </div>
 
     <div class="customer-profile-widget__metric">
-      <span class="customer-profile-widget__metric-label">Последний заказ</span>
-      <span class="customer-profile-widget__metric-value">{{ lastOrderAt }}</span>
+      <span class="customer-profile-widget__metric-label">Last order</span>
+      <span class="customer-profile-widget__metric-value">{{ customer()?.lastOrderAt | date:'mediumDate' }}</span>
     </div>
   </div>
 
   <div class="customer-profile-widget__history">
-    <button type="button" class="customer-profile-widget__button">
-      История заказов
+    <button type="button" class="customer-profile-widget__button" (click)="showOrderHistory()">
+      Order history
     </button>
   </div>
 </section>

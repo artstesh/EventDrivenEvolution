@@ -1,54 +1,54 @@
-<div *ngIf="opened" class="confirm-discount-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-discount-title">
-  <div class="confirm-discount-modal__backdrop" (click)="closed.emit()"></div>
+<div class="confirm-discount-modal" role="dialog" aria-modal="true" aria-labelledby="confirm-discount-title">
+  <div class="confirm-discount-modal__backdrop" (click)="close()"></div>
 
   <section class="confirm-discount-modal__window">
     <header class="confirm-discount-modal__header">
       <div>
-        <div class="confirm-discount-modal__eyebrow">Подтверждение скидки</div>
+        <div class="confirm-discount-modal__eyebrow">Discount Confirmation</div>
         <h3 class="confirm-discount-modal__title" id="confirm-discount-title">
-          Согласование с супервайзером
+          Approval by Supervisor
         </h3>
       </div>
 
-      <button type="button" class="confirm-discount-modal__close" aria-label="Закрыть" (click)="closed.emit()">
+      <button type="button" class="confirm-discount-modal__close" aria-label="Close" (click)="close()">
         ×
       </button>
     </header>
 
     <div class="confirm-discount-modal__summary">
       <div class="confirm-discount-modal__summary-row">
-        <span class="confirm-discount-modal__label">Сумма корзины</span>
-        <span class="confirm-discount-modal__value">{{ cartSubtotal }}</span>
+        <span class="confirm-discount-modal__label">Cart Total</span>
+        <span class="confirm-discount-modal__value">{{ cart()?.subtotal??0 }}</span>
       </div>
 
       <div class="confirm-discount-modal__summary-row">
-        <span class="confirm-discount-modal__label">Скидка</span>
-        <span class="confirm-discount-modal__value confirm-discount-modal__value--accent">{{ discount }}</span>
+        <span class="confirm-discount-modal__label">Discount</span>
+        <span class="confirm-discount-modal__value confirm-discount-modal__value--accent">{{ cart()?.discount??0 }}</span>
       </div>
 
       <div class="confirm-discount-modal__summary-row confirm-discount-modal__summary-row--total">
-        <span class="confirm-discount-modal__label">Итого к оплате</span>
-        <span class="confirm-discount-modal__value">{{ total }}</span>
+        <span class="confirm-discount-modal__label">Total Due</span>
+        <span class="confirm-discount-modal__value">{{ cart()?.total??0 }}</span>
       </div>
     </div>
 
     <label class="confirm-discount-modal__field">
-      <span class="confirm-discount-modal__label">Причина скидки</span>
+      <span class="confirm-discount-modal__label">Reason for Discount</span>
       <textarea
         class="confirm-discount-modal__textarea"
         rows="4"
         [(ngModel)]="discountReason"
-        placeholder="Например: лояльный клиент, компенсация, индивидуальное согласование"
+        placeholder="For example: loyal customer, compensation, individual agreement."
       ></textarea>
     </label>
 
     <div class="confirm-discount-modal__footer">
-      <button type="button" class="confirm-discount-modal__button" (click)="closed.emit()">
-        Отмена
+      <button type="button" class="confirm-discount-modal__button" (click)="close()">
+        Cancel
       </button>
 
       <button type="button" class="confirm-discount-modal__button confirm-discount-modal__button--primary" (click)="onConfirm()">
-        Подтвердить
+        Confirm
       </button>
     </div>
   </section>

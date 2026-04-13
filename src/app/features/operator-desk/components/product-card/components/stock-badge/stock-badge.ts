@@ -11,5 +11,5 @@ export type StockBadgeState = 'available' | 'limited' | 'out';
 })
 export class StockBadge {
   @Input() state: StockBadgeState = 'available';
-  @Input() label = 'В наличии';
+  @Input() label = 'Available';
 }

@@ -4,32 +4,32 @@
 
     <div class="operator-header__titles">
       <div class="operator-header__eyebrow">Contact Center Workspace</div>
-      <h1 class="operator-header__title">Операторская панель</h1>
+      <h1 class="operator-header__title">Operator Panel</h1>
     </div>
   </div>
 
   <div class="operator-header__center">
     <div class="operator-header__status">
-      <span class="operator-header__status-dot" [class.operator-header__status-dot--away]="status === 'away'"></span>
+      <span class="operator-header__status-dot" [class.operator-header__status-dot--away]="status() === 'away'"></span>
       <span class="operator-header__status-text">
-        {{ status === 'working' ? 'Работаю' : 'Отошёл' }}
+        {{ status() === 'working' ? 'Working' : 'Stepped away' }}
       </span>
     </div>
 
     <div class="operator-header__meta">
-      <span class="operator-header__meta-item">Смена: {{ shiftLabel }}</span>
+      <span class="operator-header__meta-item">Shift: {{ shiftLabel }}</span>
       <span class="operator-header__meta-separator"></span>
-      <span class="operator-header__meta-item">Очередь: {{ queueSize }} клиентов</span>
+      <span class="operator-header__meta-item">Queue: {{ queueSize }} clients</span>
     </div>
   </div>
 
   <div class="operator-header__actions">
-    <button type="button" class="operator-header__button">
-      История
+    <button type="button" class="operator-header__button" (click)="openHistory()">
+      History
     </button>
 
-    <button type="button" class="operator-header__button operator-header__button--primary">
-      Переключить статус
+    <button type="button" class="operator-header__button operator-header__button--primary" (click)="toggleStatus()">
+      Toggle Status
     </button>
   </div>
 </div>

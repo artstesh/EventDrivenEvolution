@@ -1,42 +1,44 @@
 import { Injectable } from '@angular/core';
-
-export interface CustomerDto {
-  id: string;
-  fullName: string;
-  isVip: boolean;
-  balanceAmount: number;
-  balanceCurrency: 'RUB' | 'USD' | 'EUR';
-  loyaltyLevel?: string;
-  segment?: string;
-  lastOrderAt?: string;
-}
+import {CustomerDto} from './models/customer-dto';
+import {ReplaySubject} from 'rxjs';
+import {CustomerHistory} from './models/customer-history';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CustomerApiAdapter {
-  async getCustomer(customerId: string): Promise<CustomerDto> {
-    void customerId;
+  private _customer!: CustomerDto;
+  public customer$ = new ReplaySubject<CustomerDto>(1);
 
-    return {
-      id: 'cust-001',
-      fullName: 'Алексей Иванов',
-      isVip: true,
-      balanceAmount: 12450,
-      balanceCurrency: 'RUB',
-      loyaltyLevel: 'Высокая',
-      segment: 'Premium',
-      lastOrderAt: '2026-04-10T09:15:00.000Z',
-    };
+  constructor() {
+    this.getNextCustomer();
   }
 
-  async getCustomerHistory(customerId: string): Promise<Array<{ id: string; orderNumber: string; createdAt: string; status: string; totalAmount: number }>> {
-    void customerId;
+  getNextCustomer(): void {
+    this._customer = {
+      id: `cust-${Math.round(Math.random()*10000)}`,
+      balanceAmount: Math.round(Math.random()*100000),
+      balanceCurrency: Math.round(Math.random()*3),
+      isVip: Math.random() > 0.5,
+      fullName: `Customer ${Math.round(Math.random()*10000)}`,
+      segment: Math.random() > 0.5 ? 'Premium' : 'Standard',
+      lastOrderAt: new Date(new Date().getTime() - Math.round(Math.random()*100000000000)).toISOString(),
+      loyaltyLevel: Math.random() > 0.5 ? 'High' : 'Low',
+    };
+    this.customer$.next(this._customer);
+  }
 
-    return [
-      { id: 'order-10482', orderNumber: '10482', createdAt: '2026-04-12T11:20:00.000Z', status: 'delivered', totalAmount: 56470 },
-      { id: 'order-10411', orderNumber: '10411', createdAt: '2026-03-28T14:40:00.000Z', status: 'closed', totalAmount: 18990 },
-      { id: 'order-10367', orderNumber: '10367', createdAt: '2026-03-11T08:05:00.000Z', status: 'returned', totalAmount: 7500 },
-    ];
+  async getCustomer(customerId: string): Promise<CustomerDto> {
+    return this._customer;
+  }
+
+  async getCustomerHistory(customerId: string): Promise<Array<CustomerHistory>> {
+    return Array.from({length: 3}, (_, i) => ({
+      id: `order-${Math.round(Math.random()*10000)}`,
+      orderNumber: `104${Math.round(Math.random()*100)}`,
+      createdAt: new Date(new Date().getTime() - Math.round(Math.random()*1000000000000)).toISOString(),
+      status: Math.random() > 0.5 ? 'delivered' : 'closed',
+      totalAmount: Math.round(Math.random()*100000),
+    }));
   }
 }

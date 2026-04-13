@@ -1,25 +1,41 @@
 <div class="toast-center" aria-live="polite" aria-atomic="true">
-  <div class="toast-center__stack">
-    <article class="toast-center__toast toast-center__toast--success">
-      <div class="toast-center__icon">✓</div>
+  @if (notifications.length) {
+    <div class="toast-center__stack">
+      @for (toast of notifications; track toast.id) {
+        <article
+          class="toast-center__toast"
+          [class.toast-center__toast--success]="toast.type === 'success'"
+          [class.toast-center__toast--info]="toast.type === 'info'"
+          [class.toast-center__toast--warning]="toast.type === 'warning'"
+          [class.toast-center__toast--error]="toast.type === 'error'"
+        >
+          <button type="button" class="toast-center__dismiss" aria-label="Close" (click)="dismiss(toast.id)">
+            ×
+          </button>
 
-      <div class="toast-center__content">
-        <div class="toast-center__title">Заказ подтверждён</div>
-        <div class="toast-center__text">
-          Скидка применена, заказ отправлен в обработку.
-        </div>
-      </div>
-    </article>
+          <div class="toast-center__icon">
+            @switch (toast.type) {
+              @case ('success') {
+                <span>✓</span>
+              }
+              @case ('info') {
+                <span>i</span>
+              }
+              @case ('warning') {
+                <span>!</span>
+              }
+              @default {
+                <span>×</span>
+              }
+            }
+          </div>
 
-    <article class="toast-center__toast toast-center__toast--info">
-      <div class="toast-center__icon">i</div>
-
-      <div class="toast-center__content">
-        <div class="toast-center__title">Остатки обновлены</div>
-        <div class="toast-center__text">
-          Доступность товара изменена в каталоге.
-        </div>
-      </div>
-    </article>
-  </div>
+          <div class="toast-center__content">
+            <div class="toast-center__title">{{ toast.title }}</div>
+            <div class="toast-center__text">{{ toast.message }}</div>
+          </div>
+        </article>
+      }
+    </div>
+  }
 </div>

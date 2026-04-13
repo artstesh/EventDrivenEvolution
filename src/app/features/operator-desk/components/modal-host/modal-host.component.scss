@@ -1,0 +1,21 @@
+:host {
+  display: block;
+}
+
+.modal-host {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+}
+
+.modal-host__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.42);
+  backdrop-filter: blur(4px);
+}
+
+.modal-host__content {
+  position: relative;
+  z-index: 1;
+}

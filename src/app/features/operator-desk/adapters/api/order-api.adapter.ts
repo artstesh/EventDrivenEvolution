@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Currency} from './models/currency.enum';
 
 export interface OrderConfirmationRequestDto {
   customerId: string;
@@ -6,7 +7,6 @@ export interface OrderConfirmationRequestDto {
     productId: string;
     quantity: number;
     unitPriceAmount: number;
-    unitPriceCurrency: 'RUB' | 'USD' | 'EUR';
   }>;
   discountReason?: string;
 }
@@ -17,7 +17,7 @@ export interface OrderConfirmationResponseDto {
   status: 'confirmed' | 'pending' | 'cancelled';
   confirmedAt: string;
   totalAmount: number;
-  totalCurrency: 'RUB' | 'USD' | 'EUR';
+  totalCurrency: Currency;
 }
 
 @Injectable({
@@ -33,7 +33,7 @@ export class OrderApiAdapter {
       status: 'confirmed',
       confirmedAt: new Date().toISOString(),
       totalAmount: 51470,
-      totalCurrency: 'RUB',
+      totalCurrency: Currency.USD,
     };
   }
 

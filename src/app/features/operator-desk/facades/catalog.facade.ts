@@ -27,8 +27,8 @@ export class CatalogFacade {
 
         this.notificationService.push({
           type: 'info',
-          title: 'Остатки обновлены',
-          message: `Товар ${event.productId} теперь имеет статус ${event.stockStatus}.`,
+          title: 'Updated',
+          message: `The product ${event.productId} has status ${event.stockStatus} now.`,
         });
       });
     }

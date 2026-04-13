@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { OperatorStatus } from '../components/call-panel/operator-status-switch/operator-status-switch';
 import { CustomerModel } from '../models/customer.model';
 import { CallModel, CallStatusModel } from '../models/call.model';
+import {BehaviorSubject, ReplaySubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,7 @@ import { CallModel, CallStatusModel } from '../models/call.model';
 export class CallRoutingService {
   private operatorStatus: OperatorStatus = 'working';
   private activeCall: CallModel | null = null;
+  public activeCall$= new ReplaySubject<CallModel | null>(1);
 
   setOperatorStatus(status: OperatorStatus): OperatorStatus {
     this.operatorStatus = status;
@@ -24,11 +26,7 @@ export class CallRoutingService {
     return this.operatorStatus;
   }
 
-  getActiveCall(): CallModel | null {
-    return this.activeCall;
-  }
-
-  startCall(customer: CustomerModel): CallModel {
+  startCall(customer: CustomerModel): void {
     const call: CallModel = {
       id: `call-${Date.now()}`,
       customer,
@@ -38,12 +36,12 @@ export class CallRoutingService {
     };
 
     this.activeCall = call;
-    return call;
+    this.activeCall$.next(call);
   }
 
-  endCall(): CallModel | null {
+  endCall(): void {
     if (!this.activeCall) {
-      return null;
+      return;
     }
 
     this.activeCall = {
@@ -51,9 +49,8 @@ export class CallRoutingService {
       status: 'ended' as CallStatusModel,
     };
 
-    const endedCall = this.activeCall;
     this.activeCall = null;
-    return endedCall;
+    this.activeCall$.next(null);
   }
 
   canReceiveIncomingCalls(): boolean {

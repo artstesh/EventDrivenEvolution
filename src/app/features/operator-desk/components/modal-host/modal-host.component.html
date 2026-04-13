@@ -1,0 +1,17 @@
+@if (activeModal) {
+  <div class="modal-host" aria-live="polite" aria-atomic="true">
+    <div class="modal-host__backdrop" (click)="close()"></div>
+
+    @if (activeModal === 'confirm-discount') {
+      <app-confirm-discount-modal></app-confirm-discount-modal>
+    }
+
+    @if (activeModal === 'order-history') {
+      <app-order-history-modal></app-order-history-modal>
+    }
+
+    @if (activeModal === 'operator-session') {
+      <app-operator-session-modal></app-operator-session-modal>
+    }
+  </div>
+}

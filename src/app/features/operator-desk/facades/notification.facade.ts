@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { NotificationPayload, NotificationService } from '../services/notification';
+import { NotificationItem, NotificationPayload, NotificationService } from '../services/notification';
 
 @Injectable({
   providedIn: 'root',
@@ -7,12 +7,16 @@ import { NotificationPayload, NotificationService } from '../services/notificati
 export class NotificationFacade {
   constructor(private readonly notificationService: NotificationService) {}
 
-  get notifications(): NotificationPayload[] {
-    return this.notificationService.getNotifications();
+  get notifications(): NotificationItem[] {
+    return this.notificationService.notifications;
   }
 
-  push(notification: NotificationPayload): NotificationPayload[] {
+  push(notification: NotificationPayload): NotificationItem[] {
     return this.notificationService.push(notification);
+  }
+
+  remove(id: string): void {
+    this.notificationService.remove(id);
   }
 
   clear(): void {

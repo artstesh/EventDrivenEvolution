@@ -13,20 +13,20 @@
 
   <div class="product-card__specs">
     <div class="product-card__spec">
-      <span class="product-card__spec-label">Артикул</span>
+      <span class="product-card__spec-label">SKU</span>
       <span class="product-card__spec-value">{{ sku }}</span>
     </div>
 
     <div class="product-card__spec">
-      <span class="product-card__spec-label">Склад</span>
+      <span class="product-card__spec-label">Warehouse</span>
       <span class="product-card__spec-value">{{ warehouse }}</span>
     </div>
   </div>
 
   <div class="product-card__footer">
     <div class="product-card__price-block">
-      <span class="product-card__price-label">Цена</span>
-      <span class="product-card__price">{{ price }}</span>
+      <span class="product-card__price-label">Price</span>
+      <span class="product-card__price">${{ price }}</span>
     </div>
 
     <button
@@ -35,7 +35,7 @@
       [disabled]="stockState === 'out'"
       (click)="addToCart.emit()"
     >
-      Добавить в корзину
+      Add to cart
     </button>
   </div>
 </article>

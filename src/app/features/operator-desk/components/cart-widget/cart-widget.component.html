@@ -1,47 +1,49 @@
 <section class="cart-widget">
   <div class="cart-widget__header">
     <div>
-      <div class="cart-widget__eyebrow">Корзина текущего заказа</div>
-      <h3 class="cart-widget__title">{{ itemCount }} позиций</h3>
+      <div class="cart-widget__eyebrow">Current order cart</div>
+      <h3 class="cart-widget__title">{{ cart()?.items?.length ?? 0 }} items</h3>
     </div>
 
-    <span class="cart-widget__badge">Обновлено</span>
+    <span class="cart-widget__badge">Updated</span>
   </div>
 
   <div class="cart-widget__items">
-    <article class="cart-widget__item" *ngFor="let item of items">
-      <div class="cart-widget__item-info">
-        <div class="cart-widget__item-name">{{ item.name }}</div>
-        <div class="cart-widget__item-meta">{{ item.quantity }} × {{ item.unitPrice }}</div>
-      </div>
-      <div class="cart-widget__item-sum">{{ item.totalPrice }}</div>
-    </article>
+    @for (item of cart()?.items; track item) {
+      <article class="cart-widget__item">
+        <div class="cart-widget__item-info">
+          <div class="cart-widget__item-name">{{ item.name }}</div>
+          <div class="cart-widget__item-meta">{{ item.quantity }} × {{ item.unitPrice }}</div>
+        </div>
+        <div class="cart-widget__item-sum">{{ item.totalPrice }}</div>
+      </article>
+    }
   </div>
 
   <div class="cart-widget__summary">
     <div class="cart-widget__summary-row">
-      <span class="cart-widget__summary-label">Скидка</span>
-      <span class="cart-widget__summary-value">{{ discount }}</span>
+      <span class="cart-widget__summary-label">Discount</span>
+      <span class="cart-widget__summary-value">${{ cart()?.discount??0 }}</span>
     </div>
 
     <div class="cart-widget__summary-row">
-      <span class="cart-widget__summary-label">Подытог</span>
-      <span class="cart-widget__summary-value">{{ subtotal }}</span>
+      <span class="cart-widget__summary-label">Subtotal</span>
+      <span class="cart-widget__summary-value">${{ cart()?.subtotal??0 }}</span>
     </div>
 
     <div class="cart-widget__summary-row cart-widget__summary-row--total">
-      <span class="cart-widget__summary-label">Итого</span>
-      <span class="cart-widget__summary-value">{{ total }}</span>
+      <span class="cart-widget__summary-label">Total</span>
+      <span class="cart-widget__summary-value">${{ cart()?.total??0 }}</span>
     </div>
   </div>
 
   <div class="cart-widget__actions">
-    <button type="button" class="cart-widget__button">
-      Очистить
+    <button type="button" class="cart-widget__button" (click)="clearCart()">
+      Clear
     </button>
 
-    <button type="button" class="cart-widget__button cart-widget__button--primary">
-      Оформить заказ
+    <button type="button" class="cart-widget__button cart-widget__button--primary" (click)="placeOrder()">
+      Place Order
     </button>
   </div>
 </section>

@@ -9,7 +9,7 @@ export interface ProductCardVm {
   description: string;
   sku: string;
   warehouse: string;
-  price: string;
+  price: number;
   stockState: StockBadgeState;
   stockLabel: string;
 }

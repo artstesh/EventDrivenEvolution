@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { CartModel } from '../models/cart.model';
-import { CartItemModel } from '../models/cart-item.model';
-import { MoneyModel } from '../models/money.model';
-import { ProductMapper } from './product.mapper';
+import {Injectable} from '@angular/core';
+import {CartModel} from '../models/cart.model';
+import {CartItemModel} from '../models/cart-item.model';
+import {ProductMapper} from './product.mapper';
+import {Currency} from '../adapters/api/models/currency.enum';
 
 export interface CartWidgetVm {
   itemCount: number;
@@ -38,7 +38,7 @@ export class CartMapper {
     };
   }
 
-  mapItem(productName: string, quantity: number, unitPrice: MoneyModel, totalPrice: MoneyModel, productId: string): CartItemModel {
+  mapItem(productName: string, quantity: number, unitPrice: number, totalPrice: number, productId: string): CartItemModel {
     return {
       id: `${productId}-${Date.now()}`,
       product: {
@@ -48,7 +48,7 @@ export class CartMapper {
         description: '',
         category: {
           id: 'unknown',
-          name: 'Без категории',
+          name: 'Phones',
           code: 'unknown',
         },
         price: unitPrice,
@@ -61,29 +61,23 @@ export class CartMapper {
     };
   }
 
-  calculateSubtotal(items: CartItemModel[]): MoneyModel {
-    const currency = items[0]?.unitPrice.currency ?? 'RUB';
-    const amount = items.reduce((sum, item) => sum + item.totalPrice.amount, 0);
-
-    return { amount, currency };
+  calculateSubtotal(items: CartItemModel[]): number {
+    return items.reduce((sum, item) => sum + item.totalPrice, 0);
   }
 
-  calculateTotal(subtotal: MoneyModel, discount: MoneyModel): MoneyModel {
-    return {
-      amount: Math.max(0, subtotal.amount - discount.amount),
-      currency: subtotal.currency,
-    };
+  calculateTotal(subtotal: number, discount: number): number {
+    return  Math.max(0, subtotal - discount);
   }
 
   private getItemCount(items: CartItemModel[]): number {
     return items.reduce((sum, item) => sum + item.quantity, 0);
   }
 
-  private formatMoney(money: MoneyModel): string {
-    return new Intl.NumberFormat('ru-RU', {
+  private formatMoney(money: number): string {
+    return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: money.currency,
+      currency: 'USD',
       maximumFractionDigits: 0,
-    }).format(money.amount);
+    }).format(money);
   }
 }
