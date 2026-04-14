@@ -15,6 +15,8 @@ interface FileMetric {
   inputs: number;
   outputs: number;
   cyclomaticApprox: number;
+  outgoingDeps: number;
+  uniqueDependencyLayers: number;
 }
 
 interface LayerSummary {
@@ -27,6 +29,8 @@ interface LayerSummary {
   inputs: number;
   outputs: number;
   cyclomaticApprox: number;
+  outgoingDeps: number;
+  uniqueDependencyLayers: number;
 }
 
 interface ImportEdge {
@@ -58,6 +62,16 @@ interface MetricsReport {
     inputs: number;
     outputs: number;
     cyclomaticApprox: number;
+    outgoingDeps: number;
+    uniqueDependencyLayers: number;
+  };
+  averages: {
+    avgImportsPerFile: number;
+    avgImportsPerComponent: number;
+    avgOutgoingDepsPerFile: number;
+    avgOutgoingDepsPerComponent: number;
+    avgUniqueDependencyLayersPerFile: number;
+    avgUniqueDependencyLayersPerComponent: number;
   };
   importGraph: ImportEdge[];
   layerDependencies: LayerDependencySummary;
@@ -146,6 +160,8 @@ function toCsv(report: MetricsReport): string {
     'inputs',
     'outputs',
     'cyclomaticApprox',
+    'outgoingDeps',
+    'uniqueDependencyLayers',
   ];
 
   const rows = report.files.map((file) => [
@@ -159,6 +175,8 @@ function toCsv(report: MetricsReport): string {
     file.inputs,
     file.outputs,
     file.cyclomaticApprox,
+    file.outgoingDeps,
+    file.uniqueDependencyLayers,
   ]);
 
   return [header, ...rows]
@@ -177,14 +195,14 @@ function toCsv(report: MetricsReport): string {
 
 function createEmptySummary(): Record<LayerName, LayerSummary> {
   return {
-    components: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0 },
-    facades: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0 },
-    services: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0 },
-    models: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0 },
-    adapters: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0 },
-    pages: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0 },
-    messages: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0 },
-    other: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0 },
+    components: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0, outgoingDeps: 0, uniqueDependencyLayers: 0 },
+    facades: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0, outgoingDeps: 0, uniqueDependencyLayers: 0 },
+    services: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0, outgoingDeps: 0, uniqueDependencyLayers: 0 },
+    models: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0, outgoingDeps: 0, uniqueDependencyLayers: 0 },
+    adapters: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0, outgoingDeps: 0, uniqueDependencyLayers: 0 },
+    pages: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0, outgoingDeps: 0, uniqueDependencyLayers: 0 },
+    messages: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0, outgoingDeps: 0, uniqueDependencyLayers: 0 },
+    other: { files: 0, loc: 0, imports: 0, classes: 0, interfaces: 0, methods: 0, inputs: 0, outputs: 0, cyclomaticApprox: 0, outgoingDeps: 0, uniqueDependencyLayers: 0 },
   };
 }
 
@@ -206,11 +224,14 @@ for (const sourceFile of project.getSourceFiles()) {
   const interfaces = sourceFile.getInterfaces();
   const imports = sourceFile.getImportDeclarations().length;
   const loc = countLoc(text);
+  const importDecls = sourceFile.getImportDeclarations();
 
   let methods = 0;
   let inputs = 0;
   let outputs = 0;
   let cyclomaticApprox = 0;
+  let outgoingDeps = 0;
+  const dependencyLayers = new Set<LayerName>();
 
   for (const cls of classes) {
     methods += cls.getMethods().length;
@@ -227,6 +248,35 @@ for (const sourceFile of project.getSourceFiles()) {
     }
   }
 
+  for (const importDecl of importDecls) {
+    const importPath = importDecl.getModuleSpecifierValue();
+    const resolved = resolveImportedFilePath(normalizedFilePath, importPath);
+
+    if (!resolved) {
+      continue;
+    }
+
+    const toLayer = detectLayer(resolved);
+    outgoingDeps += 1;
+    dependencyLayers.add(toLayer);
+
+    importGraph.push({
+      from: normalizedFilePath.replace(normalize(PROJECT_ROOT), '').replace(/^\/+/, ''),
+      to: resolved.replace(normalize(PROJECT_ROOT), '').replace(/^\/+/, ''),
+      fromLayer: layer,
+      toLayer,
+    });
+
+    if (!layerDependencies[layer]) {
+      layerDependencies[layer] = {};
+    }
+    if (!layerDependencies[layer][toLayer]) {
+      layerDependencies[layer][toLayer] = 0;
+    }
+
+    layerDependencies[layer][toLayer] += 1;
+  }
+
   files.push({
     filePath: normalizedFilePath.replace(normalize(PROJECT_ROOT), '').replace(/^\/+/, ''),
     layer,
@@ -238,6 +288,8 @@ for (const sourceFile of project.getSourceFiles()) {
     inputs,
     outputs,
     cyclomaticApprox,
+    outgoingDeps,
+    uniqueDependencyLayers: dependencyLayers.size,
   });
 
   for (const importDecl of sourceFile.getImportDeclarations()) {
@@ -281,6 +333,8 @@ for (const file of files) {
   s.inputs += file.inputs;
   s.outputs += file.outputs;
   s.cyclomaticApprox += file.cyclomaticApprox;
+  s.outgoingDeps += file.outgoingDeps;
+  s.uniqueDependencyLayers += file.uniqueDependencyLayers;
 }
 
 const totals = files.reduce(
@@ -293,6 +347,8 @@ const totals = files.reduce(
     acc.inputs += file.inputs;
     acc.outputs += file.outputs;
     acc.cyclomaticApprox += file.cyclomaticApprox;
+    acc.outgoingDeps += file.outgoingDeps;
+    acc.uniqueDependencyLayers += file.uniqueDependencyLayers;
     return acc;
   },
   {
@@ -304,8 +360,13 @@ const totals = files.reduce(
     inputs: 0,
     outputs: 0,
     cyclomaticApprox: 0,
+    outgoingDeps: 0,
+    uniqueDependencyLayers: 0,
   },
 );
+
+const componentFiles = files.filter((file) => file.layer === 'components');
+const avg = (sum: number, count: number): number => (count > 0 ? sum / count : 0);
 
 const report: MetricsReport = {
   generatedAt: new Date().toISOString(),
@@ -315,6 +376,23 @@ const report: MetricsReport = {
   files,
   summary,
   totals,
+  averages: {
+    avgImportsPerFile: avg(totals.imports, files.length),
+    avgImportsPerComponent: avg(
+      componentFiles.reduce((sum, file) => sum + file.imports, 0),
+      componentFiles.length,
+    ),
+    avgOutgoingDepsPerFile: avg(totals.outgoingDeps, files.length),
+    avgOutgoingDepsPerComponent: avg(
+      componentFiles.reduce((sum, file) => sum + file.outgoingDeps, 0),
+      componentFiles.length,
+    ),
+    avgUniqueDependencyLayersPerFile: avg(totals.uniqueDependencyLayers, files.length),
+    avgUniqueDependencyLayersPerComponent: avg(
+      componentFiles.reduce((sum, file) => sum + file.uniqueDependencyLayers, 0),
+      componentFiles.length,
+    ),
+  },
   importGraph,
   layerDependencies,
 };
