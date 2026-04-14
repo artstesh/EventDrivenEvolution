@@ -23,36 +23,20 @@
         <div class="order-history-modal__meta">
           <span>VIP</span>
           <span class="order-history-modal__separator"></span>
-          <span>8 заказов за 12 месяцев</span>
+          <span>{{orders()?.length ?? 0}} orders</span>
         </div>
       </div>
     </div>
 
-    <div class="order-history-modal__list">
+    @for(order of orders(); track order) {
       <article class="order-history-modal__item">
         <div class="order-history-modal__item-main">
-          <div class="order-history-modal__item-title">Заказ №10482</div>
-          <div class="order-history-modal__item-meta">12 апреля 2026 · Доставлен</div>
+          <div class="order-history-modal__item-title">Order №{{order.orderNumber}}</div>
+          <div class="order-history-modal__item-meta">{{order.createdAt | date:'mediumDate'}} · {{order.status}}</div>
         </div>
-        <div class="order-history-modal__item-sum">56 470 ₽</div>
+        <div class="order-history-modal__item-sum">${{order.total}}</div>
       </article>
-
-      <article class="order-history-modal__item">
-        <div class="order-history-modal__item-main">
-          <div class="order-history-modal__item-title">Заказ №10411</div>
-          <div class="order-history-modal__item-meta">28 марта 2026 · Закрыт</div>
-        </div>
-        <div class="order-history-modal__item-sum">18 990 ₽</div>
-      </article>
-
-      <article class="order-history-modal__item">
-        <div class="order-history-modal__item-main">
-          <div class="order-history-modal__item-title">Заказ №10367</div>
-          <div class="order-history-modal__item-meta">11 марта 2026 · Возврат</div>
-        </div>
-        <div class="order-history-modal__item-sum">7 500 ₽</div>
-      </article>
-    </div>
+    }
 
     <div class="order-history-modal__footer">
       <button type="button" class="order-history-modal__button" (click)="close()">

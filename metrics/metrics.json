@@ -1,0 +1,1867 @@
+{
+  "generatedAt": "2026-04-14T06:02:10.414Z",
+  "projectRoot": "C:\\projects\\EventDrivenEvolution",
+  "sourceRoot": "C:\\projects\\EventDrivenEvolution\\src\\app",
+  "totalFiles": 62,
+  "files": [
+    {
+      "filePath": "src/app/app.config.ts",
+      "layer": "other",
+      "loc": 10,
+      "imports": 3,
+      "classes": 0,
+      "interfaces": 0,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/app.routes.ts",
+      "layer": "other",
+      "loc": 13,
+      "imports": 2,
+      "classes": 0,
+      "interfaces": 0,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/app.ts",
+      "layer": "other",
+      "loc": 11,
+      "imports": 2,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/facades/call.facade.ts",
+      "layer": "facades",
+      "loc": 54,
+      "imports": 9,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 4,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 4
+    },
+    {
+      "filePath": "src/app/features/operator-desk/facades/cart.facade.ts",
+      "layer": "facades",
+      "loc": 40,
+      "imports": 7,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 3
+    },
+    {
+      "filePath": "src/app/features/operator-desk/facades/catalog.facade.ts",
+      "layer": "facades",
+      "loc": 34,
+      "imports": 5,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 4
+    },
+    {
+      "filePath": "src/app/features/operator-desk/facades/customer-queue.facade.ts",
+      "layer": "facades",
+      "loc": 30,
+      "imports": 4,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 2,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 4
+    },
+    {
+      "filePath": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "layer": "facades",
+      "loc": 38,
+      "imports": 5,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 4,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 4
+    },
+    {
+      "filePath": "src/app/features/operator-desk/facades/notification.facade.ts",
+      "layer": "facades",
+      "loc": 20,
+      "imports": 2,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 3
+    },
+    {
+      "filePath": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "layer": "facades",
+      "loc": 52,
+      "imports": 9,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 5,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 7
+    },
+    {
+      "filePath": "src/app/features/operator-desk/facades/order.facade.ts",
+      "layer": "facades",
+      "loc": 57,
+      "imports": 11,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 2,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 6
+    },
+    {
+      "filePath": "src/app/features/operator-desk/mappers/cart.mapper.ts",
+      "layer": "other",
+      "loc": 75,
+      "imports": 5,
+      "classes": 1,
+      "interfaces": 1,
+      "methods": 6,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 6
+    },
+    {
+      "filePath": "src/app/features/operator-desk/mappers/customer.mapper.ts",
+      "layer": "other",
+      "loc": 45,
+      "imports": 4,
+      "classes": 1,
+      "interfaces": 1,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 9
+    },
+    {
+      "filePath": "src/app/features/operator-desk/mappers/order.mapper.ts",
+      "layer": "other",
+      "loc": 45,
+      "imports": 7,
+      "classes": 1,
+      "interfaces": 1,
+      "methods": 2,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 2
+    },
+    {
+      "filePath": "src/app/features/operator-desk/mappers/product.mapper.ts",
+      "layer": "other",
+      "loc": 76,
+      "imports": 5,
+      "classes": 1,
+      "interfaces": 1,
+      "methods": 5,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 9
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/call.model.ts",
+      "layer": "models",
+      "loc": 9,
+      "imports": 1,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/cart-item.model.ts",
+      "layer": "models",
+      "loc": 8,
+      "imports": 1,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/cart.model.ts",
+      "layer": "models",
+      "loc": 8,
+      "imports": 1,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/customer.model.ts",
+      "layer": "models",
+      "loc": 9,
+      "imports": 0,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/discount-reason.model.ts",
+      "layer": "models",
+      "loc": 5,
+      "imports": 0,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/modal.model.ts",
+      "layer": "models",
+      "loc": 4,
+      "imports": 0,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/operator-session.model.ts",
+      "layer": "models",
+      "loc": 10,
+      "imports": 2,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/order.model.ts",
+      "layer": "models",
+      "loc": 16,
+      "imports": 3,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/product-category.model.ts",
+      "layer": "models",
+      "loc": 5,
+      "imports": 0,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/product.model.ts",
+      "layer": "models",
+      "loc": 12,
+      "imports": 2,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/models/stock-status.model.ts",
+      "layer": "models",
+      "loc": 1,
+      "imports": 0,
+      "classes": 0,
+      "interfaces": 0,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/services/call-routing.ts",
+      "layer": "services",
+      "loc": 48,
+      "imports": 5,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 5,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 7
+    },
+    {
+      "filePath": "src/app/features/operator-desk/services/cart.ts",
+      "layer": "services",
+      "loc": 68,
+      "imports": 6,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 8,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 9
+    },
+    {
+      "filePath": "src/app/features/operator-desk/services/catalog.ts",
+      "layer": "services",
+      "loc": 46,
+      "imports": 5,
+      "classes": 1,
+      "interfaces": 2,
+      "methods": 2,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 2
+    },
+    {
+      "filePath": "src/app/features/operator-desk/services/discount-approval.ts",
+      "layer": "services",
+      "loc": 23,
+      "imports": 3,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 2,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 2
+    },
+    {
+      "filePath": "src/app/features/operator-desk/services/inventory.ts",
+      "layer": "services",
+      "loc": 6,
+      "imports": 1,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/services/modal.ts",
+      "layer": "services",
+      "loc": 35,
+      "imports": 3,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 4,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 4
+    },
+    {
+      "filePath": "src/app/features/operator-desk/services/notification.ts",
+      "layer": "services",
+      "loc": 35,
+      "imports": 1,
+      "classes": 1,
+      "interfaces": 2,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 3
+    },
+    {
+      "filePath": "src/app/features/operator-desk/services/operator-session.ts",
+      "layer": "services",
+      "loc": 63,
+      "imports": 6,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 6,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 10
+    },
+    {
+      "filePath": "src/app/features/operator-desk/services/order.ts",
+      "layer": "services",
+      "loc": 39,
+      "imports": 8,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 2,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 3
+    },
+    {
+      "filePath": "src/app/features/operator-desk/adapters/api/catalog-api.adapter.ts",
+      "layer": "adapters",
+      "loc": 40,
+      "imports": 3,
+      "classes": 1,
+      "interfaces": 1,
+      "methods": 1,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 3
+    },
+    {
+      "filePath": "src/app/features/operator-desk/adapters/api/customer-api.adapter.ts",
+      "layer": "adapters",
+      "loc": 39,
+      "imports": 4,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 6
+    },
+    {
+      "filePath": "src/app/features/operator-desk/adapters/api/order-api.adapter.ts",
+      "layer": "adapters",
+      "loc": 51,
+      "imports": 2,
+      "classes": 1,
+      "interfaces": 2,
+      "methods": 2,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 3
+    },
+    {
+      "filePath": "src/app/features/operator-desk/adapters/websocket/customer-queue-websocket.adapter.ts",
+      "layer": "adapters",
+      "loc": 30,
+      "imports": 1,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 5
+    },
+    {
+      "filePath": "src/app/features/operator-desk/adapters/websocket/stock-websocket.adapter.ts",
+      "layer": "adapters",
+      "loc": 52,
+      "imports": 1,
+      "classes": 1,
+      "interfaces": 1,
+      "methods": 5,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 11
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/cart-widget/cart-widget.component.ts",
+      "layer": "components",
+      "loc": 46,
+      "imports": 5,
+      "classes": 1,
+      "interfaces": 2,
+      "methods": 4,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 4
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/modal-host/modal-host.component.ts",
+      "layer": "components",
+      "loc": 21,
+      "imports": 5,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 1,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 1
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "layer": "components",
+      "loc": 45,
+      "imports": 10,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 1,
+      "inputs": 5,
+      "outputs": 4,
+      "cyclomaticApprox": 1
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/operator-header/operator-header.ts",
+      "layer": "components",
+      "loc": 35,
+      "imports": 6,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 4,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 4
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/product-card/product-card.ts",
+      "layer": "components",
+      "loc": 20,
+      "imports": 2,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 0,
+      "inputs": 8,
+      "outputs": 1,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/toast-center/toast-center.ts",
+      "layer": "components",
+      "loc": 18,
+      "imports": 2,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 1,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 1
+    },
+    {
+      "filePath": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "layer": "pages",
+      "loc": 93,
+      "imports": 12,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 6,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 9
+    },
+    {
+      "filePath": "src/app/features/operator-desk/adapters/api/models/currency.enum.ts",
+      "layer": "models",
+      "loc": 5,
+      "imports": 0,
+      "classes": 0,
+      "interfaces": 0,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/adapters/api/models/customer-dto.ts",
+      "layer": "models",
+      "loc": 11,
+      "imports": 1,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/adapters/api/models/customer-history.ts",
+      "layer": "models",
+      "loc": 7,
+      "imports": 0,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/adapters/api/models/product-dto.ts",
+      "layer": "models",
+      "loc": 13,
+      "imports": 1,
+      "classes": 0,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/call-panel/call-status-panel/call-status-panel.ts",
+      "layer": "components",
+      "loc": 32,
+      "imports": 5,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 2,
+      "inputs": 0,
+      "outputs": 1,
+      "cyclomaticApprox": 4
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
+      "layer": "components",
+      "loc": 26,
+      "imports": 3,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 3
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/catalog/catalog-filters/catalog-filters.ts",
+      "layer": "components",
+      "loc": 34,
+      "imports": 2,
+      "classes": 1,
+      "interfaces": 1,
+      "methods": 3,
+      "inputs": 3,
+      "outputs": 3,
+      "cyclomaticApprox": 3
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/catalog/catalog-search-panel/catalog-search-panel.component.ts",
+      "layer": "components",
+      "loc": 47,
+      "imports": 3,
+      "classes": 1,
+      "interfaces": 1,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 1,
+      "cyclomaticApprox": 6
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/catalog/product-grid/product-grid.ts",
+      "layer": "components",
+      "loc": 29,
+      "imports": 4,
+      "classes": 1,
+      "interfaces": 1,
+      "methods": 0,
+      "inputs": 5,
+      "outputs": 1,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/customer-profile/customer-profile-widget/customer-profile-widget.ts",
+      "layer": "components",
+      "loc": 33,
+      "imports": 6,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 5
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/modals/confirm-discount-modal/confirm-discount-modal.ts",
+      "layer": "components",
+      "loc": 49,
+      "imports": 9,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 4,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 5
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/modals/operator-session-modal/operator-session-modal.ts",
+      "layer": "components",
+      "loc": 38,
+      "imports": 8,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 5
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/modals/order-history-modal/order-history-modal.ts",
+      "layer": "components",
+      "loc": 35,
+      "imports": 10,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 3,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 3
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/cart-widget/components/cart-item-row/cart-item-row.ts",
+      "layer": "components",
+      "loc": 9,
+      "imports": 1,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    {
+      "filePath": "src/app/features/operator-desk/components/product-card/components/stock-badge/stock-badge.ts",
+      "layer": "components",
+      "loc": 13,
+      "imports": 1,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 0,
+      "inputs": 2,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    }
+  ],
+  "summary": {
+    "components": {
+      "files": 17,
+      "loc": 530,
+      "imports": 82,
+      "classes": 17,
+      "interfaces": 5,
+      "methods": 35,
+      "inputs": 23,
+      "outputs": 11,
+      "cyclomaticApprox": 45
+    },
+    "facades": {
+      "files": 8,
+      "loc": 325,
+      "imports": 52,
+      "classes": 8,
+      "interfaces": 0,
+      "methods": 26,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 35
+    },
+    "services": {
+      "files": 9,
+      "loc": 363,
+      "imports": 38,
+      "classes": 9,
+      "interfaces": 4,
+      "methods": 32,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 40
+    },
+    "models": {
+      "files": 15,
+      "loc": 123,
+      "imports": 12,
+      "classes": 0,
+      "interfaces": 13,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    "adapters": {
+      "files": 5,
+      "loc": 212,
+      "imports": 11,
+      "classes": 5,
+      "interfaces": 4,
+      "methods": 14,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 28
+    },
+    "pages": {
+      "files": 1,
+      "loc": 93,
+      "imports": 12,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 6,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 9
+    },
+    "messages": {
+      "files": 0,
+      "loc": 0,
+      "imports": 0,
+      "classes": 0,
+      "interfaces": 0,
+      "methods": 0,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 0
+    },
+    "other": {
+      "files": 7,
+      "loc": 275,
+      "imports": 28,
+      "classes": 5,
+      "interfaces": 4,
+      "methods": 16,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 26
+    }
+  },
+  "totals": {
+    "loc": 1921,
+    "imports": 235,
+    "classes": 45,
+    "interfaces": 30,
+    "methods": 129,
+    "inputs": 23,
+    "outputs": 11,
+    "cyclomaticApprox": 183
+  },
+  "importGraph": [
+    {
+      "from": "src/app/app.config.ts",
+      "to": "src/app/app.routes.ts",
+      "fromLayer": "other",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/app.routes.ts",
+      "to": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "fromLayer": "other",
+      "toLayer": "pages"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/call.facade.ts",
+      "to": "src/app/features/operator-desk/models/call.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/call.facade.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/call.facade.ts",
+      "to": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
+      "fromLayer": "facades",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/call.facade.ts",
+      "to": "src/app/features/operator-desk/services/call-routing.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/call.facade.ts",
+      "to": "src/app/features/operator-desk/services/notification.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/call.facade.ts",
+      "to": "src/app/features/operator-desk/adapters/api/customer-api.adapter.ts",
+      "fromLayer": "facades",
+      "toLayer": "adapters"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/call.facade.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/customer-dto.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/call.facade.ts",
+      "to": "src/app/features/operator-desk/mappers/customer.mapper.ts",
+      "fromLayer": "facades",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/cart.facade.ts",
+      "to": "src/app/features/operator-desk/services/cart.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/cart.facade.ts",
+      "to": "src/app/features/operator-desk/services/notification.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/cart.facade.ts",
+      "to": "src/app/features/operator-desk/models/product.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/cart.facade.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/cart.facade.ts",
+      "to": "src/app/features/operator-desk/mappers/cart.mapper.ts",
+      "fromLayer": "facades",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/catalog.facade.ts",
+      "to": "src/app/features/operator-desk/adapters/api/catalog-api.adapter.ts",
+      "fromLayer": "facades",
+      "toLayer": "adapters"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/catalog.facade.ts",
+      "to": "src/app/features/operator-desk/adapters/websocket/stock-websocket.adapter.ts",
+      "fromLayer": "facades",
+      "toLayer": "adapters"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/catalog.facade.ts",
+      "to": "src/app/features/operator-desk/services/catalog.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/catalog.facade.ts",
+      "to": "src/app/features/operator-desk/services/notification.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/customer-queue.facade.ts",
+      "to": "src/app/features/operator-desk/adapters/websocket/stock-websocket.adapter.ts",
+      "fromLayer": "facades",
+      "toLayer": "adapters"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/customer-queue.facade.ts",
+      "to": "src/app/features/operator-desk/adapters/websocket/customer-queue-websocket.adapter.ts",
+      "fromLayer": "facades",
+      "toLayer": "adapters"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/customer-queue.facade.ts",
+      "to": "src/app/features/operator-desk/services/notification.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "to": "src/app/features/operator-desk/services/modal.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "to": "src/app/features/operator-desk/services/notification.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "to": "src/app/features/operator-desk/models/modal.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/notification.facade.ts",
+      "to": "src/app/features/operator-desk/services/notification.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "to": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
+      "fromLayer": "facades",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "to": "src/app/features/operator-desk/services/notification.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "to": "src/app/features/operator-desk/services/call-routing.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "to": "src/app/features/operator-desk/services/operator-session.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "to": "src/app/features/operator-desk/models/operator-session.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "to": "src/app/features/operator-desk/models/call.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/order.facade.ts",
+      "to": "src/app/features/operator-desk/services/order.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/order.facade.ts",
+      "to": "src/app/features/operator-desk/services/call-routing.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/order.facade.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/order.facade.ts",
+      "to": "src/app/features/operator-desk/services/cart.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/order.facade.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/order.facade.ts",
+      "to": "src/app/features/operator-desk/models/discount-reason.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/order.facade.ts",
+      "to": "src/app/features/operator-desk/models/order.model.ts",
+      "fromLayer": "facades",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/order.facade.ts",
+      "to": "src/app/features/operator-desk/mappers/order.mapper.ts",
+      "fromLayer": "facades",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/order.facade.ts",
+      "to": "src/app/features/operator-desk/facades/notification.facade.ts",
+      "fromLayer": "facades",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/facades/order.facade.ts",
+      "to": "src/app/features/operator-desk/services/notification.ts",
+      "fromLayer": "facades",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/cart.mapper.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/cart.mapper.ts",
+      "to": "src/app/features/operator-desk/models/cart-item.model.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/cart.mapper.ts",
+      "to": "src/app/features/operator-desk/mappers/product.mapper.ts",
+      "fromLayer": "other",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/cart.mapper.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/currency.enum.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/customer.mapper.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/customer.mapper.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/customer-dto.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/customer.mapper.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/currency.enum.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/order.mapper.ts",
+      "to": "src/app/features/operator-desk/adapters/api/order-api.adapter.ts",
+      "fromLayer": "other",
+      "toLayer": "adapters"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/order.mapper.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/order.mapper.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/order.mapper.ts",
+      "to": "src/app/features/operator-desk/models/discount-reason.model.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/order.mapper.ts",
+      "to": "src/app/features/operator-desk/models/order.model.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/order.mapper.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/currency.enum.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/product.mapper.ts",
+      "to": "src/app/features/operator-desk/models/product-category.model.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/product.mapper.ts",
+      "to": "src/app/features/operator-desk/models/product.model.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/product.mapper.ts",
+      "to": "src/app/features/operator-desk/components/product-card/components/stock-badge/stock-badge.ts",
+      "fromLayer": "other",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/mappers/product.mapper.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/product-dto.ts",
+      "fromLayer": "other",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/models/call.model.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/models/cart-item.model.ts",
+      "to": "src/app/features/operator-desk/models/product.model.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/models/cart.model.ts",
+      "to": "src/app/features/operator-desk/models/cart-item.model.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/models/operator-session.model.ts",
+      "to": "src/app/features/operator-desk/models/call.model.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/models/operator-session.model.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/models/order.model.ts",
+      "to": "src/app/features/operator-desk/models/cart-item.model.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/models/order.model.ts",
+      "to": "src/app/features/operator-desk/models/discount-reason.model.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/models/order.model.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/models/product.model.ts",
+      "to": "src/app/features/operator-desk/models/product-category.model.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/models/product.model.ts",
+      "to": "src/app/features/operator-desk/models/stock-status.model.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/call-routing.ts",
+      "to": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
+      "fromLayer": "services",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/call-routing.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/call-routing.ts",
+      "to": "src/app/features/operator-desk/models/call.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/cart.ts",
+      "to": "src/app/features/operator-desk/mappers/cart.mapper.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/cart.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/cart.ts",
+      "to": "src/app/features/operator-desk/models/cart-item.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/cart.ts",
+      "to": "src/app/features/operator-desk/models/product.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/catalog.ts",
+      "to": "src/app/features/operator-desk/adapters/api/catalog-api.adapter.ts",
+      "fromLayer": "services",
+      "toLayer": "adapters"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/catalog.ts",
+      "to": "src/app/features/operator-desk/mappers/product.mapper.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/catalog.ts",
+      "to": "src/app/features/operator-desk/models/product.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/catalog.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/product-dto.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/discount-approval.ts",
+      "to": "src/app/features/operator-desk/models/discount-reason.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/discount-approval.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/modal.ts",
+      "to": "src/app/features/operator-desk/models/modal.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/operator-session.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/operator-session.ts",
+      "to": "src/app/features/operator-desk/models/call.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/operator-session.ts",
+      "to": "src/app/features/operator-desk/models/operator-session.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/operator-session.ts",
+      "to": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
+      "fromLayer": "services",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/order.ts",
+      "to": "src/app/features/operator-desk/adapters/api/order-api.adapter.ts",
+      "fromLayer": "services",
+      "toLayer": "adapters"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/order.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/order.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/order.ts",
+      "to": "src/app/features/operator-desk/models/discount-reason.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/order.ts",
+      "to": "src/app/features/operator-desk/models/order.model.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/order.ts",
+      "to": "src/app/features/operator-desk/mappers/order.mapper.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/features/operator-desk/services/order.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/currency.enum.ts",
+      "fromLayer": "services",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/adapters/api/catalog-api.adapter.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/currency.enum.ts",
+      "fromLayer": "adapters",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/adapters/api/catalog-api.adapter.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/product-dto.ts",
+      "fromLayer": "adapters",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/adapters/api/customer-api.adapter.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/customer-dto.ts",
+      "fromLayer": "adapters",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/adapters/api/customer-api.adapter.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/customer-history.ts",
+      "fromLayer": "adapters",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/adapters/api/order-api.adapter.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/currency.enum.ts",
+      "fromLayer": "adapters",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/cart-widget/cart-widget.component.ts",
+      "to": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/cart-widget/cart-widget.component.ts",
+      "to": "src/app/features/operator-desk/facades/cart.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/cart-widget/cart-widget.component.ts",
+      "to": "src/app/features/operator-desk/mappers/cart.mapper.ts",
+      "fromLayer": "components",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modal-host/modal-host.component.ts",
+      "to": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modal-host/modal-host.component.ts",
+      "to": "src/app/features/operator-desk/components/modals/confirm-discount-modal/confirm-discount-modal.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modal-host/modal-host.component.ts",
+      "to": "src/app/features/operator-desk/components/modals/order-history-modal/order-history-modal.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modal-host/modal-host.component.ts",
+      "to": "src/app/features/operator-desk/components/modals/operator-session-modal/operator-session-modal.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "to": "src/app/features/operator-desk/components/operator-header/operator-header.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "to": "src/app/features/operator-desk/components/call-panel/call-status-panel/call-status-panel.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "to": "src/app/features/operator-desk/components/customer-profile/customer-profile-widget/customer-profile-widget.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "to": "src/app/features/operator-desk/components/cart-widget/cart-widget.component.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "to": "src/app/features/operator-desk/components/catalog/catalog-search-panel/catalog-search-panel.component.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "to": "src/app/features/operator-desk/components/catalog/product-grid/product-grid.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "to": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "to": "src/app/features/operator-desk/components/modal-host/modal-host.component.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "to": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-header/operator-header.ts",
+      "to": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-header/operator-header.ts",
+      "to": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-header/operator-header.ts",
+      "to": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/operator-header/operator-header.ts",
+      "to": "src/app/features/operator-desk/facades/customer-queue.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/product-card/product-card.ts",
+      "to": "src/app/features/operator-desk/components/product-card/components/stock-badge/stock-badge.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/toast-center/toast-center.ts",
+      "to": "src/app/features/operator-desk/facades/notification.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/components/operator-desk-shell/operator-desk-shell.ts",
+      "fromLayer": "pages",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/components/toast-center/toast-center.ts",
+      "fromLayer": "pages",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/components/catalog/product-grid/product-grid.ts",
+      "fromLayer": "pages",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/components/catalog/catalog-search-panel/catalog-search-panel.component.ts",
+      "fromLayer": "pages",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/facades/catalog.facade.ts",
+      "fromLayer": "pages",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/facades/cart.facade.ts",
+      "fromLayer": "pages",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "fromLayer": "pages",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "fromLayer": "pages",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/facades/notification.facade.ts",
+      "fromLayer": "pages",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/mappers/product.mapper.ts",
+      "fromLayer": "pages",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
+      "to": "src/app/features/operator-desk/facades/call.facade.ts",
+      "fromLayer": "pages",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/adapters/api/models/customer-dto.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/currency.enum.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/adapters/api/models/product-dto.ts",
+      "to": "src/app/features/operator-desk/adapters/api/models/currency.enum.ts",
+      "fromLayer": "models",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/call-panel/call-status-panel/call-status-panel.ts",
+      "to": "src/app/features/operator-desk/models/call.model.ts",
+      "fromLayer": "components",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/call-panel/call-status-panel/call-status-panel.ts",
+      "to": "src/app/features/operator-desk/services/call-routing.ts",
+      "fromLayer": "components",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
+      "to": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/catalog/catalog-search-panel/catalog-search-panel.component.ts",
+      "to": "src/app/features/operator-desk/components/catalog/catalog-filters/catalog-filters.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/catalog/product-grid/product-grid.ts",
+      "to": "src/app/features/operator-desk/components/product-card/product-card.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/catalog/product-grid/product-grid.ts",
+      "to": "src/app/features/operator-desk/components/product-card/components/stock-badge/stock-badge.ts",
+      "fromLayer": "components",
+      "toLayer": "components"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/customer-profile/customer-profile-widget/customer-profile-widget.ts",
+      "to": "src/app/features/operator-desk/services/call-routing.ts",
+      "fromLayer": "components",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/customer-profile/customer-profile-widget/customer-profile-widget.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "components",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/customer-profile/customer-profile-widget/customer-profile-widget.ts",
+      "to": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/confirm-discount-modal/confirm-discount-modal.ts",
+      "to": "src/app/features/operator-desk/facades/notification.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/confirm-discount-modal/confirm-discount-modal.ts",
+      "to": "src/app/features/operator-desk/services/discount-approval.ts",
+      "fromLayer": "components",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/confirm-discount-modal/confirm-discount-modal.ts",
+      "to": "src/app/features/operator-desk/facades/cart.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/confirm-discount-modal/confirm-discount-modal.ts",
+      "to": "src/app/features/operator-desk/models/cart.model.ts",
+      "fromLayer": "components",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/confirm-discount-modal/confirm-discount-modal.ts",
+      "to": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/confirm-discount-modal/confirm-discount-modal.ts",
+      "to": "src/app/features/operator-desk/facades/order.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/operator-session-modal/operator-session-modal.ts",
+      "to": "src/app/features/operator-desk/models/operator-session.model.ts",
+      "fromLayer": "components",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/operator-session-modal/operator-session-modal.ts",
+      "to": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/operator-session-modal/operator-session-modal.ts",
+      "to": "src/app/features/operator-desk/services/call-routing.ts",
+      "fromLayer": "components",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/operator-session-modal/operator-session-modal.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "components",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/operator-session-modal/operator-session-modal.ts",
+      "to": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/order-history-modal/order-history-modal.ts",
+      "to": "src/app/features/operator-desk/models/operator-session.model.ts",
+      "fromLayer": "components",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/order-history-modal/order-history-modal.ts",
+      "to": "src/app/features/operator-desk/models/customer.model.ts",
+      "fromLayer": "components",
+      "toLayer": "models"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/order-history-modal/order-history-modal.ts",
+      "to": "src/app/features/operator-desk/services/call-routing.ts",
+      "fromLayer": "components",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/order-history-modal/order-history-modal.ts",
+      "to": "src/app/features/operator-desk/facades/operator-session.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/order-history-modal/order-history-modal.ts",
+      "to": "src/app/features/operator-desk/facades/modal.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/order-history-modal/order-history-modal.ts",
+      "to": "src/app/features/operator-desk/facades/order.facade.ts",
+      "fromLayer": "components",
+      "toLayer": "facades"
+    },
+    {
+      "from": "src/app/features/operator-desk/components/modals/order-history-modal/order-history-modal.ts",
+      "to": "src/app/features/operator-desk/mappers/order.mapper.ts",
+      "fromLayer": "components",
+      "toLayer": "other"
+    }
+  ],
+  "layerDependencies": {
+    "other": {
+      "other": 2,
+      "pages": 1,
+      "models": 14,
+      "adapters": 1,
+      "components": 1
+    },
+    "facades": {
+      "models": 13,
+      "components": 2,
+      "services": 17,
+      "adapters": 5,
+      "other": 3,
+      "facades": 1
+    },
+    "models": {
+      "models": 12
+    },
+    "services": {
+      "components": 2,
+      "models": 18,
+      "other": 3,
+      "adapters": 2
+    },
+    "adapters": {
+      "models": 5
+    },
+    "components": {
+      "facades": 19,
+      "other": 2,
+      "components": 16,
+      "models": 7,
+      "services": 5
+    },
+    "pages": {
+      "components": 4,
+      "facades": 6,
+      "other": 1
+    }
+  }
+}

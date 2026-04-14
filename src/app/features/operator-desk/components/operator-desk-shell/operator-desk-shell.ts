@@ -29,9 +29,6 @@ import {ModalFacade} from '../../facades/modal.facade';
   styleUrl: './operator-desk-shell.scss',
 })
 export class OperatorDeskShell {
-  @Input() queueSize = 0;
-  @Input() shiftLabel = '08:00–20:00';
-
   @Input() products: ProductCardVm[] = [];
   @Input() totalCount = 0;
   @Input() displayedCount = 0;

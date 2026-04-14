@@ -9,8 +9,6 @@ import {ModalFacade} from '../../facades/modal.facade';
 import {OperatorSessionFacade} from '../../facades/operator-session.facade';
 import {NotificationFacade} from '../../facades/notification.facade';
 import {ProductMapper} from '../../mappers/product.mapper';
-import {CartWidgetVm} from '../../components/cart-widget/cart-widget.component';
-import {DiscountApprovalService} from '../../services/discount-approval';
 import {CallFacade} from '../../facades/call.facade';
 
 @Component({
@@ -21,9 +19,6 @@ import {CallFacade} from '../../facades/call.facade';
   styleUrl: './operator-desk-page.scss',
 })
 export class OperatorDeskPage implements OnInit {
-  queueSize = 3;
-  shiftLabel = '08:00–20:00';
-
   totalCount = 0;
   displayedCount = 0;
   currentPage = 1;

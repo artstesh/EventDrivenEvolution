@@ -8,7 +8,7 @@ import {Currency} from '../adapters/api/models/currency.enum';
 
 export interface OrderHistoryVm {
   orderNumber: string;
-  createdAt: string;
+  createdAt: Date;
   status: string;
   total: number;
 }
@@ -40,17 +40,9 @@ export class OrderMapper {
   mapModelToHistoryVm(model: OrderModel): OrderHistoryVm {
     return {
       orderNumber: model.id,
-      createdAt: this.formatDate(model.createdAt),
+      createdAt: model.createdAt,
       status: model.status,
       total: model.total
     };
-  }
-
-  private formatDate(value: string): string {
-    return new Intl.DateTimeFormat('ru-RU', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    }).format(new Date(value));
   }
 }

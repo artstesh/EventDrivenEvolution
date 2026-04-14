@@ -13,6 +13,6 @@ export interface OrderModel {
   total: number;
   status: OrderStatusModel;
   discountReason?: DiscountReasonModel;
-  createdAt: string;
-  confirmedAt?: string;
+  createdAt: Date;
+  confirmedAt?: Date;
 }

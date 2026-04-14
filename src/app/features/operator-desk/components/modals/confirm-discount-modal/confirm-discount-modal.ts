@@ -6,6 +6,7 @@ import {CartFacade} from '../../../facades/cart.facade';
 import {CartModel} from '../../../models/cart.model';
 import {Subscription} from 'rxjs';
 import {ModalFacade} from '../../../facades/modal.facade';
+import {OrderFacade} from '../../../facades/order.facade';
 
 @Component({
   selector: 'app-confirm-discount-modal',
@@ -24,7 +25,8 @@ export class ConfirmDiscountModal  implements OnInit, OnDestroy {
     private readonly discountApprovalService: DiscountApprovalService,
     private readonly notificationFacade: NotificationFacade,
     private readonly cartFacade: CartFacade,
-    private readonly modalFacade: ModalFacade) {
+    private readonly modalFacade: ModalFacade,
+    private readonly orderFacade: OrderFacade) {
   }
 
   ngOnInit(): void {
@@ -47,6 +49,7 @@ export class ConfirmDiscountModal  implements OnInit, OnDestroy {
       title: 'Discount accepted',
       message: discountReason.text || 'Discount reason did not set.',
     });
+    this.orderFacade.confirmOrder(discountReason);
     this.modalFacade.close();
     this.cartFacade.clearCart();
   }

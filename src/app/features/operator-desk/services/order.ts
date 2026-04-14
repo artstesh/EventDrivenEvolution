@@ -36,7 +36,7 @@ export class OrderService {
 
     return history.map((item) => ({
       orderNumber: item.orderNumber,
-      createdAt: new Intl.DateTimeFormat('en-US').format(new Date(item.createdAt)),
+      createdAt: new Date(item.createdAt),
       status: item.status,
       total: item.totalAmount,
     }));

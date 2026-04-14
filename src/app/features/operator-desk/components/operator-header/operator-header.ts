@@ -3,6 +3,7 @@ import { OperatorStatus } from '../call-panel/operator-status-switch/operator-st
 import {Subscription} from 'rxjs';
 import {OperatorSessionFacade} from '../../facades/operator-session.facade';
 import {ModalFacade} from '../../facades/modal.facade';
+import {CustomerQueueFacade} from '../../facades/customer-queue.facade';
 
 @Component({
   selector: 'app-operator-header',
@@ -12,17 +13,18 @@ import {ModalFacade} from '../../facades/modal.facade';
   styleUrl: './operator-header.scss',
 })
 export class OperatorHeader implements OnInit, OnDestroy {
-  @Input() queueSize = 0;
-  @Input() shiftLabel = '08:00–20:00';
   status = signal<OperatorStatus>('working');
   private subs: Subscription[] = [];
+  queue = signal<number>(0);
 
   constructor(private readonly sessionFacade: OperatorSessionFacade,
-              private readonly modalFacade: ModalFacade) {
+              private readonly modalFacade: ModalFacade,
+              private readonly queueFacade: CustomerQueueFacade,) {
   }
 
   ngOnInit(): void {
     this.subs.push(this.sessionFacade.status$.subscribe(status => this.status.set(status)));
+    this.queueFacade.startStockFeed(n => this.queue.set(n));
   }
 
   ngOnDestroy(): void {

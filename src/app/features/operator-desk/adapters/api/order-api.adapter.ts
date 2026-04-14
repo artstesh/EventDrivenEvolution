@@ -15,7 +15,7 @@ export interface OrderConfirmationResponseDto {
   orderId: string;
   orderNumber: string;
   status: 'confirmed' | 'pending' | 'cancelled';
-  confirmedAt: string;
+  confirmedAt: Date;
   totalAmount: number;
   totalCurrency: Currency;
 }
@@ -31,18 +31,27 @@ export class OrderApiAdapter {
       orderId: 'order-10483',
       orderNumber: '10483',
       status: 'confirmed',
-      confirmedAt: new Date().toISOString(),
+      confirmedAt: new Date(),
       totalAmount: 51470,
       totalCurrency: Currency.USD,
     };
   }
 
-  async getOrderHistory(customerId: string): Promise<Array<{ orderId: string; orderNumber: string; createdAt: string; status: string; totalAmount: number }>> {
+  async getOrderHistory(customerId: string): Promise<Array<{
+    orderId: string;
+    orderNumber: string;
+    createdAt: string;
+    status: string;
+    totalAmount: number
+  }>> {
     void customerId;
 
-    return [
-      { orderId: 'order-10482', orderNumber: '10482', createdAt: '2026-04-12T11:20:00.000Z', status: 'delivered', totalAmount: 56470 },
-      { orderId: 'order-10411', orderNumber: '10411', createdAt: '2026-03-28T14:40:00.000Z', status: 'closed', totalAmount: 18990 },
-    ];
+    return Array.from({length: 4}).map(() => ({
+      orderId: `order-${Math.round(Math.random()*10000)}`,
+      orderNumber: Math.round(Math.random()*10000)+'',
+      createdAt: new Date(new Date().getTime() - Math.round(Math.random()*1000000000000)).toISOString(),
+      status: Math.random() > 0.5 ? 'delivered' : 'closed',
+      totalAmount: Math.round(Math.random()*20000)+900
+    }));
   }
 }
