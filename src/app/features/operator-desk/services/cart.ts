@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CartMapper, CartWidgetVm} from '../mappers/cart.mapper';
+import {CartMapper} from '../mappers/cart.mapper';
 import {CartModel} from '../models/cart.model';
 import {CartItemModel} from '../models/cart-item.model';
 import {ProductModel} from '../models/product.model';
@@ -13,14 +13,6 @@ export class CartService {
   public cart$ = new ReplaySubject<CartModel>(1);
 
   constructor(private readonly cartMapper: CartMapper) {
-  }
-
-  getCart(): CartModel {
-    return this.cart;
-  }
-
-  getCartVm(): CartWidgetVm {
-    return this.cartMapper.mapModelToWidgetVm(this.cart);
   }
 
   addItem(product: ProductModel, quantity = 1): CartModel {
