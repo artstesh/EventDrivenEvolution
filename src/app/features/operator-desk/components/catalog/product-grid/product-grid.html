@@ -2,28 +2,20 @@
   <div class="product-grid__header">
     <div class="product-grid__meta">
       <span class="product-grid__meta-label">Search results</span>
-      <span class="product-grid__meta-value">Displayed {{ displayedCount }} of {{ totalCount }}</span>
+      <span class="product-grid__meta-value">Displayed {{ catalog()?.items?.length ?? 0 }}
+        of {{ catalog()?.total ?? 0 }}</span>
     </div>
 
     <div class="product-grid__pager">
       <button type="button" class="product-grid__pager-button">←</button>
-      <span class="product-grid__pager-value">Page {{ currentPage }} / {{ totalPages }}</span>
+      <span class="product-grid__pager-value">Page {{ catalog()?.page ?? 1 }} / {{ catalog()?.totalPages ?? 1 }}</span>
       <button type="button" class="product-grid__pager-button">→</button>
     </div>
   </div>
 
   <div class="product-grid__list">
-    <app-product-card
-      *ngFor="let product of products"
-      [category]="product.category"
-      [name]="product.name"
-      [description]="product.description"
-      [sku]="product.sku"
-      [warehouse]="product.warehouse"
-      [price]="product.price"
-      [stockState]="product.stockState"
-      [stockLabel]="product.stockLabel"
-      (addToCart)="addToCart.emit(product)"
-    ></app-product-card>
+    @for (product of catalog()?.items; track product.sku) {
+      <app-product-card [product]="product"></app-product-card>
+    }
   </div>
 </section>

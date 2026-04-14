@@ -1,5 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {Component, EventEmitter, input, Input, Output} from '@angular/core';
 import { StockBadge, StockBadgeState } from './components/stock-badge/stock-badge';
+import {AppPostboyService} from '../../../../shared/services/app-postboy.service';
+import {AddItemToCartCommand} from '../../messages/commands/add-item-to-cart.command';
+import {ProductCardVm} from '../../models/product-card-vm';
+import {ProductCardToProductModelExecutor} from '../../messages/executors/product-card-to-product-model.executor';
 
 @Component({
   selector: 'app-product-card',
@@ -9,14 +13,12 @@ import { StockBadge, StockBadgeState } from './components/stock-badge/stock-badg
   styleUrl: './product-card.scss',
 })
 export class ProductCard {
-  @Input() category = '';
-  @Input() name = '';
-  @Input() description = '';
-  @Input() sku = '';
-  @Input() warehouse = '';
-  @Input() price = 0;
-  @Input() stockState: StockBadgeState = 'available';
-  @Input() stockLabel = '';
+  product = input.required<ProductCardVm>();
 
-  @Output() addToCart = new EventEmitter<void>();
+  constructor(private postboy: AppPostboyService) {
+  }
+
+  addToCartClicked(): void {
+    this.postboy.fire(new AddItemToCartCommand(this.postboy.exec(new ProductCardToProductModelExecutor(this.product()))))
+  }
 }

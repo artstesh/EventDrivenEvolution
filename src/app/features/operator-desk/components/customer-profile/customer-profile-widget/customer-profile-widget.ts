@@ -1,9 +1,10 @@
 import {Component, OnDestroy, OnInit, signal} from '@angular/core';
-import {CallRoutingService} from '../../../services/call-routing';
 import {CustomerModel} from '../../../models/customer.model';
 import {Subscription} from 'rxjs';
 import {DatePipe} from '@angular/common';
-import {ModalFacade} from '../../../facades/modal.facade';
+import {OpenModalCommand} from '../../../messages/commands/open-modal.command';
+import {AppPostboyService} from '../../../../../shared/services/app-postboy.service';
+import {CallEvent} from '../../../messages/events/call.event';
 
 @Component({
   selector: 'app-customer-profile-widget',
@@ -18,18 +19,17 @@ export class CustomerProfileWidget implements OnInit, OnDestroy {
   customer = signal<CustomerModel | null>(null);
   private subs: Subscription[] = [];
 
-  constructor(private readonly callRoutingService: CallRoutingService,
-              private readonly modalFacade: ModalFacade) {
+  constructor(private readonly postboy: AppPostboyService) {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.callRoutingService.activeCall$.subscribe(call => {
-      this.customer.set(call?.customer || null);
+    this.subs.push(this.postboy.sub(CallEvent).subscribe(ev => {
+      this.customer.set(ev.call?.customer || null);
     }));
   }
 
   showOrderHistory(): void {
-    this.modalFacade.open('order-history');
+    this.postboy.fire(new OpenModalCommand('order-history'));
   }
 
   ngOnDestroy(): void {

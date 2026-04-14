@@ -13,14 +13,4 @@ export class DiscountApprovalService {
       approvedAt: new Date().toISOString(),
     };
   }
-
-  applyDiscount(cart: CartModel, discountAmount: number, reason: DiscountReasonModel): CartModel {
-    void reason;
-
-    return {
-      ...cart,
-      discount: discountAmount,
-      total: Math.max(0, cart.subtotal - discountAmount)
-    };
-  }
 }

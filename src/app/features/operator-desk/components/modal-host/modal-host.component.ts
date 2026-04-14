@@ -1,8 +1,13 @@
-import {Component} from '@angular/core';
-import {ModalFacade} from '../../facades/modal.facade';
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
 import {ConfirmDiscountModal} from '../modals/confirm-discount-modal/confirm-discount-modal';
 import {OrderHistoryModal} from '../modals/order-history-modal/order-history-modal';
 import {OperatorSessionModal} from '../modals/operator-session-modal/operator-session-modal';
+import {AppPostboyService} from '../../../../shared/services/app-postboy.service';
+import {OpenModalCommand} from '../../messages/commands/open-modal.command';
+import {ModalType} from '../../models/modal.model';
+import {Subscription} from 'rxjs';
+import {CloseModalsCommand} from '../../messages/commands/close-modals.command';
+import {ModalStateEvent} from '../../messages/events/modal-state.event';
 
 @Component({
   selector: 'app-modal-host',
@@ -11,14 +16,22 @@ import {OperatorSessionModal} from '../modals/operator-session-modal/operator-se
   templateUrl: './modal-host.component.html',
   styleUrl: './modal-host.component.scss',
 })
-export class ModalHostComponent {
-  constructor(private readonly modalFacade: ModalFacade) {}
+export class ModalHostComponent implements OnInit, OnDestroy {
+  subs: Subscription[] = [];
+  active = signal<ModalType | null>(null);
 
-  get activeModal(): string | null {
-    return this.modalFacade.activeModal;
+  constructor(private readonly postboy: AppPostboyService) {
   }
 
   close(): void {
-    this.modalFacade.closeAll();
+    this.postboy.fire(new CloseModalsCommand());
+  }
+
+  ngOnInit(): void {
+    this.subs.push(this.postboy.sub(ModalStateEvent).subscribe(c => this.active.set(c.type)))
+  }
+
+  ngOnDestroy(): void {
+    this.subs.forEach(sub => sub.unsubscribe());
   }
 }

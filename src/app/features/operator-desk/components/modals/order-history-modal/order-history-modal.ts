@@ -1,41 +1,28 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, signal} from '@angular/core';
-import {OperatorSessionModel} from '../../../models/operator-session.model';
-import {CustomerModel} from '../../../models/customer.model';
-import {Subscription} from 'rxjs';
-import {CallRoutingService} from '../../../services/call-routing';
-import {OperatorSessionFacade} from '../../../facades/operator-session.facade';
-import {ModalFacade} from '../../../facades/modal.facade';
-import {OrderFacade} from '../../../facades/order.facade';
-import {OrderHistoryVm} from '../../../mappers/order.mapper';
+import {Component, OnInit, signal} from '@angular/core';
 import {DatePipe} from '@angular/common';
+import {AppPostboyService} from '../../../../../shared/services/app-postboy.service';
+import {CloseModalsCommand} from '../../../messages/commands/close-modals.command';
+import {ListOrderHistoryQuery} from '../../../messages/queries/list-order-history.query';
+import {OrderHistoryVm} from '../../../models/order-history-vm';
 
 @Component({
   selector: 'app-order-history-modal',
   standalone: true,
-  imports: [
-    DatePipe
-
-  ],
+  imports: [    DatePipe  ],
   templateUrl: './order-history-modal.html',
   styleUrl: './order-history-modal.scss',
 })
-export class OrderHistoryModal implements OnInit, OnDestroy{
-  private subs: Subscription[] = [];
+export class OrderHistoryModal implements OnInit{
   orders = signal<OrderHistoryVm[]>([]);
 
-  constructor(private readonly modalFacade: ModalFacade,
-              private readonly orderFacade: OrderFacade) {
-  }
-
-  ngOnDestroy(): void {
-    this.subs.forEach(sub => sub.unsubscribe());
+  constructor(private readonly postboy: AppPostboyService) {
   }
 
   close(): void {
-    this.modalFacade.close();
+    this.postboy.fire(new CloseModalsCommand());
   }
 
-  async ngOnInit(): Promise<void> {
-    this.orders.set(await this.orderFacade.getOrderHistory());
+  ngOnInit(): void {
+    this.postboy.fireCallback(new ListOrderHistoryQuery()).subscribe(orders => this.orders.set(orders));
   }
 }

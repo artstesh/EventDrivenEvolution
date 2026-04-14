@@ -1,9 +1,11 @@
-import {Component, Input, OnDestroy, OnInit, signal} from '@angular/core';
-import { OperatorStatus } from '../call-panel/operator-status-switch/operator-status-switch';
-import {Subscription} from 'rxjs';
-import {OperatorSessionFacade} from '../../facades/operator-session.facade';
-import {ModalFacade} from '../../facades/modal.facade';
-import {CustomerQueueFacade} from '../../facades/customer-queue.facade';
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
+import {OperatorStatus} from '../call-panel/operator-status-switch/operator-status-switch';
+import {distinctUntilChanged, map, Subscription} from 'rxjs';
+import {AppPostboyService} from '../../../../shared/services/app-postboy.service';
+import {OperationSessionEvent} from '../../messages/events/operation-session.event';
+import {SetOperationStatusCommand} from '../../messages/commands/set-operation-status.command';
+import {OpenModalCommand} from '../../messages/commands/open-modal.command';
+import {CustomerQueueEvent} from '../../messages/events/customer-queue.event';
 
 @Component({
   selector: 'app-operator-header',
@@ -17,14 +19,12 @@ export class OperatorHeader implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
   queue = signal<number>(0);
 
-  constructor(private readonly sessionFacade: OperatorSessionFacade,
-              private readonly modalFacade: ModalFacade,
-              private readonly queueFacade: CustomerQueueFacade,) {
+  constructor(private readonly postboy: AppPostboyService) {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.sessionFacade.status$.subscribe(status => this.status.set(status)));
-    this.queueFacade.startStockFeed(n => this.queue.set(n));
+    this.subs.push(this.postboy.sub(OperationSessionEvent).pipe(map(e => e.session.status), distinctUntilChanged()).subscribe(status => this.status.set(status)));
+    this.postboy.sub(CustomerQueueEvent).subscribe(ev => this.queue.set(ev.count));
   }
 
   ngOnDestroy(): void {
@@ -32,10 +32,10 @@ export class OperatorHeader implements OnInit, OnDestroy {
   }
 
   toggleStatus(): void {
-    this.sessionFacade.toggleStatus();
+    this.postboy.fire(new SetOperationStatusCommand({toggle: true}));
   }
 
   openHistory(): void {
-    this.modalFacade.open('operator-session');
+    this.postboy.fire(new OpenModalCommand('operator-session'));
   }
 }

@@ -1,18 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ProductCard } from '../../product-card/product-card';
-import { StockBadgeState } from '../../product-card/components/stock-badge/stock-badge';
-
-export interface ProductCardVm {
-  category: string;
-  name: string;
-  description: string;
-  sku: string;
-  warehouse: string;
-  price: number;
-  stockState: StockBadgeState;
-  stockLabel: string;
-}
+import {CommonModule} from '@angular/common';
+import {Component, OnInit, signal} from '@angular/core';
+import {ProductCard} from '../../product-card/product-card';
+import {AppPostboyService} from '../../../../../shared/services/app-postboy.service';
+import {CatalogEvent} from '../../../messages/events/catalog.event';
+import {CatalogSearchViewResult} from '../../../services/catalog';
 
 @Component({
   selector: 'app-product-grid',
@@ -21,13 +12,14 @@ export interface ProductCardVm {
   templateUrl: './product-grid.html',
   styleUrl: './product-grid.scss',
 })
-export class ProductGrid {
-  @Input() totalCount = 1248;
-  @Input() displayedCount = 24;
-  @Input() currentPage = 1;
-  @Input() totalPages = 52;
+export class ProductGrid implements OnInit{
+  catalog = signal< CatalogSearchViewResult|null>(null);
 
-  @Input() products: ProductCardVm[] = [];
+  constructor(private postboy: AppPostboyService) {
+  }
 
-  @Output() addToCart = new EventEmitter<ProductCardVm>();
+  ngOnInit(): void {
+    this.postboy.sub(CatalogEvent).subscribe(ev =>
+      this.catalog.set(ev.catalog))
+  }
 }

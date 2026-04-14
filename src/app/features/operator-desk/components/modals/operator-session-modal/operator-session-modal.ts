@@ -1,11 +1,13 @@
-import {CommonModule, DatePipe} from '@angular/common';
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output, signal} from '@angular/core';
-import { OperatorSessionModel } from '../../../models/operator-session.model';
-import {OperatorSessionFacade} from '../../../facades/operator-session.facade';
+import {DatePipe} from '@angular/common';
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
+import {OperatorSessionModel} from '../../../models/operator-session.model';
 import {Subscription} from 'rxjs';
 import {CallRoutingService} from '../../../services/call-routing';
 import {CustomerModel} from '../../../models/customer.model';
-import {ModalFacade} from '../../../facades/modal.facade';
+import {AppPostboyService} from '../../../../../shared/services/app-postboy.service';
+import {OperationSessionEvent} from '../../../messages/events/operation-session.event';
+import {CloseModalsCommand} from '../../../messages/commands/close-modals.command';
+import {CallEvent} from '../../../messages/events/call.event';
 
 @Component({
   selector: 'app-operator-session-modal',
@@ -16,14 +18,13 @@ import {ModalFacade} from '../../../facades/modal.facade';
   templateUrl: './operator-session-modal.html',
   styleUrl: './operator-session-modal.scss',
 })
-export class OperatorSessionModal implements OnInit, OnDestroy{
+export class OperatorSessionModal implements OnInit, OnDestroy {
   session = signal<OperatorSessionModel | null>(null);
   customer = signal<CustomerModel | null>(null);
   private subs: Subscription[] = [];
 
   constructor(private readonly callRoutingService: CallRoutingService,
-    private readonly sessionFacade: OperatorSessionFacade,
-              private readonly modalFacade: ModalFacade) {
+              private readonly postboy: AppPostboyService) {
   }
 
   ngOnDestroy(): void {
@@ -31,13 +32,11 @@ export class OperatorSessionModal implements OnInit, OnDestroy{
   }
 
   close(): void {
-    this.modalFacade.close();
+    this.postboy.fire(new CloseModalsCommand());
   }
 
   ngOnInit(): void {
-    this.subs.push(this.sessionFacade.session$.subscribe(session => this.session.set(session)));
-    this.subs.push(this.callRoutingService.activeCall$.subscribe(call => {
-      this.customer.set(call?.customer || null);
-    }));
+    this.subs.push(this.postboy.sub(OperationSessionEvent).subscribe(ev => this.session.set(ev.session)));
+    this.subs.push(this.postboy.sub(CallEvent).subscribe(ev => this.customer.set(ev.call?.customer || null)));
   }
 }

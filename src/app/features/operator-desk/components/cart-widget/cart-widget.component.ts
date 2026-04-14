@@ -1,23 +1,11 @@
 import {Component, OnDestroy, OnInit, signal} from '@angular/core';
-import {ModalFacade} from '../../facades/modal.facade';
-import {CartFacade} from '../../facades/cart.facade';
 import {Subscription} from 'rxjs';
-import {CartMapper} from '../../mappers/cart.mapper';
-
-export interface CartItemVm {
-  name: string;
-  quantity: number;
-  unitPrice: string;
-  totalPrice: string;
-}
-
-export interface CartWidgetVm {
-  itemCount: number;
-  discount: string;
-  subtotal: string;
-  total: string;
-  items: CartItemVm[];
-}
+import {OpenModalCommand} from '../../messages/commands/open-modal.command';
+import {AppPostboyService} from '../../../../shared/services/app-postboy.service';
+import {CartStateEvent} from '../../messages/events/cart-state.event';
+import {ClearCartCommand} from '../../messages/commands/clear-cart.command';
+import {CartWidgetVm} from '../../models/cart-widget';
+import {CartModelToWidgetExecutor} from '../../messages/executors/cart-model-to-widget.executor';
 
 @Component({
   selector: 'app-cart-widget',
@@ -30,22 +18,22 @@ export class CartWidgetComponent implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
   cart = signal<CartWidgetVm | null>(null);
 
-  constructor(private readonly modalFacade: ModalFacade,
-              private readonly cartFacade: CartFacade,
-              private readonly cartMapper: CartMapper) {
+  constructor(private readonly postboy: AppPostboyService) {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.cartFacade.cart.subscribe(cart =>
-      this.cart.set(this.cartMapper.mapModelToWidgetVm(cart))))
+    this.subs.push(this.postboy.sub(CartStateEvent).subscribe(ev => {
+      this.cart.set(this.postboy.exec(new CartModelToWidgetExecutor(ev.cart)));
+      console.log(ev.cart);
+    }))
   }
 
   placeOrder(): void {
-    this.modalFacade.open('confirm-discount');
+    this.postboy.fire(new OpenModalCommand('confirm-discount'));
   }
 
   clearCart(): void {
-    this.cartFacade.clearCart();
+    this.postboy.fire(new ClearCartCommand());
   }
 
   ngOnDestroy(): void {

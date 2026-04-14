@@ -1,16 +1,19 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {OperatorHeader} from '../operator-header/operator-header';
 import {CallStatusPanel} from '../call-panel/call-status-panel/call-status-panel';
 import {CustomerProfileWidget} from '../customer-profile/customer-profile-widget/customer-profile-widget';
-import {CartWidgetComponent, CartWidgetVm} from '../cart-widget/cart-widget.component';
+import {CartWidgetComponent} from '../cart-widget/cart-widget.component';
 import {
   CatalogSearchCriteria,
   CatalogSearchPanelComponent
 } from '../catalog/catalog-search-panel/catalog-search-panel.component';
-import {ProductCardVm, ProductGrid} from '../catalog/product-grid/product-grid';
+import {ProductGrid} from '../catalog/product-grid/product-grid';
 import {OperatorStatus, OperatorStatusSwitch} from '../call-panel/operator-status-switch/operator-status-switch';
 import {ModalHostComponent} from '../modal-host/modal-host.component';
-import {ModalFacade} from '../../facades/modal.facade';
+import {OpenModalCommand} from '../../messages/commands/open-modal.command';
+import {AppPostboyService} from '../../../../shared/services/app-postboy.service';
+import {EndCallCommand} from '../../messages/commands/end-call.command';
+import {CatalogSearchCommand} from '../../messages/commands/catalog-search.command';
 
 @Component({
   selector: 'app-operator-desk-shell',
@@ -29,21 +32,16 @@ import {ModalFacade} from '../../facades/modal.facade';
   styleUrl: './operator-desk-shell.scss',
 })
 export class OperatorDeskShell {
-  @Input() products: ProductCardVm[] = [];
-  @Input() totalCount = 0;
-  @Input() displayedCount = 0;
-  @Input() currentPage = 1;
-  @Input() totalPages = 1;
-
   @Output() operatorStatusChanged = new EventEmitter<OperatorStatus>();
-  @Output() searchRequested = new EventEmitter<CatalogSearchCriteria>();
-  @Output() addToCart = new EventEmitter<ProductCardVm>();
-  @Output() endCall = new EventEmitter<void>();
 
-  constructor(private readonly modalFacade: ModalFacade) {
+  constructor(private readonly postboy: AppPostboyService) {
   }
 
   placeOrder(): void {
-    this.modalFacade.open('confirm-discount');
+    this.postboy.fire(new OpenModalCommand('confirm-discount'));
+  }
+
+  endCall(): void {
+    this.postboy.fire(new EndCallCommand());
   }
 }

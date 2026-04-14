@@ -1,44 +1,37 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { ModalStateModel, ModalType } from '../models/modal.model';
+import {Injectable} from '@angular/core';
+import {AppPostboyService} from '../../../shared/services/app-postboy.service';
+import {OpenModalCommand} from '../messages/commands/open-modal.command';
+import {ModalStateEvent} from '../messages/events/modal-state.event';
+import {IPostboyDependingService} from '@artstesh/postboy';
+import {CloseModalsCommand} from '../messages/commands/close-modals.command';
+import {PushNotificationCommand} from '../messages/commands/push-notification.command';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ModalService {
-  private readonly modalStateSubject = new BehaviorSubject<ModalStateModel>({
-    activeModal: null,
-  });
+export class ModalService implements IPostboyDependingService{
+  private namespace = 'modal-service';
 
-  readonly modalState$ = this.modalStateSubject.asObservable();
-
-  get snapshot(): ModalStateModel {
-    return this.modalStateSubject.value;
+  constructor(private postboy: AppPostboyService) {
+    postboy.addNamespace(this.namespace)
+      .recordReplay(ModalStateEvent)
+      .recordSubject(CloseModalsCommand)
+      .recordSubject(OpenModalCommand);
   }
 
-  open(modal: Exclude<ModalType, null>): ModalStateModel {
-    const updated = {
-      activeModal: modal,
-    };
-
-    this.modalStateSubject.next(updated);
-    return updated;
+  up(): void {
+    this.postboy.sub(OpenModalCommand).subscribe((cmd) => this.open(cmd));
+    this.postboy.sub(CloseModalsCommand).subscribe((cmd) => this.postboy.fire(new ModalStateEvent(null)));
   }
 
-  close(): ModalStateModel {
-    const updated = {
-      activeModal: null,
-    };
-
-    this.modalStateSubject.next(updated);
-    return updated;
+  private open(cmd: OpenModalCommand) {
+    this.postboy.fire(new ModalStateEvent(cmd.type));
+    this.postboy.fire(new PushNotificationCommand({
+      type: 'info',
+      title: 'A modal is opened',
+      message: `The modal "${cmd.type}" is opened.`,
+    }));
   }
 
-  closeAll(): ModalStateModel {
-    return this.close();
-  }
-
-  isOpen(modal: Exclude<ModalType, null>): boolean {
-    return this.snapshot.activeModal === modal;
-  }
+  down = () => this.postboy.eliminateNamespace(this.namespace);
 }

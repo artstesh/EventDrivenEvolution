@@ -1,35 +1,41 @@
 import {Injectable} from '@angular/core';
-import {CartMapper, CartWidgetVm} from '../mappers/cart.mapper';
 import {CartModel} from '../models/cart.model';
 import {CartItemModel} from '../models/cart-item.model';
 import {ProductModel} from '../models/product.model';
-import {ReplaySubject} from 'rxjs';
+import {IPostboyDependingService} from '@artstesh/postboy';
+import {AppPostboyService} from '../../../shared/services/app-postboy.service';
+import {CartStateEvent} from '../messages/events/cart-state.event';
+import {AddItemToCartCommand} from '../messages/commands/add-item-to-cart.command';
+import {ClearCartCommand} from '../messages/commands/clear-cart.command';
+import {PushNotificationCommand} from '../messages/commands/push-notification.command';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService implements IPostboyDependingService {
+  private namespace = 'cart-service';
   private cart: CartModel = this.createEmptyCart();
-  public cart$ = new ReplaySubject<CartModel>(1);
 
-  constructor(private readonly cartMapper: CartMapper) {
+  constructor(private postboy: AppPostboyService) {
+    postboy.addNamespace(this.namespace)
+      .recordReplay(CartStateEvent)
+      .recordSubject(AddItemToCartCommand)
+      .recordSubject(ClearCartCommand);
   }
 
-  getCart(): CartModel {
-    return this.cart;
+  up(): void {
+    this.postboy.sub(AddItemToCartCommand).subscribe((cmd) => this.addItem(cmd.product, cmd.quantity));
+    this.postboy.sub(ClearCartCommand).subscribe(() => this.clearCart());
   }
 
-  getCartVm(): CartWidgetVm {
-    return this.cartMapper.mapModelToWidgetVm(this.cart);
-  }
-
-  addItem(product: ProductModel, quantity = 1): CartModel {
+  private addItem(product: ProductModel, quantity = 1): void {
     const existing = this.cart.items.find((item) => item.product.id === product.id);
     const unitPrice = product.price;
 
     if (existing) {
       existing.quantity += quantity;
       existing.totalPrice = this.multiplyMoney(unitPrice, existing.quantity);
+      this.cart.recalculate();
     } else {
       const item: CartItemModel = {
         id: `${product.id}-${Date.now()}`,
@@ -42,40 +48,36 @@ export class CartService {
       this.cart.items = [...this.cart.items, item];
     }
 
-    this.recalculateTotals();
-    this.cart$.next(this.cart);
-    return this.cart;
+    this.postboy.fire(new PushNotificationCommand({
+      type: 'success',
+      title: 'The item is added',
+      message: `${product.name} id added to the cart.`,
+    }));
+    this.postboy.fire(new CartStateEvent(this.cart));
   }
 
-  clearCart(): CartModel {
+  private clearCart(): void {
     this.cart = this.createEmptyCart();
-    this.cart$.next(this.cart);
-    return this.cart;
+    this.postboy.fire(new CartStateEvent(this.cart));
+    this.postboy.fire(new PushNotificationCommand({
+      type: 'info',
+      title: 'The cart is cleaned',
+      message: 'The cart is cleaned.',
+    }));
   }
 
-  setDiscount(discount: number): CartModel {
+  private setDiscount(discount: number): void {
     this.cart.discount = discount;
-    this.recalculateTotals();
-    return this.cart;
-  }
-
-  private recalculateTotals(): void {
-    this.cart.subtotal = this.cartMapper.calculateSubtotal(this.cart.items);
-    this.cart.total = this.cartMapper.calculateTotal(this.cart.subtotal, this.cart.discount);
-    this.cart$.next(this.cart);
+    this.postboy.fire(new CartStateEvent(this.cart));
   }
 
   private createEmptyCart(): CartModel {
-    return {
-      id: `cart-${Date.now()}`,
-      items: [],
-      discount: 0,
-      subtotal: 0,
-      total: 0
-    };
+    return new CartModel(`cart-${Date.now()}`);
   }
 
   private multiplyMoney(money: number, quantity: number): number {
     return money * quantity;
   }
+
+  down = () => this.postboy.eliminateNamespace(this.namespace);
 }

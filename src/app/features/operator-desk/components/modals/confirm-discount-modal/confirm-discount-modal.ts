@@ -1,12 +1,14 @@
 import {Component, OnDestroy, OnInit, signal} from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import {NotificationFacade} from '../../../facades/notification.facade';
 import {DiscountApprovalService} from '../../../services/discount-approval';
-import {CartFacade} from '../../../facades/cart.facade';
 import {CartModel} from '../../../models/cart.model';
 import {Subscription} from 'rxjs';
-import {ModalFacade} from '../../../facades/modal.facade';
-import {OrderFacade} from '../../../facades/order.facade';
+import {AppPostboyService} from '../../../../../shared/services/app-postboy.service';
+import {PushNotificationCommand} from '../../../messages/commands/push-notification.command';
+import {CloseModalsCommand} from '../../../messages/commands/close-modals.command';
+import {CartStateEvent} from '../../../messages/events/cart-state.event';
+import {ConfirmOrderCommand} from '../../../messages/commands/confirm-order.command';
+import {ClearCartCommand} from '../../../messages/commands/clear-cart.command';
 
 @Component({
   selector: 'app-confirm-discount-modal',
@@ -23,15 +25,12 @@ export class ConfirmDiscountModal  implements OnInit, OnDestroy {
 
   constructor(
     private readonly discountApprovalService: DiscountApprovalService,
-    private readonly notificationFacade: NotificationFacade,
-    private readonly cartFacade: CartFacade,
-    private readonly modalFacade: ModalFacade,
-    private readonly orderFacade: OrderFacade) {
+    private readonly postboy: AppPostboyService) {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.cartFacade.cart.subscribe(cart =>
-      this.cart.set(cart)))
+    this.subs.push(this.postboy.sub(CartStateEvent).subscribe(ev =>
+      this.cart.set(ev.cart)))
   }
 
   ngOnDestroy(): void {
@@ -39,18 +38,18 @@ export class ConfirmDiscountModal  implements OnInit, OnDestroy {
   }
 
   close(): void {
-    this.modalFacade.close();
+    this.postboy.fire(new CloseModalsCommand());
   }
 
   onConfirm(): void {
     const discountReason = this.discountApprovalService.createDiscountReason(this.discountReason.trim());
-    this.notificationFacade.push({
+    this.postboy.fire(new PushNotificationCommand({
       type: 'success',
       title: 'Discount accepted',
       message: discountReason.text || 'Discount reason did not set.',
-    });
-    this.orderFacade.confirmOrder(discountReason);
-    this.modalFacade.close();
-    this.cartFacade.clearCart();
+    }));
+    this.postboy.fire(new ConfirmOrderCommand());
+    this.postboy.fire(new CloseModalsCommand());
+    this.postboy.fire(new ClearCartCommand());
   }
 }

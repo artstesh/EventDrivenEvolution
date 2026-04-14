@@ -6,9 +6,7 @@
   <main class="operator-desk-shell__content">
     <aside class="operator-desk-shell__sidebar operator-desk-shell__sidebar--left">
       <section class="operator-desk-shell__section">
-        <app-call-status-panel
-          (endCall)="endCall.emit()"
-        ></app-call-status-panel>
+        <app-call-status-panel></app-call-status-panel>
       </section>
 
       <section class="operator-desk-shell__section">
@@ -23,16 +21,8 @@
 
     <section class="operator-desk-shell__workspace">
       <div class="operator-desk-shell__catalog">
-        <app-catalog-search-panel (criteriaChanged)="searchRequested.emit($event)"></app-catalog-search-panel>
-
-        <app-product-grid
-          [products]="products"
-          [totalCount]="totalCount"
-          [displayedCount]="displayedCount"
-          [currentPage]="currentPage"
-          [totalPages]="totalPages"
-          (addToCart)="addToCart.emit($event)"
-        ></app-product-grid>
+        <app-catalog-search-panel></app-catalog-search-panel>
+        <app-product-grid></app-product-grid>
       </div>
     </section>
 
@@ -43,7 +33,7 @@
 
       <section class="operator-desk-shell__section operator-desk-shell__section--compact">
         <div class="operator-desk-shell__actions">
-          <button type="button" class="operator-desk-shell__action" (click)="endCall.emit()">
+          <button type="button" class="operator-desk-shell__action" (click)="endCall()">
             End call
           </button>
 

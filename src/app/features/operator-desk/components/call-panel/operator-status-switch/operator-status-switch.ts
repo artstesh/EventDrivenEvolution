@@ -1,6 +1,8 @@
 import {Component, OnDestroy, OnInit, signal} from '@angular/core';
-import {OperatorSessionFacade} from '../../../facades/operator-session.facade';
-import {Subscription} from 'rxjs';
+import {distinctUntilChanged, map, Subscription} from 'rxjs';
+import {AppPostboyService} from '../../../../../shared/services/app-postboy.service';
+import {OperationSessionEvent} from '../../../messages/events/operation-session.event';
+import {SetOperationStatusCommand} from '../../../messages/commands/set-operation-status.command';
 
 export type OperatorStatus = 'working' | 'away';
 
@@ -15,7 +17,7 @@ export class OperatorStatusSwitch implements OnInit, OnDestroy {
   status = signal<OperatorStatus>('working');
   private subs: Subscription[] = [];
 
-  constructor(private readonly sessionFacade: OperatorSessionFacade) {
+  constructor(private readonly postboy: AppPostboyService) {
   }
 
   ngOnDestroy(): void {
@@ -23,10 +25,10 @@ export class OperatorStatusSwitch implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.sessionFacade.status$.subscribe(status => this.status.set(status)));
+    this.subs.push(this.postboy.sub(OperationSessionEvent).pipe(map(e => e.session.status), distinctUntilChanged()).subscribe(status => this.status.set(status)));
   }
 
   setStatus(status: OperatorStatus): void {
-    this.sessionFacade.setStatus(status);
+    this.postboy.fire(new SetOperationStatusCommand({status}));
   }
 }

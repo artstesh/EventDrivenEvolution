@@ -1,7 +1,7 @@
 <div class="toast-center" aria-live="polite" aria-atomic="true">
-  @if (notifications.length) {
+  @if (notifications().length) {
     <div class="toast-center__stack">
-      @for (toast of notifications; track toast.id) {
+      @for (toast of notifications(); track toast.id) {
         <article
           class="toast-center__toast"
           [class.toast-center__toast--success]="toast.type === 'success'"

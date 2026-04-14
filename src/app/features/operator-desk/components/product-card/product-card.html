@@ -1,39 +1,39 @@
 <article class="product-card">
   <div class="product-card__topline">
-    <span class="product-card__category">{{ category }}</span>
-    <app-stock-badge [state]="stockState" [label]="stockLabel"></app-stock-badge>
+    <span class="product-card__category">{{  product().category }}</span>
+    <app-stock-badge [state]=" product().stockState" [label]=" product().stockLabel"></app-stock-badge>
   </div>
 
   <div class="product-card__main">
-    <h4 class="product-card__name">{{ name }}</h4>
+    <h4 class="product-card__name">{{  product().name }}</h4>
     <p class="product-card__description">
-      {{ description }}
+      {{  product().description }}
     </p>
   </div>
 
   <div class="product-card__specs">
     <div class="product-card__spec">
       <span class="product-card__spec-label">SKU</span>
-      <span class="product-card__spec-value">{{ sku }}</span>
+      <span class="product-card__spec-value">{{  product().sku }}</span>
     </div>
 
     <div class="product-card__spec">
       <span class="product-card__spec-label">Warehouse</span>
-      <span class="product-card__spec-value">{{ warehouse }}</span>
+      <span class="product-card__spec-value">{{  product().warehouse }}</span>
     </div>
   </div>
 
   <div class="product-card__footer">
     <div class="product-card__price-block">
       <span class="product-card__price-label">Price</span>
-      <span class="product-card__price">${{ price }}</span>
+      <span class="product-card__price">${{ product().price }}</span>
     </div>
 
     <button
       type="button"
       class="product-card__button"
-      [disabled]="stockState === 'out'"
-      (click)="addToCart.emit()"
+      [disabled]="product().stockState === 'out'"
+      (click)="addToCartClicked()"
     >
       Add to cart
     </button>
