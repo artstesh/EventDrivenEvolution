@@ -4,6 +4,8 @@ import {AppPostboyService} from '../../../../../shared/services/app-postboy.serv
 import {CloseModalsCommand} from '../../../messages/commands/close-modals.command';
 import {ListOrderHistoryQuery} from '../../../messages/queries/list-order-history.query';
 import {OrderHistoryVm} from '../../../models/order-history-vm';
+import {CallEvent} from '../../../messages/events/call.event';
+import {CallModel} from '../../../models/call.model';
 
 @Component({
   selector: 'app-order-history-modal',
@@ -14,6 +16,7 @@ import {OrderHistoryVm} from '../../../models/order-history-vm';
 })
 export class OrderHistoryModal implements OnInit{
   orders = signal<OrderHistoryVm[]>([]);
+  activeCall = signal<CallModel | null>(null);
 
   constructor(private readonly postboy: AppPostboyService) {
   }
@@ -23,6 +26,11 @@ export class OrderHistoryModal implements OnInit{
   }
 
   ngOnInit(): void {
-    this.postboy.fireCallback(new ListOrderHistoryQuery()).subscribe(orders => this.orders.set(orders));
+    this.postboy.sub(CallEvent).subscribe(ev => {
+      this.activeCall.set(ev.call);
+    });
+    this.postboy.fireCallback(new ListOrderHistoryQuery()).subscribe(orders => {
+      this.orders.set(orders)
+    });
   }
 }

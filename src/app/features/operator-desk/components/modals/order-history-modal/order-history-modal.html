@@ -19,9 +19,9 @@
       <div class="order-history-modal__avatar">А</div>
 
       <div class="order-history-modal__customer-info">
-        <div class="order-history-modal__name">Алексей Иванов</div>
+        <div class="order-history-modal__name">{{ activeCall()?.customer!.fullName }}</div>
         <div class="order-history-modal__meta">
-          <span>VIP</span>
+          <span>{{ activeCall()?.customer?.isVip ? 'VIP' : 'Standard' }}</span>
           <span class="order-history-modal__separator"></span>
           <span>{{orders().length}} orders</span>
         </div>
