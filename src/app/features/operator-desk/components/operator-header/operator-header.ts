@@ -6,6 +6,8 @@ import {OperatorSessionEvent} from '../../messages/events/operator-session.event
 import {SetOperatorStatusCommand} from '../../messages/commands/set-operator-status.command';
 import {OpenModalCommand} from '../../messages/commands/open-modal.command';
 import {CustomerQueueEvent} from '../../messages/events/customer-queue.event';
+import {CatalogSearchViewResult} from '../../services/catalog';
+import {CatalogEvent} from '../../messages/events/catalog.event';
 
 @Component({
   selector: 'app-operator-header',
@@ -18,6 +20,7 @@ export class OperatorHeader implements OnInit, OnDestroy {
   status = signal<OperatorStatus>('working');
   private subs: Subscription[] = [];
   queue = signal<number>(0);
+  catalog = signal< CatalogSearchViewResult|null>(null);
 
   constructor(private readonly postboy: AppPostboyService) {
   }
@@ -25,6 +28,8 @@ export class OperatorHeader implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subs.push(this.postboy.sub(OperatorSessionEvent).pipe(map(e => e.session.status), distinctUntilChanged()).subscribe(status => this.status.set(status)));
     this.postboy.sub(CustomerQueueEvent).subscribe(ev => this.queue.set(ev.count));
+    this.postboy.sub(CatalogEvent).subscribe(ev =>
+      this.catalog.set(ev.catalog))
   }
 
   ngOnDestroy(): void {
