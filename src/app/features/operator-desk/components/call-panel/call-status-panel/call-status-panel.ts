@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnDestroy, OnInit, Output, signal} from '@angular/core';
+import {Component, OnDestroy, OnInit, signal} from '@angular/core';
 import {CallModel} from '../../../models/call.model';
 import {interval, Subscription} from 'rxjs';
 import {DatePipe} from '@angular/common';

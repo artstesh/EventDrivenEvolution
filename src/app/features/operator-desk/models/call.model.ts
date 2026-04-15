@@ -1,4 +1,4 @@
-import { CustomerModel } from './customer.model';
+import {CustomerModel} from './customer.model';
 
 export type CallStatusModel = 'incoming' | 'active' | 'ended' | 'waiting';
 

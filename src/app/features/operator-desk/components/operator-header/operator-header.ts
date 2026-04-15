@@ -2,8 +2,8 @@ import {Component, OnDestroy, OnInit, signal} from '@angular/core';
 import {OperatorStatus} from '../call-panel/operator-status-switch/operator-status-switch';
 import {distinctUntilChanged, map, Subscription} from 'rxjs';
 import {AppPostboyService} from '../../../../shared/services/app-postboy.service';
-import {OperationSessionEvent} from '../../messages/events/operation-session.event';
-import {SetOperationStatusCommand} from '../../messages/commands/set-operation-status.command';
+import {OperatorSessionEvent} from '../../messages/events/operator-session.event';
+import {SetOperatorStatusCommand} from '../../messages/commands/set-operator-status.command';
 import {OpenModalCommand} from '../../messages/commands/open-modal.command';
 import {CustomerQueueEvent} from '../../messages/events/customer-queue.event';
 
@@ -23,7 +23,7 @@ export class OperatorHeader implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.postboy.sub(OperationSessionEvent).pipe(map(e => e.session.status), distinctUntilChanged()).subscribe(status => this.status.set(status)));
+    this.subs.push(this.postboy.sub(OperatorSessionEvent).pipe(map(e => e.session.status), distinctUntilChanged()).subscribe(status => this.status.set(status)));
     this.postboy.sub(CustomerQueueEvent).subscribe(ev => this.queue.set(ev.count));
   }
 
@@ -32,7 +32,7 @@ export class OperatorHeader implements OnInit, OnDestroy {
   }
 
   toggleStatus(): void {
-    this.postboy.fire(new SetOperationStatusCommand({toggle: true}));
+    this.postboy.fire(new SetOperatorStatusCommand({toggle: true}));
   }
 
   openHistory(): void {

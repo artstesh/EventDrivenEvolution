@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-04-14T14:33:45.005Z",
+  "generatedAt": "2026-04-15T07:25:29.384Z",
   "projectRoot": "C:\\projects\\EventDrivenEvolution",
   "sourceRoot": "C:\\projects\\EventDrivenEvolution\\src\\app",
-  "totalFiles": 82,
+  "totalFiles": 83,
   "files": [
     {
       "filePath": "src/app/app.config.ts",
@@ -35,16 +35,16 @@
     {
       "filePath": "src/app/app.ts",
       "layer": "other",
-      "loc": 11,
-      "imports": 2,
+      "loc": 16,
+      "imports": 4,
       "classes": 1,
       "interfaces": 0,
       "methods": 0,
       "inputs": 0,
       "outputs": 0,
       "cyclomaticApprox": 0,
-      "outgoingDeps": 0,
-      "uniqueDependencyLayers": 0
+      "outgoingDeps": 2,
+      "uniqueDependencyLayers": 1
     },
     {
       "filePath": "src/app/shared/services/app-postboy.service.ts",
@@ -59,6 +59,20 @@
       "cyclomaticApprox": 0,
       "outgoingDeps": 0,
       "uniqueDependencyLayers": 0
+    },
+    {
+      "filePath": "src/app/shared/services/postboy-notification-middleware.ts",
+      "layer": "services",
+      "loc": 27,
+      "imports": 6,
+      "classes": 1,
+      "interfaces": 0,
+      "methods": 1,
+      "inputs": 0,
+      "outputs": 0,
+      "cyclomaticApprox": 7,
+      "outgoingDeps": 5,
+      "uniqueDependencyLayers": 2
     },
     {
       "filePath": "src/app/features/operator-desk/models/call.model.ts",
@@ -259,7 +273,7 @@
     {
       "filePath": "src/app/features/operator-desk/services/call-routing.ts",
       "layer": "services",
-      "loc": 79,
+      "loc": 69,
       "imports": 14,
       "classes": 1,
       "interfaces": 0,
@@ -273,7 +287,7 @@
     {
       "filePath": "src/app/features/operator-desk/services/cart.ts",
       "layer": "services",
-      "loc": 71,
+      "loc": 63,
       "imports": 10,
       "classes": 1,
       "interfaces": 0,
@@ -287,7 +301,7 @@
     {
       "filePath": "src/app/features/operator-desk/services/catalog.ts",
       "layer": "services",
-      "loc": 65,
+      "loc": 61,
       "imports": 13,
       "classes": 1,
       "interfaces": 1,
@@ -301,7 +315,7 @@
     {
       "filePath": "src/app/features/operator-desk/services/customer-queue.service.ts",
       "layer": "services",
-      "loc": 35,
+      "loc": 31,
       "imports": 6,
       "classes": 1,
       "interfaces": 0,
@@ -343,7 +357,7 @@
     {
       "filePath": "src/app/features/operator-desk/services/modal.ts",
       "layer": "services",
-      "loc": 32,
+      "loc": 27,
       "imports": 7,
       "classes": 1,
       "interfaces": 0,
@@ -385,28 +399,28 @@
     {
       "filePath": "src/app/features/operator-desk/services/operator-session.ts",
       "layer": "services",
-      "loc": 70,
-      "imports": 11,
+      "loc": 59,
+      "imports": 9,
       "classes": 1,
       "interfaces": 0,
       "methods": 6,
       "inputs": 0,
       "outputs": 0,
       "cyclomaticApprox": 14,
-      "outgoingDeps": 8,
+      "outgoingDeps": 7,
       "uniqueDependencyLayers": 4
     },
     {
       "filePath": "src/app/features/operator-desk/services/order.ts",
       "layer": "services",
-      "loc": 86,
+      "loc": 79,
       "imports": 16,
       "classes": 1,
       "interfaces": 0,
       "methods": 3,
       "inputs": 0,
       "outputs": 0,
-      "cyclomaticApprox": 11,
+      "cyclomaticApprox": 12,
       "outgoingDeps": 13,
       "uniqueDependencyLayers": 4
     },
@@ -679,7 +693,7 @@
     {
       "filePath": "src/app/features/operator-desk/messages/commands/push-notification.command.ts",
       "layer": "other",
-      "loc": 8,
+      "loc": 12,
       "imports": 2,
       "classes": 1,
       "interfaces": 0,
@@ -691,7 +705,7 @@
       "uniqueDependencyLayers": 1
     },
     {
-      "filePath": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
+      "filePath": "src/app/features/operator-desk/messages/commands/set-operator-status.command.ts",
       "layer": "other",
       "loc": 8,
       "imports": 2,
@@ -803,7 +817,7 @@
       "uniqueDependencyLayers": 1
     },
     {
-      "filePath": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "filePath": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "layer": "other",
       "loc": 8,
       "imports": 2,
@@ -931,15 +945,15 @@
     {
       "filePath": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
       "layer": "pages",
-      "loc": 48,
-      "imports": 10,
+      "loc": 34,
+      "imports": 8,
       "classes": 1,
       "interfaces": 0,
       "methods": 3,
       "inputs": 0,
       "outputs": 0,
       "cyclomaticApprox": 3,
-      "outgoingDeps": 9,
+      "outgoingDeps": 7,
       "uniqueDependencyLayers": 3
     },
     {
@@ -1085,7 +1099,7 @@
     {
       "filePath": "src/app/features/operator-desk/components/modals/confirm-discount-modal/confirm-discount-modal.ts",
       "layer": "components",
-      "loc": 48,
+      "loc": 44,
       "imports": 11,
       "classes": 1,
       "interfaces": 0,
@@ -1156,7 +1170,7 @@
   "summary": {
     "components": {
       "files": 17,
-      "loc": 525,
+      "loc": 521,
       "imports": 111,
       "classes": 17,
       "interfaces": 2,
@@ -1181,17 +1195,17 @@
       "uniqueDependencyLayers": 0
     },
     "services": {
-      "files": 12,
-      "loc": 573,
-      "imports": 106,
-      "classes": 12,
+      "files": 13,
+      "loc": 551,
+      "imports": 110,
+      "classes": 13,
       "interfaces": 3,
-      "methods": 33,
+      "methods": 34,
       "inputs": 0,
       "outputs": 0,
-      "cyclomaticApprox": 52,
-      "outgoingDeps": 81,
-      "uniqueDependencyLayers": 30
+      "cyclomaticApprox": 60,
+      "outgoingDeps": 85,
+      "uniqueDependencyLayers": 32
     },
     "models": {
       "files": 18,
@@ -1221,15 +1235,15 @@
     },
     "pages": {
       "files": 1,
-      "loc": 48,
-      "imports": 10,
+      "loc": 34,
+      "imports": 8,
       "classes": 1,
       "interfaces": 0,
       "methods": 3,
       "inputs": 0,
       "outputs": 0,
       "cyclomaticApprox": 3,
-      "outgoingDeps": 9,
+      "outgoingDeps": 7,
       "uniqueDependencyLayers": 3
     },
     "messages": {
@@ -1247,36 +1261,36 @@
     },
     "other": {
       "files": 29,
-      "loc": 365,
-      "imports": 65,
+      "loc": 374,
+      "imports": 67,
       "classes": 33,
       "interfaces": 0,
       "methods": 9,
       "inputs": 0,
       "outputs": 0,
       "cyclomaticApprox": 13,
-      "outgoingDeps": 34,
-      "uniqueDependencyLayers": 24
+      "outgoingDeps": 36,
+      "uniqueDependencyLayers": 25
     }
   },
   "totals": {
-    "loc": 1918,
-    "imports": 316,
-    "classes": 69,
+    "loc": 1887,
+    "imports": 320,
+    "classes": 70,
     "interfaces": 25,
-    "methods": 103,
+    "methods": 104,
     "inputs": 5,
     "outputs": 4,
-    "cyclomaticApprox": 151,
-    "outgoingDeps": 220,
-    "uniqueDependencyLayers": 111
+    "cyclomaticApprox": 159,
+    "outgoingDeps": 224,
+    "uniqueDependencyLayers": 114
   },
   "averages": {
-    "avgImportsPerFile": 3.8536585365853657,
+    "avgImportsPerFile": 3.855421686746988,
     "avgImportsPerComponent": 6.529411764705882,
-    "avgOutgoingDepsPerFile": 2.682926829268293,
+    "avgOutgoingDepsPerFile": 2.6987951807228914,
     "avgOutgoingDepsPerComponent": 4.588235294117647,
-    "avgUniqueDependencyLayersPerFile": 1.353658536585366,
+    "avgUniqueDependencyLayersPerFile": 1.3734939759036144,
     "avgUniqueDependencyLayersPerComponent": 2.4705882352941178
   },
   "importGraph": [
@@ -1305,6 +1319,90 @@
       "toLayer": "pages"
     },
     {
+      "from": "src/app/app.ts",
+      "to": "src/app/shared/services/app-postboy.service.ts",
+      "fromLayer": "other",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/app.ts",
+      "to": "src/app/shared/services/postboy-notification-middleware.ts",
+      "fromLayer": "other",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/app.ts",
+      "to": "src/app/shared/services/app-postboy.service.ts",
+      "fromLayer": "other",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/app.ts",
+      "to": "src/app/shared/services/postboy-notification-middleware.ts",
+      "fromLayer": "other",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/shared/services/postboy-notification-middleware.ts",
+      "to": "src/app/shared/services/app-postboy.service.ts",
+      "fromLayer": "services",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/shared/services/postboy-notification-middleware.ts",
+      "to": "src/app/features/operator-desk/messages/events/call.event.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/shared/services/postboy-notification-middleware.ts",
+      "to": "src/app/features/operator-desk/messages/commands/push-notification.command.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/shared/services/postboy-notification-middleware.ts",
+      "to": "src/app/features/operator-desk/messages/commands/end-call.command.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/shared/services/postboy-notification-middleware.ts",
+      "to": "src/app/features/operator-desk/messages/commands/open-modal.command.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/shared/services/postboy-notification-middleware.ts",
+      "to": "src/app/shared/services/app-postboy.service.ts",
+      "fromLayer": "services",
+      "toLayer": "services"
+    },
+    {
+      "from": "src/app/shared/services/postboy-notification-middleware.ts",
+      "to": "src/app/features/operator-desk/messages/events/call.event.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/shared/services/postboy-notification-middleware.ts",
+      "to": "src/app/features/operator-desk/messages/commands/push-notification.command.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/shared/services/postboy-notification-middleware.ts",
+      "to": "src/app/features/operator-desk/messages/commands/end-call.command.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
+      "from": "src/app/shared/services/postboy-notification-middleware.ts",
+      "to": "src/app/features/operator-desk/messages/commands/open-modal.command.ts",
+      "fromLayer": "services",
+      "toLayer": "other"
+    },
+    {
       "from": "src/app/features/operator-desk/models/call.model.ts",
       "to": "src/app/features/operator-desk/models/customer.model.ts",
       "fromLayer": "models",
@@ -2164,12 +2262,6 @@
     },
     {
       "from": "src/app/features/operator-desk/services/operator-session.ts",
-      "to": "src/app/features/operator-desk/models/call.model.ts",
-      "fromLayer": "services",
-      "toLayer": "models"
-    },
-    {
-      "from": "src/app/features/operator-desk/services/operator-session.ts",
       "to": "src/app/features/operator-desk/models/operator-session.model.ts",
       "fromLayer": "services",
       "toLayer": "models"
@@ -2188,13 +2280,13 @@
     },
     {
       "from": "src/app/features/operator-desk/services/operator-session.ts",
-      "to": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "to": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "fromLayer": "services",
       "toLayer": "other"
     },
     {
       "from": "src/app/features/operator-desk/services/operator-session.ts",
-      "to": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
+      "to": "src/app/features/operator-desk/messages/commands/set-operator-status.command.ts",
       "fromLayer": "services",
       "toLayer": "other"
     },
@@ -2212,12 +2304,6 @@
     },
     {
       "from": "src/app/features/operator-desk/services/operator-session.ts",
-      "to": "src/app/features/operator-desk/models/call.model.ts",
-      "fromLayer": "services",
-      "toLayer": "models"
-    },
-    {
-      "from": "src/app/features/operator-desk/services/operator-session.ts",
       "to": "src/app/features/operator-desk/models/operator-session.model.ts",
       "fromLayer": "services",
       "toLayer": "models"
@@ -2236,13 +2322,13 @@
     },
     {
       "from": "src/app/features/operator-desk/services/operator-session.ts",
-      "to": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "to": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "fromLayer": "services",
       "toLayer": "other"
     },
     {
       "from": "src/app/features/operator-desk/services/operator-session.ts",
-      "to": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
+      "to": "src/app/features/operator-desk/messages/commands/set-operator-status.command.ts",
       "fromLayer": "services",
       "toLayer": "other"
     },
@@ -2794,13 +2880,13 @@
     },
     {
       "from": "src/app/features/operator-desk/components/operator-header/operator-header.ts",
-      "to": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "to": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "fromLayer": "components",
       "toLayer": "other"
     },
     {
       "from": "src/app/features/operator-desk/components/operator-header/operator-header.ts",
-      "to": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
+      "to": "src/app/features/operator-desk/messages/commands/set-operator-status.command.ts",
       "fromLayer": "components",
       "toLayer": "other"
     },
@@ -2830,13 +2916,13 @@
     },
     {
       "from": "src/app/features/operator-desk/components/operator-header/operator-header.ts",
-      "to": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "to": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "fromLayer": "components",
       "toLayer": "other"
     },
     {
       "from": "src/app/features/operator-desk/components/operator-header/operator-header.ts",
-      "to": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
+      "to": "src/app/features/operator-desk/messages/commands/set-operator-status.command.ts",
       "fromLayer": "components",
       "toLayer": "other"
     },
@@ -3021,13 +3107,13 @@
       "toLayer": "services"
     },
     {
-      "from": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
+      "from": "src/app/features/operator-desk/messages/commands/set-operator-status.command.ts",
       "to": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
       "fromLayer": "other",
       "toLayer": "components"
     },
     {
-      "from": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
+      "from": "src/app/features/operator-desk/messages/commands/set-operator-status.command.ts",
       "to": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
       "fromLayer": "other",
       "toLayer": "components"
@@ -3105,13 +3191,13 @@
       "toLayer": "services"
     },
     {
-      "from": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "from": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "to": "src/app/features/operator-desk/models/operator-session.model.ts",
       "fromLayer": "other",
       "toLayer": "models"
     },
     {
-      "from": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "from": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "to": "src/app/features/operator-desk/models/operator-session.model.ts",
       "fromLayer": "other",
       "toLayer": "models"
@@ -3376,18 +3462,6 @@
     },
     {
       "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
-      "to": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
-      "fromLayer": "pages",
-      "toLayer": "other"
-    },
-    {
-      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
-      "to": "src/app/features/operator-desk/messages/commands/close-modals.command.ts",
-      "fromLayer": "pages",
-      "toLayer": "other"
-    },
-    {
-      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
       "to": "src/app/features/operator-desk/messages/commands/clear-cart.command.ts",
       "fromLayer": "pages",
       "toLayer": "other"
@@ -3430,18 +3504,6 @@
     },
     {
       "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
-      "to": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
-      "fromLayer": "pages",
-      "toLayer": "other"
-    },
-    {
-      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
-      "to": "src/app/features/operator-desk/messages/commands/close-modals.command.ts",
-      "fromLayer": "pages",
-      "toLayer": "other"
-    },
-    {
-      "from": "src/app/features/operator-desk/pages/operator-desk-page/operator-desk-page.ts",
       "to": "src/app/features/operator-desk/messages/commands/clear-cart.command.ts",
       "fromLayer": "pages",
       "toLayer": "other"
@@ -3532,13 +3594,13 @@
     },
     {
       "from": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
-      "to": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "to": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "fromLayer": "components",
       "toLayer": "other"
     },
     {
       "from": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
-      "to": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
+      "to": "src/app/features/operator-desk/messages/commands/set-operator-status.command.ts",
       "fromLayer": "components",
       "toLayer": "other"
     },
@@ -3550,13 +3612,13 @@
     },
     {
       "from": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
-      "to": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "to": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "fromLayer": "components",
       "toLayer": "other"
     },
     {
       "from": "src/app/features/operator-desk/components/call-panel/operator-status-switch/operator-status-switch.ts",
-      "to": "src/app/features/operator-desk/messages/commands/set-operation-status.command.ts",
+      "to": "src/app/features/operator-desk/messages/commands/set-operator-status.command.ts",
       "fromLayer": "components",
       "toLayer": "other"
     },
@@ -3814,7 +3876,7 @@
     },
     {
       "from": "src/app/features/operator-desk/components/modals/operator-session-modal/operator-session-modal.ts",
-      "to": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "to": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "fromLayer": "components",
       "toLayer": "other"
     },
@@ -3856,7 +3918,7 @@
     },
     {
       "from": "src/app/features/operator-desk/components/modals/operator-session-modal/operator-session-modal.ts",
-      "to": "src/app/features/operator-desk/messages/events/operation-session.event.ts",
+      "to": "src/app/features/operator-desk/messages/events/operator-session.event.ts",
       "fromLayer": "components",
       "toLayer": "other"
     },
@@ -3925,21 +3987,21 @@
     "other": {
       "other": 2,
       "pages": 2,
+      "services": 10,
       "models": 50,
       "adapters": 6,
-      "services": 6,
       "components": 2
+    },
+    "services": {
+      "services": 36,
+      "other": 88,
+      "components": 4,
+      "models": 32,
+      "adapters": 10
     },
     "models": {
       "models": 24,
       "components": 2
-    },
-    "services": {
-      "components": 4,
-      "models": 34,
-      "services": 34,
-      "other": 80,
-      "adapters": 10
     },
     "adapters": {
       "models": 10
@@ -3952,7 +4014,7 @@
     },
     "pages": {
       "components": 4,
-      "other": 10,
+      "other": 6,
       "services": 4
     }
   }

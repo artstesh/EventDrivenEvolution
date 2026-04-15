@@ -27,12 +27,7 @@ export class CustomerQueueService implements IPostboyDependingService {
 
     this.adapter.subscribe((event) => {
       this.postboy.fire(new CustomerQueueEvent(event));
-
-      this.postboy.fire(new PushNotificationCommand({
-        type: 'info',
-        title: 'Customer queue is updated',
-        message: `The customer queue is ${event} now.`,
-      }));
+      this.postboy.fire(new PushNotificationCommand('info','Customer queue is updated', `The customer queue is ${event} now.`));
     });
   }
 

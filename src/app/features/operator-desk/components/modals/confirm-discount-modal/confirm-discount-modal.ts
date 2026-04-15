@@ -17,7 +17,7 @@ import {ClearCartCommand} from '../../../messages/commands/clear-cart.command';
   templateUrl: './confirm-discount-modal.html',
   styleUrl: './confirm-discount-modal.scss',
 })
-export class ConfirmDiscountModal  implements OnInit, OnDestroy {
+export class ConfirmDiscountModal implements OnInit, OnDestroy {
   private subs: Subscription[] = [];
 
   discountReason = '';
@@ -43,11 +43,7 @@ export class ConfirmDiscountModal  implements OnInit, OnDestroy {
 
   onConfirm(): void {
     const discountReason = this.discountApprovalService.createDiscountReason(this.discountReason.trim());
-    this.postboy.fire(new PushNotificationCommand({
-      type: 'success',
-      title: 'Discount accepted',
-      message: discountReason.text || 'Discount reason did not set.',
-    }));
+    this.postboy.fire(new PushNotificationCommand('success', 'Discount accepted', discountReason.text || 'Discount reason did not set.'));
     this.postboy.fire(new ConfirmOrderCommand());
     this.postboy.fire(new CloseModalsCommand());
     this.postboy.fire(new ClearCartCommand());

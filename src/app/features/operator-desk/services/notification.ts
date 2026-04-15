@@ -1,4 +1,4 @@
-import {Injectable, signal} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {IPostboyDependingService} from '@artstesh/postboy';
 import {AppPostboyService} from '../../../shared/services/app-postboy.service';
 import {PushNotificationCommand} from '../messages/commands/push-notification.command';

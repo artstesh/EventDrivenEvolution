@@ -5,7 +5,7 @@ import {Subscription} from 'rxjs';
 import {CallRoutingService} from '../../../services/call-routing';
 import {CustomerModel} from '../../../models/customer.model';
 import {AppPostboyService} from '../../../../../shared/services/app-postboy.service';
-import {OperationSessionEvent} from '../../../messages/events/operation-session.event';
+import {OperatorSessionEvent} from '../../../messages/events/operator-session.event';
 import {CloseModalsCommand} from '../../../messages/commands/close-modals.command';
 import {CallEvent} from '../../../messages/events/call.event';
 
@@ -36,7 +36,7 @@ export class OperatorSessionModal implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.postboy.sub(OperationSessionEvent).subscribe(ev => this.session.set(ev.session)));
+    this.subs.push(this.postboy.sub(OperatorSessionEvent).subscribe(ev => this.session.set(ev.session)));
     this.subs.push(this.postboy.sub(CallEvent).subscribe(ev => this.customer.set(ev.call?.customer || null)));
   }
 }

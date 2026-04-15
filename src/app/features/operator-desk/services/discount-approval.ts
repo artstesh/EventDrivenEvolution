@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-import { DiscountReasonModel } from '../models/discount-reason.model';
-import { CartModel } from '../models/cart.model';
+import {Injectable} from '@angular/core';
+import {DiscountReasonModel} from '../models/discount-reason.model';
 
 @Injectable({
   providedIn: 'root',

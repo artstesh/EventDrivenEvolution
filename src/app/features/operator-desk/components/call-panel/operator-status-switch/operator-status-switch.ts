@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit, signal} from '@angular/core';
 import {distinctUntilChanged, map, Subscription} from 'rxjs';
 import {AppPostboyService} from '../../../../../shared/services/app-postboy.service';
-import {OperationSessionEvent} from '../../../messages/events/operation-session.event';
-import {SetOperationStatusCommand} from '../../../messages/commands/set-operation-status.command';
+import {OperatorSessionEvent} from '../../../messages/events/operator-session.event';
+import {SetOperatorStatusCommand} from '../../../messages/commands/set-operator-status.command';
 
 export type OperatorStatus = 'working' | 'away';
 
@@ -25,10 +25,10 @@ export class OperatorStatusSwitch implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subs.push(this.postboy.sub(OperationSessionEvent).pipe(map(e => e.session.status), distinctUntilChanged()).subscribe(status => this.status.set(status)));
+    this.subs.push(this.postboy.sub(OperatorSessionEvent).pipe(map(e => e.session.status), distinctUntilChanged()).subscribe(status => this.status.set(status)));
   }
 
   setStatus(status: OperatorStatus): void {
-    this.postboy.fire(new SetOperationStatusCommand({status}));
+    this.postboy.fire(new SetOperatorStatusCommand({status}));
   }
 }

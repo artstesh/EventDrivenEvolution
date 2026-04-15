@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {CustomerDto} from './models/customer-dto';
 import {ReplaySubject} from 'rxjs';
 import {CustomerHistory} from './models/customer-history';
@@ -26,19 +26,5 @@ export class CustomerApiAdapter {
       loyaltyLevel: Math.random() > 0.5 ? 'High' : 'Low',
     };
     this.customer$.next(this._customer);
-  }
-
-  async getCustomer(customerId: string): Promise<CustomerDto> {
-    return this._customer;
-  }
-
-  async getCustomerHistory(customerId: string): Promise<Array<CustomerHistory>> {
-    return Array.from({length: 3}, (_, i) => ({
-      id: `order-${Math.round(Math.random()*10000)}`,
-      orderNumber: `104${Math.round(Math.random()*100)}`,
-      createdAt: new Date(new Date().getTime() - Math.round(Math.random()*1000000000000)).toISOString(),
-      status: Math.random() > 0.5 ? 'delivered' : 'closed',
-      totalAmount: Math.round(Math.random()*100000),
-    }));
   }
 }

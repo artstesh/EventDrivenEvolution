@@ -1,5 +1,4 @@
-import { CallModel } from './call.model';
-import { CartModel } from './cart.model';
+import {CartModel} from './cart.model';
 
 export type OperatorStatusModel = 'working' | 'away';
 

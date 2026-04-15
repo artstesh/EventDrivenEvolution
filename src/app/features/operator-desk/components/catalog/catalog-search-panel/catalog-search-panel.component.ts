@@ -1,15 +1,8 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Output } from '@angular/core';
-import { CatalogFilters, CatalogFiltersValue } from '../catalog-filters/catalog-filters';
+import {CommonModule} from '@angular/common';
+import {Component} from '@angular/core';
+import {CatalogFilters, CatalogFiltersValue} from '../catalog-filters/catalog-filters';
 import {AppPostboyService} from '../../../../../shared/services/app-postboy.service';
 import {CatalogSearchCommand} from '../../../messages/commands/catalog-search.command';
-
-export interface CatalogSearchCriteria {
-  query: string;
-  category: string;
-  availability: string;
-  preset: string;
-}
 
 @Component({
   selector: 'app-catalog-search-panel',

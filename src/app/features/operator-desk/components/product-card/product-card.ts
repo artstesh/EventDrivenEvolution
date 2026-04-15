@@ -1,5 +1,5 @@
-import {Component, EventEmitter, input, Input, Output} from '@angular/core';
-import { StockBadge, StockBadgeState } from './components/stock-badge/stock-badge';
+import {Component, input} from '@angular/core';
+import {StockBadge} from './components/stock-badge/stock-badge';
 import {AppPostboyService} from '../../../../shared/services/app-postboy.service';
 import {AddItemToCartCommand} from '../../messages/commands/add-item-to-cart.command';
 import {ProductCardVm} from '../../models/product-card-vm';

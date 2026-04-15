@@ -7,7 +7,6 @@ import {IPostboyDependingService} from '@artstesh/postboy';
 import {AppPostboyService} from '../../../shared/services/app-postboy.service';
 import {CartStateEvent} from '../messages/events/cart-state.event';
 import {StartCallCommand} from '../messages/commands/start-call.command';
-import {PushNotificationCommand} from '../messages/commands/push-notification.command';
 import {CallEvent} from '../messages/events/call.event';
 import {CustomerApiAdapter} from '../adapters/api/customer-api.adapter';
 import {EndCallCommand} from '../messages/commands/end-call.command';
@@ -25,7 +24,7 @@ export class CallRoutingService implements IPostboyDependingService {
       .recordReplay(CartStateEvent)
       .recordSubject(EndCallCommand)
       .recordSubject(StartCallCommand)
-      .recordSubject(CallEvent);
+      .recordReplay(CallEvent);
   }
 
   up(): void {
@@ -38,20 +37,6 @@ export class CallRoutingService implements IPostboyDependingService {
   private operatorStatus: OperatorStatus = 'working';
   private activeCall: CallModel | null = null;
 
-  setOperatorStatus(status: OperatorStatus): OperatorStatus {
-    this.operatorStatus = status;
-
-    if (status === 'away') {
-      this.activeCall = null;
-    }
-
-    return this.operatorStatus;
-  }
-
-  getOperatorStatus(): OperatorStatus {
-    return this.operatorStatus;
-  }
-
   private startCall(customer: CustomerModel): void {
     const call: CallModel = {
       id: `call-${Date.now()}`,
@@ -60,11 +45,6 @@ export class CallRoutingService implements IPostboyDependingService {
       status: 'active',
       durationSeconds: 0,
     };
-    this.postboy.fire(new PushNotificationCommand({
-      type: 'info',
-      title: 'Income call',
-      message: `Client ${customer.fullName} is on air.`,
-    }));
     this.activeCall = call;
     this.postboy.fire(new CallEvent(call));
   }
@@ -73,12 +53,6 @@ export class CallRoutingService implements IPostboyDependingService {
     if (!this.activeCall) {
       return;
     }
-    this.postboy.fire(new PushNotificationCommand({
-      type: 'info',
-      title: 'The call is ended',
-      message: 'The current contact has been closed, and the session cleared.',
-    }));
-
     this.activeCall = null;
     this.postboy.fire(new CallEvent(null));
     this.customerAdapter.getNextCustomer();

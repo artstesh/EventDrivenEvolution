@@ -1,4 +1,4 @@
-import {PostboyCallbackMessage, PostboyGenericMessage} from '@artstesh/postboy';
+import {PostboyCallbackMessage} from '@artstesh/postboy';
 import {OrderModel} from '../../models/order.model';
 
 export class ConfirmOrderCommand extends PostboyCallbackMessage<OrderModel> {

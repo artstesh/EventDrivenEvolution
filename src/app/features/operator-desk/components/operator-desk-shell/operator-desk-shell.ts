@@ -1,19 +1,15 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {OperatorHeader} from '../operator-header/operator-header';
 import {CallStatusPanel} from '../call-panel/call-status-panel/call-status-panel';
 import {CustomerProfileWidget} from '../customer-profile/customer-profile-widget/customer-profile-widget';
 import {CartWidgetComponent} from '../cart-widget/cart-widget.component';
-import {
-  CatalogSearchCriteria,
-  CatalogSearchPanelComponent
-} from '../catalog/catalog-search-panel/catalog-search-panel.component';
+import {CatalogSearchPanelComponent} from '../catalog/catalog-search-panel/catalog-search-panel.component';
 import {ProductGrid} from '../catalog/product-grid/product-grid';
 import {OperatorStatus, OperatorStatusSwitch} from '../call-panel/operator-status-switch/operator-status-switch';
 import {ModalHostComponent} from '../modal-host/modal-host.component';
 import {OpenModalCommand} from '../../messages/commands/open-modal.command';
 import {AppPostboyService} from '../../../../shared/services/app-postboy.service';
 import {EndCallCommand} from '../../messages/commands/end-call.command';
-import {CatalogSearchCommand} from '../../messages/commands/catalog-search.command';
 
 @Component({
   selector: 'app-operator-desk-shell',

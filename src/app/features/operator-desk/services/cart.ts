@@ -47,23 +47,14 @@ export class CartService implements IPostboyDependingService {
 
       this.cart.items = [...this.cart.items, item];
     }
-
-    this.postboy.fire(new PushNotificationCommand({
-      type: 'success',
-      title: 'The item is added',
-      message: `${product.name} id added to the cart.`,
-    }));
+    this.postboy.fire(new PushNotificationCommand('success', 'The item is added', `${product.name} id added to the cart.`));
     this.postboy.fire(new CartStateEvent(this.cart));
   }
 
   private clearCart(): void {
     this.cart = this.createEmptyCart();
     this.postboy.fire(new CartStateEvent(this.cart));
-    this.postboy.fire(new PushNotificationCommand({
-      type: 'info',
-      title: 'The cart is cleaned',
-      message: 'The cart is cleaned.',
-    }));
+    this.postboy.fire(new PushNotificationCommand('info', 'The cart is cleaned', 'The cart is cleaned.'));
   }
 
   private setDiscount(discount: number): void {

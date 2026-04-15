@@ -3,7 +3,6 @@ import {ConfirmDiscountModal} from '../modals/confirm-discount-modal/confirm-dis
 import {OrderHistoryModal} from '../modals/order-history-modal/order-history-modal';
 import {OperatorSessionModal} from '../modals/operator-session-modal/operator-session-modal';
 import {AppPostboyService} from '../../../../shared/services/app-postboy.service';
-import {OpenModalCommand} from '../../messages/commands/open-modal.command';
 import {ModalType} from '../../models/modal.model';
 import {Subscription} from 'rxjs';
 import {CloseModalsCommand} from '../../messages/commands/close-modals.command';

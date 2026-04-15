@@ -1,6 +1,6 @@
-import { CartItemModel } from './cart-item.model';
-import { DiscountReasonModel } from './discount-reason.model';
-import { CustomerModel } from './customer.model';
+import {CartItemModel} from './cart-item.model';
+import {DiscountReasonModel} from './discount-reason.model';
+import {CustomerModel} from './customer.model';
 
 export type OrderStatusModel = 'draft' | 'confirmed' | 'cancelled' | 'completed';
 

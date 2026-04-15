@@ -6,7 +6,9 @@
       [value]="category"
       (change)="setCategory($any($event.target).value)"
     >
-      <option *ngFor="let item of categories" [value]="item">{{ item }}</option>
+      @for (item of categories; track item) {
+        <option [value]="item">{{ item }}</option>
+      }
     </select>
   </label>
 
@@ -17,19 +19,22 @@
       [value]="availability"
       (change)="setAvailability($any($event.target).value)"
     >
-      <option *ngFor="let item of availabilityOptions" [value]="item">{{ item }}</option>
+      @for (item of availabilityOptions; track item) {
+        <option [value]="item">{{ item }}</option>
+      }
     </select>
   </label>
 
   <div class="catalog-filters__chips">
-    <button
-      type="button"
-      class="catalog-filters__chip"
-      *ngFor="let item of presets"
-      [class.catalog-filters__chip--active]="preset === item"
-      (click)="setPreset(item)"
-    >
-      {{ item }}
-    </button>
+    @for (item of presets; track item) {
+      <button
+        type="button"
+        class="catalog-filters__chip"
+        [class.catalog-filters__chip--active]="preset === item"
+        (click)="setPreset(item)"
+      >
+        {{ item }}
+      </button>
+    }
   </div>
 </div>

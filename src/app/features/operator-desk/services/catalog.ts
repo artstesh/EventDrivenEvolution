@@ -24,11 +24,11 @@ export interface CatalogSearchViewResult {
 @Injectable({
   providedIn: 'root',
 })
-export class CatalogService  implements IPostboyDependingService{
+export class CatalogService implements IPostboyDependingService {
   private namespace = 'catalog-service';
 
   constructor(private postboy: AppPostboyService,
-  private readonly catalogApiAdapter: CatalogApiAdapter,
+              private readonly catalogApiAdapter: CatalogApiAdapter,
               private readonly stockWebSocketAdapter: StockWebSocketAdapter) {
     postboy.addNamespace(this.namespace)
       .recordBehavior(CatalogSearchCommand, new CatalogSearchCommand({
@@ -46,11 +46,7 @@ export class CatalogService  implements IPostboyDependingService{
     this.postboy.sub(CatalogSearchCommand).subscribe((cmd) => this.search(cmd.filter));
     this.stockWebSocketAdapter.subscribe((event) => {
       this.postboy.fire(new StockUpdateEvent(event));
-      this.postboy.fire(new PushNotificationCommand({
-        type: 'info',
-        title: 'Updated',
-        message: `The product ${event.productId} has status ${event.stockStatus} now.`,
-      }));
+      this.postboy.fire(new PushNotificationCommand('info', 'Updated', `The product ${event.productId} has status ${event.stockStatus} now.`));
     });
   }
 
