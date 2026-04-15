@@ -60,8 +60,6 @@ export class StockWebSocketAdapter {
   private createRandomUpdate(): StockUpdateDto {
     const statuses: Array<StockUpdateDto['stockStatus']> = ['available', 'limited', 'out'];
 
-    console.log(this.productIds[Math.floor(Math.random() * this.productIds.length)]);
-
     return {
       productId: this.productIds[Math.floor(Math.random() * this.productIds.length)] ?? 'prd-001',
       stockStatus: statuses[Math.floor(Math.random() * statuses.length)] ?? 'available',
