@@ -18,7 +18,7 @@ export class CustomerApiAdapter {
     this._customer = {
       id: `cust-${Math.round(Math.random()*10000)}`,
       balanceAmount: Math.round(Math.random()*100000),
-      balanceCurrency: Math.round(Math.random()*3),
+      balanceCurrency: "USD",
       isVip: Math.random() > 0.5,
       fullName: `Customer ${Math.round(Math.random()*10000)}`,
       segment: Math.random() > 0.5 ? 'Premium' : 'Standard',

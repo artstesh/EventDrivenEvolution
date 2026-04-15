@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Currency} from './models/currency.enum';
 import {ProductDto} from './models/product-dto';
 
 
@@ -36,7 +35,7 @@ export class CatalogApiAdapter {
         categoryId: `cat-${rndStr()}`,
         categoryName: criteria.category || `Category ${rndStr()}`,
         priceAmount: Math.floor(Math.random() * 10000) + 100,
-        priceCurrency: Currency.USD,
+        priceCurrency: "USD",
         warehouse: 'Warehouse',
         stockStatus: Math.random() < 0.5 ? 'available' : 'limited'
       }))

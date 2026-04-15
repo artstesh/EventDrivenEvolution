@@ -3,10 +3,10 @@ import {ConfirmDiscountModal} from '../modals/confirm-discount-modal/confirm-dis
 import {OrderHistoryModal} from '../modals/order-history-modal/order-history-modal';
 import {OperatorSessionModal} from '../modals/operator-session-modal/operator-session-modal';
 import {AppPostboyService} from '../../../../shared/services/app-postboy.service';
-import {ModalType} from '../../models/modal.model';
 import {Subscription} from 'rxjs';
 import {CloseModalsCommand} from '../../messages/commands/close-modals.command';
 import {ModalStateEvent} from '../../messages/events/modal-state.event';
+import {ModalType} from '../../models/modal-type';
 
 @Component({
   selector: 'app-modal-host',

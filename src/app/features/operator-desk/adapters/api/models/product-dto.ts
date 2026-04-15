@@ -1,5 +1,3 @@
-import {Currency} from './currency.enum';
-
 export interface ProductDto {
   id: string;
   sku: string;
@@ -8,7 +6,7 @@ export interface ProductDto {
   categoryId: string;
   categoryName: string;
   priceAmount: number;
-  priceCurrency: Currency;
+  priceCurrency: string;
   warehouse: string;
   stockStatus: 'available' | 'limited' | 'out';
 }

@@ -1,11 +1,9 @@
-import {Currency} from './currency.enum';
-
 export interface CustomerDto {
   id: string;
   fullName: string;
   isVip: boolean;
   balanceAmount: number;
-  balanceCurrency: Currency;
+  balanceCurrency: string;
   loyaltyLevel?: string;
   segment?: string;
   lastOrderAt?: string;

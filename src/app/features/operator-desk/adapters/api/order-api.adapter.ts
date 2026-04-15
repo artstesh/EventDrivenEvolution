@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Currency} from './models/currency.enum';
 
 export interface OrderConfirmationRequestDto {
   customerId: string;
@@ -17,7 +16,7 @@ export interface OrderConfirmationResponseDto {
   status: 'confirmed' | 'pending' | 'cancelled';
   confirmedAt: Date;
   totalAmount: number;
-  totalCurrency: Currency;
+  totalCurrency: string;
 }
 
 @Injectable({
@@ -33,7 +32,7 @@ export class OrderApiAdapter {
       status: 'confirmed',
       confirmedAt: new Date(),
       totalAmount: 51470,
-      totalCurrency: Currency.USD,
+      totalCurrency: "USD",
     };
   }
 
