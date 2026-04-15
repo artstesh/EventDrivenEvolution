@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {ProductDto} from '../api/models/product-dto';
 
 export interface StockUpdateDto {
   productId: string;
@@ -14,6 +15,7 @@ type StockUpdateHandler = (event: StockUpdateDto) => void;
 export class StockWebSocketAdapter {
   private handlers = new Set<StockUpdateHandler>();
   private timerId: ReturnType<typeof setInterval> | null = null;
+  private productIds: string[] = [];
 
   connect(): void {
     if (this.timerId) {
@@ -23,7 +25,7 @@ export class StockWebSocketAdapter {
     this.timerId = setInterval(() => {
       const event: StockUpdateDto = this.createRandomUpdate();
       this.handlers.forEach((handler) => handler(event));
-    }, 8000);
+    }, 20000);
   }
 
   disconnect(): void {
@@ -51,12 +53,17 @@ export class StockWebSocketAdapter {
     this.handlers.forEach((handler) => handler(event));
   }
 
+  setProductIds(ids: ProductDto[]): void {
+    this.productIds = ids.map(i=> i.id);
+  }
+
   private createRandomUpdate(): StockUpdateDto {
-    const productIds = ['prd-001', 'prd-002', 'prd-003'];
     const statuses: Array<StockUpdateDto['stockStatus']> = ['available', 'limited', 'out'];
 
+    console.log(this.productIds[Math.floor(Math.random() * this.productIds.length)]);
+
     return {
-      productId: productIds[Math.floor(Math.random() * productIds.length)] ?? 'prd-001',
+      productId: this.productIds[Math.floor(Math.random() * this.productIds.length)] ?? 'prd-001',
       stockStatus: statuses[Math.floor(Math.random() * statuses.length)] ?? 'available',
       updatedAt: new Date().toISOString(),
     };
