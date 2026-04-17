@@ -53,6 +53,7 @@ export class CatalogService implements IPostboyDependingService {
 
   private async search(criteria: CatalogSearchDto): Promise<void> {
     const response = await this.catalogApiAdapter.searchProducts(criteria);
+    this.stockWebSocketAdapter.setProductIds(response.items)
 
     this.postboy.fire(new CatalogEvent({
       total: response.total,

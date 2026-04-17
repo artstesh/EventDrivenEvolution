@@ -28,7 +28,7 @@ export class CatalogApiAdapter {
       page: 1,
       pageSize: 24,
       items:  Array.from({length: 6}).map(() => ({
-        id: `prd-${Math.floor(Math.random() * 100) + 100}`,
+        id: `prd-${Math.floor(Math.random() * 6) + 1}`,
         sku: `SKU-${Math.floor(Math.random() * 100) + 100}`,
         name: `Product ${rndStr()}`,
         description: Array.from({length: 5}).map(() => rndStr()).join(' '),
