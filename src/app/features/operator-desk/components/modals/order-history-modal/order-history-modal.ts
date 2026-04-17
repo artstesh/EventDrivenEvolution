@@ -22,9 +22,11 @@ import {DatePipe} from '@angular/common';
 export class OrderHistoryModal implements OnInit, OnDestroy{
   private subs: Subscription[] = [];
   orders = signal<OrderHistoryVm[]>([]);
+  customer = signal<CustomerModel | null>(null);
 
   constructor(private readonly modalFacade: ModalFacade,
-              private readonly orderFacade: OrderFacade) {
+              private readonly orderFacade: OrderFacade,
+              private readonly callRoutingService: CallRoutingService,) {
   }
 
   ngOnDestroy(): void {
@@ -37,5 +39,8 @@ export class OrderHistoryModal implements OnInit, OnDestroy{
 
   async ngOnInit(): Promise<void> {
     this.orders.set(await this.orderFacade.getOrderHistory());
+    this.subs.push(this.callRoutingService.activeCall$.subscribe(call => {
+      this.customer.set(call?.customer || null);
+    }));
   }
 }
