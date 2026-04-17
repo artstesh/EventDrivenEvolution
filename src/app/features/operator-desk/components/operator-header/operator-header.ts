@@ -1,9 +1,10 @@
-import {Component, Input, OnDestroy, OnInit, signal} from '@angular/core';
+import {Component, input, Input, OnDestroy, OnInit, signal} from '@angular/core';
 import { OperatorStatus } from '../call-panel/operator-status-switch/operator-status-switch';
 import {Subscription} from 'rxjs';
 import {OperatorSessionFacade} from '../../facades/operator-session.facade';
 import {ModalFacade} from '../../facades/modal.facade';
 import {CustomerQueueFacade} from '../../facades/customer-queue.facade';
+import {CatalogSearchResult, CatalogSearchViewResult, CatalogService} from '../../services/catalog';
 
 @Component({
   selector: 'app-operator-header',
@@ -16,10 +17,11 @@ export class OperatorHeader implements OnInit, OnDestroy {
   status = signal<OperatorStatus>('working');
   private subs: Subscription[] = [];
   queue = signal<number>(0);
+  displayedCount = input.required<number>();
 
   constructor(private readonly sessionFacade: OperatorSessionFacade,
               private readonly modalFacade: ModalFacade,
-              private readonly queueFacade: CustomerQueueFacade,) {
+              private readonly queueFacade: CustomerQueueFacade) {
   }
 
   ngOnInit(): void {
