@@ -4,6 +4,7 @@ import {ProductCard} from '../../product-card/product-card';
 import {AppPostboyService} from '../../../../../shared/services/app-postboy.service';
 import {CatalogEvent} from '../../../messages/events/catalog.event';
 import {CatalogSearchViewResult} from '../../../services/catalog';
+import {StockUpdateEvent} from '../../../messages/events/stock-update.event';
 
 @Component({
   selector: 'app-product-grid',

@@ -25,7 +25,7 @@ export class StockWebSocketAdapter {
     this.timerId = setInterval(() => {
       const event: StockUpdateDto = this.createRandomUpdate();
       this.handlers.forEach((handler) => handler(event));
-    }, 20000);
+    }, 2000);
   }
 
   disconnect(): void {
