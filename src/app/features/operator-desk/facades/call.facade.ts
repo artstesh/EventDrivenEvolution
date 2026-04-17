@@ -7,18 +7,24 @@ import {NotificationService} from '../services/notification';
 import {CustomerApiAdapter} from '../adapters/api/customer-api.adapter';
 import {CustomerDto} from '../adapters/api/models/customer-dto';
 import {CustomerMapper} from '../mappers/customer.mapper';
+import {map, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CallFacade {
+  currentCustomer$: Observable<CustomerModel | null>;
+
   constructor(
     private readonly callRoutingService: CallRoutingService,
     private readonly notificationService: NotificationService,
     private readonly customerAdapter: CustomerApiAdapter,
     private readonly customerMapper: CustomerMapper
   ) {
-    this.customerAdapter.customer$.subscribe((customer) => this.nextCustomer(customer))
+    this.currentCustomer$ = this.callRoutingService.activeCall$.pipe(
+      map(call => call?.customer ?? null)
+    );
+    this.customerAdapter.customer$.subscribe((customer) => this.nextCustomer(customer));
   }
 
   get operatorStatus(): OperatorStatus {

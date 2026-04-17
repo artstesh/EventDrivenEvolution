@@ -8,6 +8,7 @@ import {ModalFacade} from '../../../facades/modal.facade';
 import {OrderFacade} from '../../../facades/order.facade';
 import {OrderHistoryVm} from '../../../mappers/order.mapper';
 import {DatePipe} from '@angular/common';
+import {CallFacade} from '../../../facades/call.facade';
 
 @Component({
   selector: 'app-order-history-modal',
@@ -26,7 +27,7 @@ export class OrderHistoryModal implements OnInit, OnDestroy{
 
   constructor(private readonly modalFacade: ModalFacade,
               private readonly orderFacade: OrderFacade,
-              private readonly callRoutingService: CallRoutingService,) {
+              private readonly callFacade: CallFacade) {
   }
 
   ngOnDestroy(): void {
@@ -39,8 +40,6 @@ export class OrderHistoryModal implements OnInit, OnDestroy{
 
   async ngOnInit(): Promise<void> {
     this.orders.set(await this.orderFacade.getOrderHistory());
-    this.subs.push(this.callRoutingService.activeCall$.subscribe(call => {
-      this.customer.set(call?.customer || null);
-    }));
+    this.callFacade.currentCustomer$.subscribe(c=> this.customer.set(c));
   }
 }
